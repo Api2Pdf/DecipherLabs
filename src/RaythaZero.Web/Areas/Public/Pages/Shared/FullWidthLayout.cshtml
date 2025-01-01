@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div class="container">
+    @Html.Partial("_Partials/Header")
+    <main role="main" class="">
+        @RenderBody()
+        @Html.Partial("_Partials/Footer")
+    </main>
+</div>

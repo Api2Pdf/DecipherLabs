@@ -21,8 +21,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="Areas\Api\" />
-      <Folder Include="wwwroot\admin\js\" />
       <Folder Include="wwwroot\public\" />
     </ItemGroup>
     
@@ -43,14 +41,33 @@
       <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
       <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Admins\ApiKeys\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\public\lib\jquery\dist\jquery.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\public\lib\jquery\dist\jquery.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\public\lib\jquery\dist\jquery.min.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\public\lib\jquery\LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="wwwroot\public\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\public\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\public\lib\jquery-validation-unobtrusive\LICENSE.txt" />
     </ItemGroup>
     
     <ItemGroup>
       <AdditionalFiles Include="Areas\Admin\Pages\Shared\_Layout.cshtml" />
-      <AdditionalFiles Include="Areas\Admin\Pages\Shared\_ValidationScriptsPartial.cshtml" />
       <AdditionalFiles Include="Areas\Public\Pages\Error.cshtml" />
       <AdditionalFiles Include="Areas\Public\Pages\Index.cshtml" />
-      <AdditionalFiles Include="Areas\Public\Pages\Privacy.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\ForgotPassword.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\ForgotPasswordComplete.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\ForgotPasswordSent.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\LoginRedirect.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\LoginWithEmailAndPassword.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\LoginWithJwt.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\LoginWithMagicLink.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\LoginWithMagicLinkComplete.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\LoginWithMagicLinkSent.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\LoginWithSaml.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\LoginWithSso.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Login\Logout.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Profile\ChangePassword.cshtml" />
+      <AdditionalFiles Include="Areas\Public\Pages\Profile\Index.cshtml" />
       <AdditionalFiles Include="Areas\Public\Pages\Shared\_Layout.cshtml" />
       <AdditionalFiles Include="Areas\Public\Pages\Shared\_ValidationScriptsPartial.cshtml" />
       <AdditionalFiles Include="Areas\Public\Pages\_ViewImports.cshtml" />
