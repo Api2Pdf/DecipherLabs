@@ -1,23 +1,27 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
 WORKDIR /src
-COPY ["src/RaythaZero/RaythaZero.csproj", "RaythaZero/"]
-RUN dotnet restore "src/RaythaZero/RaythaZero.csproj"
-COPY . .
-WORKDIR "/src/RaythaZero"
-RUN dotnet build "RaythaZero.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "RaythaZero.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+COPY ["src/RaythaZero.Domain/RaythaZero.Domain.csproj", "src/RaythaZero.Domain/"]
+COPY ["src/RaythaZero.Application/RaythaZero.Application.csproj", "src/RaythaZero.Application/"]
+COPY ["src/RaythaZero.Infrastructure/RaythaZero.Infrastructure.csproj", "src/RaythaZero.Infrastructure/"]
+COPY ["src/RaythaZero.Web/RaythaZero.Web.csproj", "src/RaythaZero.Web/"]
+COPY ["RaythaZero.sln", ""]
+
+ARG DOTNET_RESTORE_CLI_ARGS=
+RUN dotnet restore "RaythaZero.sln" $DOTNET_RESTORE_CLI_ARGS
+
+COPY . .
+RUN dotnet build "RaythaZero.sln" -c Release --no-restore
+
+RUN dotnet publish -c Release --no-build -o /app "src/RaythaZero.Web/RaythaZero.Web.csproj"
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "RaythaZero.dll"]
+COPY --from=publish /app .
+
+ARG BUILD_NUMBER=
+ENV BUILD_NUMBER=$BUILD_NUMBER
+
+ENTRYPOINT ["dotnet", "RaythaZero.Web.dll"]
