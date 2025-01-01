@@ -1,18 +1,25 @@
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" asp-page="/Dashboard/Index">RaythaZero</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="/">Home</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<div class="navbar bg-white breadcrumb-bar">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Project</li>
+        </ol>
     </nav>
-</header>
+
+    <div class="dropdown">
+        <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+            <i class="material-icons">settings</i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#project-edit-modal">Edit Project</a>
+            <a class="dropdown-item" href="#">Share</a>
+            <a class="dropdown-item" href="#">Mark as Complete</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="#">Archive</a>
+
+        </div>
+    </div>
+
+</div>
