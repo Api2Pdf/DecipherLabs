@@ -22,7 +22,6 @@
     
     <ItemGroup>
       <Folder Include="Areas\Api\" />
-      <Folder Include="Filters\" />
       <Folder Include="wwwroot\admin\js\" />
       <Folder Include="wwwroot\public\" />
     </ItemGroup>
