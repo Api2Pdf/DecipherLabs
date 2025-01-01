@@ -22,9 +22,12 @@ public class ResetPassword : BaseAdminPageModel, ISubActionViewModel
             return RedirectToPage("/Admins/Edit", new { id });
         }
 
-        Form = new FormModel();
 
         var response = await Mediator.Send(new GetAdminById.Query { Id = id });
+        Form = new FormModel
+        {
+            Id = id
+        };
         
         Id = id;
         IsActive = response.Result.IsActive;
