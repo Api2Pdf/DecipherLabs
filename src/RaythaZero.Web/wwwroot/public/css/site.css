@@ -24,3 +24,8 @@ body {
 svg.icon.icon-sm {
   max-width: 20px;
 }
+
+.raytha-required:after {
+  content: "\00a0*";
+  color: red;
+}

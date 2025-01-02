@@ -18,7 +18,62 @@
   <component name="ChangeListManager">
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Admin/Pages/Admins/ResetPassword.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Admin/Pages/Admins/ResetPassword.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Login/Commands/ChangePassword.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Login/Commands/ChangePassword.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/BasePublicPageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/BasePublicPageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Profile/ChangePassword.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Profile/ChangePassword.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Profile/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Profile/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/SidebarLayout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/SidebarLayout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/Header.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/Header.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/TablePagination.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/TablePagination.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/RaythaZero.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/RaythaZero.Web.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-utilities.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-utilities.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-utilities.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.esm.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.esm.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/bootstrap/dist/js/bootstrap.min.js.map" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +87,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -70,25 +126,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.RaythaZero.Web: IIS Express.executor&quot;: &quot;Debug&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.4992224&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.RaythaZero.Web: IIS Express.executor": "Debug",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "XThreadsFramesViewSplitterKey": "0.4992224",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.RaythaZero.Web: IIS Express">
     <configuration name="RaythaZero: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/RaythaZero.Web/RaythaZero.Web.csproj" />

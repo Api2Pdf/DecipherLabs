@@ -1,7 +1,5 @@
-﻿@inject IAuthorizationService AuthorizationService
-@inject ICurrentOrganization CurrentOrganization
+﻿@inject ICurrentOrganization CurrentOrganization
 @inject ICurrentUser CurrentUser
-@using RaythaZero.Domain.Entities
 @{
     Layout = "_Layout";
 }
@@ -60,7 +58,7 @@
         </div>
         <div class="d-none d-lg-block">
             <div class="dropup">
-                <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="text-white">
                     @CurrentUser.FullName
                 </a>
                 <div class="dropdown-menu">

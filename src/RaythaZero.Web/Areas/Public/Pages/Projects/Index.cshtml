@@ -4,16 +4,41 @@
 @{
     Layout = "SidebarLayout";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+<div class="main-container">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-11 col-xl-10">
+      <div class="page-header">
+        <h1>Projects <a asp-page="/Projects/Create" class="btn btn-primary">Create project</a></h1>
+        <hr>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="projects" role="tabpanel" data-filter-list="content-list-body">
+            <div class="content-list">
+              <div class="content-list-body row">
+                <div class="col-lg-12">
+                  @foreach (var item in Model.ListView.Items)
+                  {
+                    <div class="card card-project">
+                      <div class="card-body">
+                        <div class="card-title">
+                          <a asp-page="/Projects/Manage" asp-route-id="@item.Id"><h5 data-filter-by="text">@item.Label</h5></a>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+          <partial name="_Partials/TablePagination" model="@Model.ListView" />
+          <div class="row">
+            <div class="col-lg-12">
+              <small><a asp-page="/Projects/Index" asp-route-archived="true">View archived only</a></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</body>
-</html>
+</div>

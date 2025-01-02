@@ -8,4 +8,6 @@ namespace RaythaZero.Web.Areas.Public.Pages;
 [Authorize]
 public class BasePublicPageModel : BasePageModel
 {
+    public string ProjectId { get; set; }
+    public string ProjectName { get; set; }
 }

@@ -23,8 +23,8 @@
                    asp-route-orderBy="@Model.OrderByAsString"
                    asp-route-pageNumber="@(Model.PageNumber - 1)"
                    asp-route-pageSize="@Model.PageSize"
-                    class="page-link">
-                    <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path></svg>
+                   class="page-link">
+                    <i class="bi bi-chevron-double-left"></i>
                 </a>
             </li>
 
@@ -35,7 +35,7 @@
                    asp-route-pageNumber="@(Model.PageNumber + 1)"
                    asp-route-pageSize="@Model.PageSize"
                     class="page-link">
-                    <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <i class="bi bi-chevron-left"></i>
                 </a>
             </li>
 
@@ -70,7 +70,7 @@
                    asp-route-pageNumber="@(Model.PageNumber + 1)"
                    asp-route-pageSize="@Model.PageSize"
                    class="page-link">
-                    <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <i class="bi bi-chevron-right"></i>
                 </a>
             </li>
 
@@ -81,7 +81,7 @@
                    asp-route-pageNumber="@Model.TotalPages"
                    asp-route-pageSize="@Model.PageSize"
                    class="page-link">
-                    <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+                    <i class="bi bi-chevron-double-right"></i>
                 </a>
             </li>
         </ul>
