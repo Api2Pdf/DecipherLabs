@@ -1,0 +1,18 @@
+@{
+    Layout = null;
+    var action = ViewData["TurboAction"] as string;
+    var target = ViewData["TurboTarget"] as string;
+}
+
+@if (!string.IsNullOrEmpty(action) && !string.IsNullOrEmpty(target))
+{
+    <turbo-stream action="@action" target="@target">
+        <template>
+            @RenderBody()
+        </template>
+    </turbo-stream>
+}
+else
+{
+    @RenderBody()
+}

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using RaythaZero.Application;
 using RaythaZero.Application.Common.Utils;
 using RaythaZero.Infrastructure.Persistence;
@@ -28,6 +29,15 @@ public class Startup
         services.AddInfrastructureServices(Configuration);
         services.AddWebUIServices();
         services.AddRazorPages();
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(policy =>
+            {
+                policy.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -78,6 +88,8 @@ public class Startup
             endpoints.MapRazorPages();
             endpoints.MapControllers();
         });
+
+        app.UseCors();
         
         bool applyMigrationsOnStartup = Convert.ToBoolean(Configuration["APPLY_PENDING_MIGRATIONS"] ?? "false");
         if (applyMigrationsOnStartup)
