@@ -7,13 +7,18 @@
     var token = Antiforgery.GetAndStoreTokens(Context).RequestToken;
 }
 <script type="module">
-    import { Uppy, Dashboard, DragDrop, XHRUpload } from "https://releases.transloadit.com/uppy/v4.9.0/uppy.min.mjs"
-    const uppy = new Uppy({
+    import { Uppy, Dashboard, XHRUpload } from "https://releases.transloadit.com/uppy/v4.9.0/uppy.min.mjs"
+    let uppy;
+    
+    if (uppy) {
+        uppy.close();
+    }
+    
+    uppy = new Uppy({
         restrictions: { maxNumberOfFiles: @Model.MaxFiles },
         autoProceed: true 
     });
 
-    /*uppy.use(DragDrop, { target: '#upload-container-@Model.ContainerId' });*/
     uppy.use(Dashboard, {
         target: '#upload-container-@Model.ContainerId',
         inline: true, 
@@ -36,7 +41,7 @@
         console.log('failed files:', result.failed);
         const targetElement = document.querySelector('#@Model.TargetFrame'); // Replace with your target element's selector
         if (targetElement && result.successful.length > 0) {
-            targetElement.src = '@Model.TargetSrc?time=' + new Date().toString();
+            targetElement.src = '@Model.TargetSrc&time=' + encodeURIComponent(new Date().toISOString());
         }
     });
     

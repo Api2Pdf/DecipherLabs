@@ -32,7 +32,7 @@ public class Manage : BasePublicPageModel
             new() { FileId = "2", FileName = "This file name 2", Src = "/htlld" },
             new() { FileId = "3", FileName = "This file name 3", Src = "/htlld" },
         };
-        return Partial("_Partials/Resumes", this);
+        return new PartialViewResult { ViewName = "_Partials/Resumes", ViewData=ViewData };
     }
 
     public async Task<IActionResult> OnPostResumeUpload(string id)

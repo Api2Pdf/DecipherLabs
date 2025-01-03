@@ -1,25 +1,25 @@
 @model RaythaZero.Web.Areas.Public.Pages.Projects.Manage
 
 <turbo-frame id="docs_resumes_frame">
-    @foreach (var item in Model.Resumes)
-    {
-        <div class="card card-task">
-            <div class="card-body">
-                <div class="card-title">
-                    <a href="@item.Src" target="_blank"><h6 data-filter-by="text">@item.FileName</h6></a>
-                </div>
-                <div class="card-meta">
-                    <div class="dropdown card-options">
-                        <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                        </div>
+@foreach (var item in Model.Resumes)
+{
+    <div class="card card-task">
+        <div class="card-body">
+            <div class="card-title">
+                <a href="@item.Src" target="_blank"><h6 data-filter-by="text">@item.FileName</h6></a>
+            </div>
+            <div class="card-meta">
+                <div class="dropdown card-options">
+                    <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item text-danger" href="#">Delete</a>
                     </div>
                 </div>
             </div>
         </div>
-    }
+    </div>
+}
 </turbo-frame>
