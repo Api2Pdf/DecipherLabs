@@ -15,7 +15,21 @@ public class Create : BasePublicPageModel
 
     public async Task<IActionResult> OnPost()
     {
-        return Page();
+        var response = await Mediator.Send(new RaythaZero.Application.Projects.Commands.CreateProject.Command 
+        { 
+            Label = Form.Label
+        });
+
+        if (response.Success)
+        {
+            SetSuccessMessage("Project created successfully.");
+            return RedirectToPage("/Projects/Manage", new { id = response.Result });
+        }
+        else
+        {
+            SetErrorMessage(response.GetErrors());
+            return Page();
+        } 
     }
 
     public record FormModel

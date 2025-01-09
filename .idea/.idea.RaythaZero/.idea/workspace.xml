@@ -18,9 +18,16 @@
   <component name="ChangeListManager">
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/FileUpload.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/FileUpload.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/Resumes.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/Resumes.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Interfaces/IRaythaDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Interfaces/IRaythaDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/OrganizationSettingsDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/OrganizationSettingsDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/OrganizationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/OrganizationSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/RaythaZero.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/RaythaZero.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Migrations/RaythaDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Migrations/RaythaDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Persistence/RaythaDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Persistence/RaythaDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Create.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/SidebarLayout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/SidebarLayout.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,25 +80,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.RaythaZero.Web: IIS Express.executor": "Debug",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "0.4992224",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.HTML",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.RaythaZero.Web: IIS Express.executor&quot;: &quot;Debug&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.4992224&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.HTML&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.RaythaZero.Web: IIS Express">
     <configuration name="RaythaZero: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/RaythaZero.Web/RaythaZero.Web.csproj" />
@@ -294,6 +301,7 @@
       <updated>1735237814918</updated>
       <workItem from="1735237816395" duration="9060000" />
       <workItem from="1735757397081" duration="11325000" />
+      <workItem from="1736462949481" duration="3047000" />
     </task>
     <servers />
   </component>

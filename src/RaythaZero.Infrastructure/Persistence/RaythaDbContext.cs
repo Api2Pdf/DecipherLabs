@@ -47,6 +47,7 @@ public class RaythaDbContext : DbContext, IRaythaDbContext, IDataProtectionKeyCo
     public DbSet<MediaItem> MediaItems => Set<MediaItem>();
     public DbSet<ApiKey> ApiKeys => Set<ApiKey>();
     public DbSet<BackgroundTask> BackgroundTasks => Set<BackgroundTask>();
+    public DbSet<Project> Projects => Set<Project>();
     public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
 
     public DbContext DbContext => DbContext;
