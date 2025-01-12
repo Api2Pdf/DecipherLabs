@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json;
 using CSharpVitamins;
 using Microsoft.AspNetCore.Mvc;
-using RaythaZero.Application.OrganizationSettings;
+using RaythaZero.Application.Common.Utils;
 using RaythaZero.Application.OrganizationSettings.Queries;
 
 namespace RaythaZero.Web.Areas.Public.Pages.Company;
@@ -15,21 +14,18 @@ public class Index : BasePublicPageModel
     public async Task<IActionResult> OnGet()
     {
         var response = await Mediator.Send(new GetOrganizationSettings.Query());
-        CompanyLevelInfoDto companyLevelInfoDto =
-            JsonSerializer.Deserialize<CompanyLevelInfoDto>(
-                JsonSerializer.Serialize(response.Result.CompanyLevelInfo));
         
         Form = new FormModel
         {
-            LegalName = companyLevelInfoDto.LegalName,
-            Url = companyLevelInfoDto.Url,
-            CityAndStateHq = companyLevelInfoDto.CityAndStateHq,
-            OffersBenefits = companyLevelInfoDto.OffersBenefits,
-            OffersBenefitsDescription = companyLevelInfoDto.OffersBenefitsDescription,
-            WageRateSheetMediaId = companyLevelInfoDto.WageRateSheetMediaId,
-            PreviousCostVolumeExcelMediaId = companyLevelInfoDto.PreviousCostVolumeExcelMediaId,
-            PreviousCostVolumeWordMediaId = companyLevelInfoDto.PreviousCostVolumeWordMediaId,
-            FinancialStatements =  companyLevelInfoDto.FinancialStatements
+            LegalName = response.Result.CompanyLevelInfo.LegalName,
+            Url = response.Result.CompanyLevelInfo.Url,
+            StateHq = response.Result.CompanyLevelInfo.StateHq,
+            CityHq = response.Result.CompanyLevelInfo.CityHq,
+            OffersBenefits = response.Result.CompanyLevelInfo.OffersBenefits,
+            OffersBenefitsDescription = response.Result.CompanyLevelInfo.OffersBenefitsDescription,
+            WageRateSheetMediaId = response.Result.CompanyLevelInfo.WageRateSheetMediaId,
+            PreviousCostVolumeExcelMediaId = response.Result.CompanyLevelInfo.PreviousCostVolumeExcelMediaId,
+            PreviousCostVolumeWordMediaId = response.Result.CompanyLevelInfo.PreviousCostVolumeWordMediaId
         };
         return Page();
     }
@@ -40,7 +36,8 @@ public class Index : BasePublicPageModel
         { 
             LegalName = Form.LegalName,
             Url = Form.Url,
-            CityAndStateHq = Form.CityAndStateHq,
+            CityHq = Form.CityHq,
+            StateHq = Form.StateHq,
             OffersBenefits = Form.OffersBenefits,
             OffersBenefitsDescription = Form.OffersBenefitsDescription,
             WageRateSheetMediaId = Form.WageRateSheetMediaId,
@@ -52,7 +49,7 @@ public class Index : BasePublicPageModel
         if (response.Success)
         {
             SetSuccessMessage("Company info saved successfully.");
-            return RedirectToPage("/Projects/Index", new { id = response.Result });
+            return RedirectToPage("/Company/Index", new { id = response.Result });
         }
         else
         {
@@ -61,17 +58,43 @@ public class Index : BasePublicPageModel
         } 
     }
     
+    public async Task<IActionResult> OnPostProcessWageRatesUpload([FromBody] WageRatesUploadRequest uploads)
+    {
+        Form = new FormModel
+        {
+            WageRateSheetMediaId = uploads.UploadedIds.First()
+        };
+        return new PartialViewResult { ViewName = "_Partials/ProcessWageRatesUpload", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnGetDeleteWageRatesUpload()
+    {
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/WageRatesUpload", ViewData=ViewData };
+    }
+    
     public record FormModel 
     {
         [Display(Name = "Legal name")]
-        public string LegalName { get; init; } = string.Empty;
-        public string Url { get; init; } = string.Empty;
-        public string CityAndStateHq { get; init; } = string.Empty;
-        public bool OffersBenefits { get; init; } = false;
-        public string OffersBenefitsDescription { get; init; } = string.Empty;
-        public ShortGuid? WageRateSheetMediaId { get; init; }
-        public ShortGuid? PreviousCostVolumeExcelMediaId { get; init; }
-        public ShortGuid? PreviousCostVolumeWordMediaId { get; init; }
-        public IEnumerable<ShortGuid> FinancialStatements { get; init; } =  new List<ShortGuid>();
+        public string LegalName { get; set; } = string.Empty;
+        [Display(Name = "Company URL")]
+        public string Url { get; set; } = string.Empty;
+        [Display(Name = "City HQ")]
+        public string CityHq { get; set; } = string.Empty;
+        [Display(Name = "State HQ")]
+        public string StateHq { get; set; } = string.Empty;
+        [Display(Name = "Offers benefits")] 
+        public bool OffersBenefits { get; set; } = false;
+        [Display(Name = "Description of benefits")]
+        public string OffersBenefitsDescription { get; set; } = string.Empty;
+        public string WageRateSheetMediaId { get; set; } = string.Empty;
+        public string PreviousCostVolumeExcelMediaId { get; set; } = string.Empty;
+        public string PreviousCostVolumeWordMediaId { get; set; } = string.Empty;
+        public IEnumerable<string> FinancialStatements { get; set; } =  new List<string>();
+    }
+
+    public record WageRatesUploadRequest 
+    {
+        public IEnumerable<string> UploadedIds { get; set; } = new List<string>();
     }
 }

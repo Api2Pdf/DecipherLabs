@@ -17,17 +17,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/FileUpload/Index.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/FileUpload/IndexViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Interfaces/IRaythaDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Interfaces/IRaythaDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaythaZero.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/RaythaZero.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/Constants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/StringExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/StringExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/Commands/EditCompanyLevelInfocs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/Commands/EditCompanyLevelInfocs.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/OrganizationSettingsDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/OrganizationSettingsDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/OrganizationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/OrganizationSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/RaythaZero.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/RaythaZero.Domain.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Migrations/RaythaDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Migrations/RaythaDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Persistence/RaythaDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Persistence/RaythaDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Create.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/SidebarLayout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/SidebarLayout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/JsonConverters/ShortGuidConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/JsonConverters/ShortGuidConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Admin/Controllers/MediaItemsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Admin/Controllers/MediaItemsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/FileUpload.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/FileUploadViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_TurboStream.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_TurboStream.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/RaythaZero.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/RaythaZero.Web.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Services/RelativeUrlBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Services/RelativeUrlBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/js/site.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,9 +68,11 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/804891a5dc5685a3f7409f4e737c7018274e7af1aa111975a024fa3fc08e5c/ExecutorFactory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9eda537f15ea23cdfae523c19e87eb303a3ded88937ae7e55919387a43f70/ExecutionContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a1a52cad5cbb32df9053fee4b07d4654d4a16163aaeb6067f2b6b1b09b95679/PageConventionCollection.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ae4af1ba1190ee18f53bc8e16286b884b58c0beca3f1e7a275dbda381df2d0/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c7b951b325bab108c85162b50e1bcf1a5604ef441dabab73ab914f6c6f741d/HtmlHelperPartialExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c7da56581ee7b20208f09e80b735961e4d5d7b9e5562bfdec94a75c57b391/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f8c7eb7ea1edec4e19324d5ffa81a4a6eb62d142b0aae0598f9aa7773ec68f6b/RequestDelegateFactory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fb367341658aaedd7de424d4c9189db33c4387e268dcc4011918569442ab12/AsyncTaskMethodBuilderT.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/lib/jquery/dist/jquery.min.map" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -301,7 +314,7 @@
       <updated>1735237814918</updated>
       <workItem from="1735237816395" duration="9060000" />
       <workItem from="1735757397081" duration="11325000" />
-      <workItem from="1736462949481" duration="3047000" />
+      <workItem from="1736462949481" duration="32682000" />
     </task>
     <servers />
   </component>
@@ -315,5 +328,29 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/RaythaZero.Web/Services/RelativeUrlBuilder.cs</url>
+          <line>39</line>
+          <properties documentPath="C:\Users\Zack Schwartz\source\repos\DecipherLabs\src\RaythaZero.Web\Services\RelativeUrlBuilder.cs" containingFunctionPresentation="Method 'ResolveUrlIfHttpContextAccessExists'">
+            <startOffsets>
+              <option value="2464" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2509" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#System.Text.Json.JsonValueKind" memberName="value__" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

@@ -1,6 +1,7 @@
 ﻿using CSharpVitamins;
 using RaythaZero.Application.Common.Utils;
 using System.Linq.Expressions;
+using RaythaZero.Domain.Entities;
 
 namespace RaythaZero.Application.OrganizationSettings;
 
@@ -17,7 +18,7 @@ public record OrganizationSettingsDto
     public int? SmtpPort { get; init; }
     public string SmtpUsername { get; init; } = string.Empty;
     public string SmtpPassword { get; init; } = string.Empty;
-    public dynamic CompanyLevelInfo { get; init; } = new CompanyLevelInfoDto();
+    public CompanyLevelInfo CompanyLevelInfo { get; init; } = new CompanyLevelInfo();
     public static Expression<Func<Domain.Entities.OrganizationSettings, OrganizationSettingsDto>> GetProjection()
     {
         return entity => GetProjection(entity);
@@ -41,19 +42,7 @@ public record OrganizationSettingsDto
             SmtpPort = entity.SmtpPort,
             SmtpPassword = entity.SmtpPassword,
             SmtpUsername = entity.SmtpUsername,
-            CompanyLevelInfo = entity.CompanySetupData ?? new CompanyLevelInfoDto()
+            CompanyLevelInfo = entity.CompanySetupData ?? new CompanyLevelInfo()
         };
     }
-}
-public record CompanyLevelInfoDto
-{
-    public string LegalName { get; init; } = string.Empty;
-    public string Url { get; init; } = string.Empty;
-    public string CityAndStateHq { get; init; } = string.Empty;
-    public bool OffersBenefits { get; init; } = false;
-    public string OffersBenefitsDescription { get; init; } = string.Empty;
-    public ShortGuid? WageRateSheetMediaId { get; init; }
-    public ShortGuid? PreviousCostVolumeExcelMediaId { get; init; }
-    public ShortGuid? PreviousCostVolumeWordMediaId { get; init; }
-    public IEnumerable<ShortGuid> FinancialStatements { get; init; } =  new List<ShortGuid>();
 }

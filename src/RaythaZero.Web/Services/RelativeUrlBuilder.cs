@@ -24,7 +24,7 @@ public class RelativeUrlBuilder : IRelativeUrlBuilder
 
     public string AdminForgotPasswordCompleteUrl(string token) => ResolveUrlIfHttpContextAccessExists("/Login/ForgotPasswordComplete", new { area = "Admin", token });
 
-    public string MediaRedirectToFileUrl(string objectKey) => ResolveUrlIfHttpContextAccessExists("RedirectToFileUrlByObjectKey", new { area = "Admin", controller = "MediaItems", action = "RedirectToFileUrlByObjectKey", objectKey });
+    public string MediaRedirectToFileUrl(string id) => ResolveUrlIfHttpContextAccessExists("RedirectToFileUrlById", new { controller = "MediaItems", action = "RedirectToFileUrlById", id});
 
     public string MediaFileLocalStorageUrl(string objectKey) => GetBaseUrl() + $"/_static-files/{objectKey}";
 

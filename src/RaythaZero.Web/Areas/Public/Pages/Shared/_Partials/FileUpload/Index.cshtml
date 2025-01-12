@@ -1,0 +1,12 @@
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@model IndexViewModel
+@{
+    var token = Antiforgery.GetAndStoreTokens(Context).RequestToken;
+}
+<div class="file-upload-container" 
+     data-controller="file-upload" 
+     data-file-upload-success-endpoint-value="@Model.SuccessEndpoint"
+     data-file-upload-max-files-value="@Model.MaxFiles"
+     data-file-upload-csrf-token-value="@token">
+    <div data-file-upload-target="uploadContainer"></div>
+</div>

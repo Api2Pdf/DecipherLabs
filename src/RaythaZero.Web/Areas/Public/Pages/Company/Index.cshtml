@@ -1,4 +1,6 @@
 @page "/company"
+@using RaythaZero.Application.Common.Utils
+@using RaythaZero.Web.Areas.Public.Pages.Shared._Partials
 @model RaythaZero.Web.Areas.Public.Pages.Company.Index
 
 @{
@@ -25,6 +27,51 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label raytha-required" asp-for="Form.Url"></label>
+                                    <input type="text" class="form-control @Model.HasError("Url")" asp-for="Form.Url" required>
+                                    <div class="invalid-feedback">@Model.ErrorMessageFor("Url")</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label raytha-required" asp-for="Form.CityHq"></label>
+                                    <input type="text" class="form-control @Model.HasError("CityHq")" asp-for="Form.CityHq" required>
+                                    <div class="invalid-feedback">@Model.ErrorMessageFor("CityHq")</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label raytha-required" asp-for="Form.StateHq"></label>
+                                    <select class="form-control @Model.HasError("StateHq")" asp-for="Form.StateHq" required>
+                                        <option value="">-- SELECT --</option>
+                                        @foreach (var state in Constants.GetStatesAndTerritories())
+                                        {
+                                            <option value="@state">@state</option>
+                                        }
+                                    </select>
+                                    <div class="invalid-feedback">@Model.ErrorMessageFor("StateHq")</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input @Model.HasError("OffersBenefits")" asp-for="Form.OffersBenefits" id="offersBenefitsCheckbox" onclick="toggleBenefitsDescription()">
+                                    <label class="form-check-label" asp-for="Form.OffersBenefits"></label>
+                                    <div class="invalid-feedback">@Model.ErrorMessageFor("OffersBenefits")</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" id="benefitsDescriptionField" style="display: none;">
+                                <div class="mb-3">
+                                    <label class="form-label" asp-for="Form.OffersBenefitsDescription"></label>
+                                    <textarea class="form-control @Model.HasError("OffersBenefitsDescription")" asp-for="Form.OffersBenefitsDescription"></textarea>
+                                    <div class="invalid-feedback">@Model.ErrorMessageFor("OffersBenefitsDescription")</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" id="wage_rates_upload_container">
+                                @Html.Partial("_Partials/WageRatesUpload")
+                            </div>
+                            <div class="col-lg-12">
                                 <button type="submit" class="btn btn-success mt-4">Save changes</button>
                             </div>
                         </div>
@@ -34,3 +81,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    function toggleBenefitsDescription() {
+        var checkbox = document.getElementById("offersBenefitsCheckbox");
+        var benefitsDescriptionField = document.getElementById("benefitsDescriptionField");
+        benefitsDescriptionField.style.display = checkbox.checked ? "block" : "none";
+    }
+
+    // Initialize visibility on page load
+    toggleBenefitsDescription();
+</script>

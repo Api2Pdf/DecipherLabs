@@ -22,7 +22,7 @@ public class MediaItemsController : Controller
     
     [HttpPost]
     [Route($"presign", Name = "mediaitemspresignuploadurl")]
-    public async Task<IActionResult> CloudUploadPresignRequest([FromBody] MediaItemPresignRequestViewModel body, string contentType)
+    public async Task<IActionResult> CloudUploadPresignRequest([FromBody] MediaItemPresignRequestViewModel body)
     {
         var idForKey = ShortGuid.NewGuid();
         var objectKey = FileStorageUtility.CreateObjectKeyFromIdAndFileName(idForKey, body.filename);
@@ -33,7 +33,7 @@ public class MediaItemsController : Controller
 
     [HttpPost]
     [Route($"create-after-upload", Name = "mediaitemscreateafterupload")]
-    public async Task<IActionResult> CloudUploadCreateAfterUpload([FromBody] MediaItemCreateAfterUploadViewModel body, string contentType, string themeId)
+    public async Task<IActionResult> CloudUploadCreateAfterUpload([FromBody] MediaItemCreateAfterUploadViewModel body)
     {
         var input = new CreateMediaItem.Command
         {
@@ -59,7 +59,7 @@ public class MediaItemsController : Controller
 
     [HttpPost]
     [Route($"upload", Name = "mediaitemslocalstorageupload")]
-    public async Task<IActionResult> LocalStorageUpload(IFormFile file, string contentType, string themeId)
+    public async Task<IActionResult> LocalStorageUpload(IFormFile file)
     {
         if (file.Length <= 0)
         {
@@ -88,7 +88,7 @@ public class MediaItemsController : Controller
             var response = await Mediator.Send(input);
             if (response.Success)
             {
-                var url = RelativeUrlBuilder.MediaRedirectToFileUrl(objectKey);
+                var url = Url.Action("RedirectToFileUrlById", "MediaItems", new { id = response.Result });
                 return Json(new { url, location = url, success = true, fields = new { id = idForKey.ToString(), fileName = file.FileName, file.ContentType, objectKey } });
             }
             else

@@ -4,6 +4,7 @@ using MediatR;
 using RaythaZero.Application.Common.Interfaces;
 using RaythaZero.Application.Common.Models;
 using RaythaZero.Application.Common.Utils;
+using RaythaZero.Domain.Entities;
 
 namespace RaythaZero.Application.OrganizationSettings.Commands;
 
@@ -13,13 +14,14 @@ public class EditCompanylevelInfo
     {
         public string LegalName { get; init; } = string.Empty;
         public string Url { get; init; } = string.Empty;
-        public string CityAndStateHq { get; init; } = string.Empty;
+        public string CityHq { get; init; } = string.Empty;
+        public string StateHq { get; init; } = string.Empty;
         public bool OffersBenefits { get; init; } = false;
         public string OffersBenefitsDescription { get; init; } = string.Empty;
-        public ShortGuid? WageRateSheetMediaId { get; init; }
-        public ShortGuid? PreviousCostVolumeExcelMediaId { get; init; }
-        public ShortGuid? PreviousCostVolumeWordMediaId { get; init; }
-        public IEnumerable<ShortGuid> FinancialStatements { get; init; } =  new List<ShortGuid>();
+        public string WageRateSheetMediaId { get; init; }
+        public string PreviousCostVolumeExcelMediaId { get; init; }
+        public string PreviousCostVolumeWordMediaId { get; init; }
+        public IEnumerable<string> FinancialStatements { get; init; } =  new List<string>();
     }
 
     public class Validator : AbstractValidator<Command>
@@ -28,8 +30,16 @@ public class EditCompanylevelInfo
         {
             RuleFor(x => x.LegalName).NotEmpty();
             RuleFor(x => x.Url).NotEmpty();
-            RuleFor(x => x.CityAndStateHq).NotEmpty();
-            RuleFor(x => x.WageRateSheetMediaId).NotEmpty();
+            RuleFor(x => x.CityHq).NotEmpty();
+            RuleFor(x => x.StateHq).NotEmpty();
+            RuleFor(x => x.WageRateSheetMediaId).Custom((request, context) =>
+            {
+                if (request == ShortGuid.Empty)
+                {
+                    context.AddFailure(Constants.VALIDATION_SUMMARY, "'Wage Rate Sheet' cannot be empty.");
+                    return;
+                }
+            });
         }
     }
 
@@ -43,7 +53,20 @@ public class EditCompanylevelInfo
         public async Task<CommandResponseDto<ShortGuid>> Handle(Command request, CancellationToken cancellationToken)
         {
             var entity = _db.OrganizationSettings.First();
-            entity.CompanySetupData = request;
+            var companyInfo = new CompanyLevelInfo()
+            {
+                LegalName = request.LegalName,
+                Url = request.Url,
+                CityHq = request.CityHq,
+                StateHq = request.StateHq,
+                OffersBenefits = request.OffersBenefits,
+                OffersBenefitsDescription = request.OffersBenefitsDescription,
+                WageRateSheetMediaId = request.WageRateSheetMediaId,
+                PreviousCostVolumeExcelMediaId = request.PreviousCostVolumeExcelMediaId,
+                PreviousCostVolumeWordMediaId = request.PreviousCostVolumeWordMediaId,
+                FinancialStatements = request.FinancialStatements
+            };
+            entity.CompanySetupData = companyInfo;
             await _db.SaveChangesAsync(cancellationToken);
             return new CommandResponseDto<ShortGuid>(entity.Id);
         }

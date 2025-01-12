@@ -1,5 +1,6 @@
 @page "/projects/manage/{id}"
 @using RaythaZero.Web.Areas.Public.Pages.Projects._Partials
+@using RaythaZero.Web.Areas.Public.Pages.Shared._Partials
 @model RaythaZero.Web.Areas.Public.Pages.Projects.Manage
 
 @{
@@ -38,14 +39,9 @@
                 <h6>Resumes</h6>
               </div>
               <div class="card-list-body">
-                @Html.Partial("_Partials/FileUpload", new FileUploadViewModel
+                @Html.Partial("_Partials/FileUpload", new IndexViewModel
                 {
-                  Endpoint = Url.Page("/Projects/Manage", "ResumeUpload", new { id = Model.ProjectId }),
                   MaxFiles = 20,
-                  ContainerId = "resumes",
-                  FileName = "ResumeFile",
-                  TargetFrame = "docs_resumes_frame",
-                  TargetSrc = Url.Page("/Projects/Manage", "Resumes", new { id = Model.ProjectId })
                 })
                 @Html.Partial("_Partials/Resumes", Model)
               </div>
@@ -56,14 +52,9 @@
                 <h6>Top Level DoD BAA</h6>
               </div>
               <div class="card-list-body">
-                @Html.Partial("_Partials/FileUpload", new FileUploadViewModel
+                @Html.Partial("_Partials/FileUpload", new IndexViewModel
                 {
-                  Endpoint = Url.Page("/Projects/Manage", "ResumeUpload", new { id = Model.ProjectId }),
                   MaxFiles = 20,
-                  ContainerId = "toplevel",
-                  FileName = "ResumeFile",
-                  TargetFrame = "docs_resumes_frame",
-                  TargetSrc = Url.Page("/Projects/Manage", "Resumes", new { id = Model.ProjectId })
                 })
                 <turbo-frame id="docs_toplevel_frame">
                   <div class="card card-task">
@@ -94,14 +85,9 @@
                 <h6>Service Specific DoD BAA</h6>
               </div>
               <div class="card-list-body">
-                @Html.Partial("_Partials/FileUpload", new FileUploadViewModel
+                @Html.Partial("_Partials/FileUpload", new IndexViewModel
                 {
-                  Endpoint = Url.Page("/Projects/Manage", "ResumeUpload", new { id = Model.ProjectId }),
                   MaxFiles = 20,
-                  ContainerId = "service",
-                  FileName = "ResumeFile",
-                  TargetFrame = "docs_resumes_frame",
-                  TargetSrc = Url.Page("/Projects/Manage", "Resumes", new { id = Model.ProjectId })
                 })
                 <turbo-frame id="docs_service_frame">
                   <div class="card card-task">
@@ -132,14 +118,9 @@
                 <h6>Specific Topic BAA</h6>
               </div>
               <div class="card-list-body">
-                @Html.Partial("_Partials/FileUpload", new FileUploadViewModel
+                @Html.Partial("_Partials/FileUpload", new IndexViewModel
                 {
-                  Endpoint = Url.Page("/Projects/Manage", "ResumeUpload", new { id = Model.ProjectId }),
                   MaxFiles = 20,
-                  ContainerId = "topic",
-                  FileName = "ResumeFile",
-                  TargetFrame = "docs_resumes_frame",
-                  TargetSrc = Url.Page("/Projects/Manage", "Resumes", new { id = Model.ProjectId })
                 })
                 <turbo-frame id="docs_topic_frame">
                   <div class="card card-task">

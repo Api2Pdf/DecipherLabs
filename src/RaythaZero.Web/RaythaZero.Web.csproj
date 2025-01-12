@@ -21,10 +21,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="wwwroot\public\" />
-    </ItemGroup>
-    
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="Areas\Public\Pages\Error.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Public\Pages\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Public\Pages\Privacy.cshtml" />

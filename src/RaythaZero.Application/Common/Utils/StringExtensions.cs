@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using CSharpVitamins;
 
 namespace RaythaZero.Application.Common.Utils;
 
@@ -183,6 +184,13 @@ public static class StringExtensions
                 return $"%{input}%";
         }
         throw new NotImplementedException();
+    }
+
+    public static string EmptyStringIfEmptyGuid(this ShortGuid guid)
+    {
+        if (guid == ShortGuid.Empty)
+            return string.Empty;
+        return guid.ToString();
     }
     
 }
