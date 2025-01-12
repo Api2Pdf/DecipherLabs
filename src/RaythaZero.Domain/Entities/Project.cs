@@ -10,16 +10,16 @@ public class Project : BaseAuditableEntity
     public bool? IsArchived { get; set; } = false;
     public string? _ProjectData { get; set; }
     
-    private dynamic _projectData;
+    private ProjectLevelInfo _projectData;
 
     [NotMapped]
-    public dynamic ProjectData 
+    public ProjectLevelInfo ProjectData 
     { 
         get 
         { 
             if (_projectData == null)
             {
-                _projectData = JsonSerializer.Deserialize<dynamic>(_ProjectData ?? JsonSerializer.Serialize(new ProjectLevelInfo()));
+                _projectData = JsonSerializer.Deserialize<ProjectLevelInfo>(_ProjectData ?? JsonSerializer.Serialize(new ProjectLevelInfo()));
             }
             return _projectData; 
         } 
@@ -33,51 +33,51 @@ public class Project : BaseAuditableEntity
 
 public record ProjectLevelInfo
 {
-    public string DsipProposalNumber { get; init; } = string.Empty;
-    public string TypeOfProposal { get; init; } = string.Empty;
-    public ShortGuid? TopLevel { get; init; }
-    public ShortGuid? ServiceSpecific { get; init; }
-    public ShortGuid? Topic { get; init; }
-    public IEnumerable<string> OtherDirectCostSelections { get; init; } = new List<string>();
-    public IEnumerable<Resume> Resumes { get; init; } = new List<Resume>();
-    public TravelDto Travel { get; init; } = new TravelDto();
-    public MaterialsDto Materials { get; init; } = new MaterialsDto();
-    public SuppliesDto Supplies { get; init; } = new SuppliesDto();
-    public EquipmentDto Equipment { get; init; } = new EquipmentDto();
-    public OtherDirectCosts OtherDirectCosts { get; init; } = new OtherDirectCosts();
-    public ConsultantDto Consultant { get; init; } = new ConsultantDto();
+    public string DsipProposalNumber { get; set; } = string.Empty;
+    public string TypeOfProposal { get; set; } = string.Empty;
+    public string TopLevelMediaId { get; set; }
+    public string ServiceSpecificMediaId { get; set; }
+    public string TopicMediaId { get; set; }
+    public IEnumerable<string> OtherDirectCostSelections { get; set; } = new List<string>();
+    public IEnumerable<Resume> Resumes { get; set; } = new List<Resume>();
+    public TravelDto Travel { get; set; } = new TravelDto();
+    public MaterialsDto Materials { get; set; } = new MaterialsDto();
+    public SuppliesDto Supplies { get; set; } = new SuppliesDto();
+    public EquipmentDto Equipment { get; set; } = new EquipmentDto();
+    public OtherDirectCosts OtherDirectCosts { get; set; } = new OtherDirectCosts();
+    public ConsultantDto Consultant { get; set; } = new ConsultantDto();
 }
 
 public record Resume
 {
-    public string FileName { get; init; } = string.Empty;
-    public ShortGuid? ResumeMediaId { get; init; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
+    public string ResumeMediaId { get; set; } = string.Empty;
 }
 
 public abstract record Subtier
 {
-    public string Description { get; init; } = string.Empty;
-    public ShortGuid? DescriptionMediaId { get; init; }
+    public string Description { get; set; } = string.Empty;
+    public string DescriptionMediaId { get; set; }
 }
 
 public record TravelDto : Subtier
 {
-    public int NumberOfTrips { get; init; } = 0;
-    public int NumberOfTravelers { get; init; } = 0;
-    public string LocationOfGovEndUser { get; init; } = string.Empty;
-    public string LocationOfSubcontractor { get; init; } = string.Empty;
-    public bool UseRideshare { get; init; } = false;
-    public bool UseRentalCar { get; init; } = false;
+    public int NumberOfTrips { get; set; } = 0;
+    public int NumberOfTravelers { get; set; } = 0;
+    public string LocationOfGovEndUser { get; set; } = string.Empty;
+    public string LocationOfSubcontractor { get; set; } = string.Empty;
+    public bool UseRideshare { get; set; } = false;
+    public bool UseRentalCar { get; set; } = false;
 }
 
 public record SubcontractorDto : Subtier
 {
-    public string Url { get; init; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
 }
 
 public record ConsultantDto : Subtier
 {
-    public string Url { get; init; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
 }
 
 public record SuppliesDto : Subtier

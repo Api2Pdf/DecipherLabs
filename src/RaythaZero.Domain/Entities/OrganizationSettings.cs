@@ -50,15 +50,15 @@ public class OrganizationSettings : BaseEntity
 
 public record CompanyLevelInfo
 {
-    public string LegalName { get; init; } = string.Empty;
-    public string Url { get; init; } = string.Empty;
-    public string CityHq { get; init; } = string.Empty;
-    public string StateHq { get; init; } = string.Empty;
-    public bool OffersBenefits { get; init; } = false;
-    public string OffersBenefitsDescription { get; init; } = string.Empty;
-    public string WageRateSheetMediaId { get; init; }
-    public string PreviousCostVolumeExcelMediaId { get; init; }
-    public string PreviousCostVolumeWordMediaId { get; init; }
-    public string BalanceSheetMediaId { get; init; }
-    public string ProfitAndLossMediaId { get; init; }
+    public string LegalName { get; set; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
+    public string CityHq { get; set; } = string.Empty;
+    public string StateHq { get; set; } = string.Empty;
+    public bool OffersBenefits { get; set; } = false;
+    public string OffersBenefitsDescription { get; set; } = string.Empty;
+    public string WageRateSheetMediaId { get; set; }
+    public string PreviousCostVolumeExcelMediaId { get; set; }
+    public string PreviousCostVolumeWordMediaId { get; set; }
+    public string BalanceSheetMediaId { get; set; }
+    public string ProfitAndLossMediaId { get; set; }
 }

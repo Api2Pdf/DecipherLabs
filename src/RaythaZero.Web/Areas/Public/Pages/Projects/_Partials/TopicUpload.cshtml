@@ -1,0 +1,30 @@
+@using RaythaZero.Web.Areas.Public.Pages.Shared._Partials
+@model RaythaZero.Web.Areas.Public.Pages.Projects.Edit
+<turbo-frame id="topic_file_frame">
+    <div class="card-list-body">
+        @if (string.IsNullOrEmpty(Model.Form.TopicMediaId))
+        {
+            @Html.Partial("Shared/_Partials/FileUpload/Index", new IndexViewModel
+            {
+                MaxFiles = 1,
+                SuccessEndpoint = Url.Page("/Projects/Edit", "ProcessTopicUpload", new { id = Model.Form.Id })
+            })
+        }
+        @if (!string.IsNullOrEmpty(Model.Form.TopicMediaId))
+        {
+            <div class="card card-task">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h6><a target="_blank" asp-controller="MediaItems" asp-action="RedirectToFileUrlById" asp-route-id="@Model.Form.TopicMediaId">@Model.Form.TopicMediaId</a></h6>
+                    </div>
+                    <div class="card-meta">
+                        <a class="nav-link d-inline-flex align-items-center justify-content-center text-danger" asp-page="/Projects/Edit" asp-route-id="@Model.Form.Id" asp-page-handler="DeleteTopicUpload">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="Form.TopicMediaId" />
+            </div>
+        }
+    </div>
+</turbo-frame>

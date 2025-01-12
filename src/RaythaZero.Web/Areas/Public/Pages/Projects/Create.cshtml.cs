@@ -23,7 +23,7 @@ public class Create : BasePublicPageModel
         if (response.Success)
         {
             SetSuccessMessage("Project created successfully.");
-            return RedirectToPage("/Projects/Manage", new { id = response.Result });
+            return RedirectToPage("/Projects/Edit", new { id = response.Result });
         }
         else
         {
