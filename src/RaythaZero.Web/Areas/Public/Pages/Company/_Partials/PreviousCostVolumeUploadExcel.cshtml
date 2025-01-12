@@ -1,0 +1,33 @@
+@using RaythaZero.Web.Areas.Public.Pages.Shared._Partials
+@model RaythaZero.Web.Areas.Public.Pages.Company.Index
+
+<turbo-frame id="previous_cost_volume_excel_file_frame">
+    <div class="card-list-body">
+        <h6>Excel file</h6>
+        @if (string.IsNullOrEmpty(Model.Form.PreviousCostVolumeExcelMediaId))
+        {
+            @Html.Partial("Shared/_Partials/FileUpload/Index", new IndexViewModel
+            {
+                MaxFiles = 1,
+                SuccessEndpoint = Url.Page("/Company/Index", "ProcessPreviousCostVolumeExcelUpload"),
+                AllowedFileTypes = new List<string> { ".xls", ".xlsx" }
+            })
+        }
+        @if (!string.IsNullOrEmpty(Model.Form.PreviousCostVolumeExcelMediaId))
+        {
+            <div class="card card-task">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h6><a target="_blank" asp-controller="MediaItems" asp-action="RedirectToFileUrlById" asp-route-id="@Model.Form.PreviousCostVolumeExcelMediaId">@Model.Form.PreviousCostVolumeExcelMediaId</a></h6>
+                    </div>
+                    <div class="card-meta">
+                        <a class="nav-link d-inline-flex align-items-center justify-content-center text-danger" asp-page="/Company/Index" asp-page-handler="DeletePreviousCostVolumeExcelUpload">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="Form.PreviousCostVolumeExcelMediaId"/>
+            </div>
+        }
+    </div>
+</turbo-frame>

@@ -17,28 +17,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/FileUpload/Index.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/FileUpload/IndexViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RaythaZero.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/RaythaZero.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/Constants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/StringExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/StringExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/Commands/EditCompanyLevelInfocs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/Commands/EditCompanyLevelInfocs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/OrganizationSettingsDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/OrganizationSettings/OrganizationSettingsDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/OrganizationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/OrganizationSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/JsonConverters/ShortGuidConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/JsonConverters/ShortGuidConverter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Admin/Controllers/MediaItemsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Admin/Controllers/MediaItemsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/Index.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/FileUpload.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/FileUploadViewModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_TurboStream.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_TurboStream.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/RaythaZero.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/RaythaZero.Web.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Services/RelativeUrlBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Services/RelativeUrlBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/js/site.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/_Partials/ProcessWageRatesUpload.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/_Partials/ProcessWageRatesUpload.cshtml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/_Partials/WageRatesUpload.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Company/_Partials/WageRatesUpload.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/FileUpload/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/FileUpload/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/FileUpload/IndexViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/FileUpload/IndexViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/controllers/file_upload_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/wwwroot/public/controllers/file_upload_controller.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +303,7 @@
       <updated>1735237814918</updated>
       <workItem from="1735237816395" duration="9060000" />
       <workItem from="1735757397081" duration="11325000" />
-      <workItem from="1736462949481" duration="32682000" />
+      <workItem from="1736462949481" duration="39710000" />
     </task>
     <servers />
   </component>

@@ -59,5 +59,6 @@ public record CompanyLevelInfo
     public string WageRateSheetMediaId { get; init; }
     public string PreviousCostVolumeExcelMediaId { get; init; }
     public string PreviousCostVolumeWordMediaId { get; init; }
-    public IEnumerable<string> FinancialStatements { get; init; } =  new List<string>();
+    public string BalanceSheetMediaId { get; init; }
+    public string ProfitAndLossMediaId { get; init; }
 }

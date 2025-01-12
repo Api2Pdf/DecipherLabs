@@ -1,0 +1,32 @@
+@using RaythaZero.Web.Areas.Public.Pages.Shared._Partials
+@model RaythaZero.Web.Areas.Public.Pages.Company.Index
+
+<turbo-frame id="balance_sheet_file_frame">
+    <div class="card-list-body">
+        <h6>Balance sheet</h6>
+        @if (string.IsNullOrEmpty(Model.Form.BalanceSheetMediaId))
+        {
+            @Html.Partial("Shared/_Partials/FileUpload/Index", new IndexViewModel
+            {
+                MaxFiles = 1,
+                SuccessEndpoint = Url.Page("/Company/Index", "ProcessBalanceSheetUpload"),
+            })
+        }
+        @if (!string.IsNullOrEmpty(Model.Form.BalanceSheetMediaId))
+        {
+            <div class="card card-task">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h6><a target="_blank" asp-controller="MediaItems" asp-action="RedirectToFileUrlById" asp-route-id="@Model.Form.BalanceSheetMediaId">@Model.Form.BalanceSheetMediaId</a></h6>
+                    </div>
+                    <div class="card-meta">
+                        <a class="nav-link d-inline-flex align-items-center justify-content-center text-danger" asp-page="/Company/Index" asp-page-handler="DeleteBalanceSheetUpload">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="Form.BalanceSheetMediaId"/>
+            </div>
+        }
+    </div>
+</turbo-frame>

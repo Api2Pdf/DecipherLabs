@@ -69,7 +69,33 @@
                                 </div>
                             </div>
                             <div class="col-lg-12" id="wage_rates_upload_container">
-                                @Html.Partial("_Partials/WageRatesUpload")
+                                <div class="mb-3">
+                                    <label class="form-label" asp-for="Form.WageRateSheetMediaId"></label>
+                                    <div class="invalid-feedback">@Model.ErrorMessageFor("WageRateSheetMediaId")</div>
+                                    <div class="card-list">
+                                        @Html.Partial("_Partials/WageRatesUpload")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" id="previous_cost_volume_upload_container">
+                                <div class="mb-3">
+                                    <label class="form-label">Previous cost volumes</label>
+                                    <div class="card-list">
+                                        @Html.Partial("_Partials/PreviousCostVolumeUploadExcel")
+                                        <p></p>
+                                        @Html.Partial("_Partials/PreviousCostVolumeUploadWord")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" id="financial_statements_upload_container">
+                                <div class="mb-3">
+                                    <label class="form-label">Financial statements</label>
+                                    <div class="card-list">
+                                        @Html.Partial("_Partials/BalanceSheetUpload")
+                                        <p></p>
+                                        @Html.Partial("_Partials/ProfitAndLossUpload")
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-12">
                                 <button type="submit" class="btn btn-success mt-4">Save changes</button>

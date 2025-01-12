@@ -1,7 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using CSharpVitamins;
 using Microsoft.AspNetCore.Mvc;
-using RaythaZero.Application.Common.Utils;
 using RaythaZero.Application.OrganizationSettings.Queries;
 
 namespace RaythaZero.Web.Areas.Public.Pages.Company;
@@ -25,7 +23,9 @@ public class Index : BasePublicPageModel
             OffersBenefitsDescription = response.Result.CompanyLevelInfo.OffersBenefitsDescription,
             WageRateSheetMediaId = response.Result.CompanyLevelInfo.WageRateSheetMediaId,
             PreviousCostVolumeExcelMediaId = response.Result.CompanyLevelInfo.PreviousCostVolumeExcelMediaId,
-            PreviousCostVolumeWordMediaId = response.Result.CompanyLevelInfo.PreviousCostVolumeWordMediaId
+            PreviousCostVolumeWordMediaId = response.Result.CompanyLevelInfo.PreviousCostVolumeWordMediaId,
+            BalanceSheetMediaId = response.Result.CompanyLevelInfo.BalanceSheetMediaId,
+            ProfitAndLossMediaId = response.Result.CompanyLevelInfo.ProfitAndLossMediaId
         };
         return Page();
     }
@@ -43,7 +43,8 @@ public class Index : BasePublicPageModel
             WageRateSheetMediaId = Form.WageRateSheetMediaId,
             PreviousCostVolumeExcelMediaId = Form.PreviousCostVolumeExcelMediaId,
             PreviousCostVolumeWordMediaId = Form.PreviousCostVolumeWordMediaId,
-            FinancialStatements = Form.FinancialStatements
+            BalanceSheetMediaId = Form.BalanceSheetMediaId,
+            ProfitAndLossMediaId = Form.ProfitAndLossMediaId,
         });
 
         if (response.Success)
@@ -58,7 +59,7 @@ public class Index : BasePublicPageModel
         } 
     }
     
-    public async Task<IActionResult> OnPostProcessWageRatesUpload([FromBody] WageRatesUploadRequest uploads)
+    public async Task<IActionResult> OnPostProcessWageRatesUpload([FromBody] UploadRequest uploads)
     {
         Form = new FormModel
         {
@@ -73,6 +74,64 @@ public class Index : BasePublicPageModel
         return new PartialViewResult { ViewName = "_Partials/WageRatesUpload", ViewData=ViewData };
     }
     
+    public async Task<IActionResult> OnPostProcessPreviousCostVolumeExcelUpload([FromBody] UploadRequest uploads)
+    {
+        Form = new FormModel
+        {
+            PreviousCostVolumeExcelMediaId = uploads.UploadedIds.First()
+        };
+        return new PartialViewResult { ViewName = "_Partials/ProcessPreviousCostVolumeExcelUpload", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnGetDeletePreviousCostVolumeExcelUpload()
+    {
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/PreviousCostVolumeUploadExcel", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnPostProcessPreviousCostVolumeWordUpload([FromBody] UploadRequest uploads)
+    {
+        Form = new FormModel
+        {
+            PreviousCostVolumeWordMediaId = uploads.UploadedIds.First()
+        };
+        return new PartialViewResult { ViewName = "_Partials/ProcessPreviousCostVolumeWordUpload", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnGetDeletePreviousCostVolumeWordUpload()
+    {
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/PreviousCostVolumeUploadWord", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnPostProcessBalanceSheetUpload([FromBody] UploadRequest uploads)
+    {
+        Form = new FormModel
+        {
+            BalanceSheetMediaId = uploads.UploadedIds.First()
+        };
+        return new PartialViewResult { ViewName = "_Partials/ProcessBalanceSheetUpload", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnGetDeleteBalanceSheetUpload()
+    {
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/BalanceSheetUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnPostProcessProfitAndLossUpload([FromBody] UploadRequest uploads)
+    {
+        Form = new FormModel
+        {
+            ProfitAndLossMediaId = uploads.UploadedIds.First()
+        };
+        return new PartialViewResult { ViewName = "_Partials/ProcessProfitAndLossUpload", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnGetDeleteProfitAndLossUpload()
+    {
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/ProfitAndLossUpload", ViewData=ViewData };
+    }
     public record FormModel 
     {
         [Display(Name = "Legal name")]
@@ -87,13 +146,19 @@ public class Index : BasePublicPageModel
         public bool OffersBenefits { get; set; } = false;
         [Display(Name = "Description of benefits")]
         public string OffersBenefitsDescription { get; set; } = string.Empty;
+        [Display(Name = "Wage rate sheet")]
         public string WageRateSheetMediaId { get; set; } = string.Empty;
+        [Display(Name = "Previous cost volume excel file")]
         public string PreviousCostVolumeExcelMediaId { get; set; } = string.Empty;
+        [Display(Name = "Previous cost volume word file")]
         public string PreviousCostVolumeWordMediaId { get; set; } = string.Empty;
-        public IEnumerable<string> FinancialStatements { get; set; } =  new List<string>();
+        [Display(Name = "Balance sheet")]
+        public string BalanceSheetMediaId { get; set; } = string.Empty;
+        [Display(Name = "Profit and loss")]
+        public string ProfitAndLossMediaId { get; set; } = string.Empty;
     }
 
-    public record WageRatesUploadRequest 
+    public record UploadRequest 
     {
         public IEnumerable<string> UploadedIds { get; set; } = new List<string>();
     }

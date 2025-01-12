@@ -6,7 +6,10 @@ export default class extends Controller {
     static values = {
         maxFiles: Number,
         csrfToken: String,
-        successEndpoint: String
+        successEndpoint: String,
+        hideUploaderIfMaxHit: Boolean,
+        currentNumberOfFiles: Number,
+        allowedFileTypes: Array
     }
     connect() {
         let uppy;
@@ -16,7 +19,7 @@ export default class extends Controller {
         }
 
         uppy = new Uppy({
-            restrictions: { maxNumberOfFiles: this.maxFilesValue },
+            restrictions: { maxNumberOfFiles: this.maxFilesValue, allowedFileTypes: this.allowedFileTypesValue },
             autoProceed: true
         });
 
@@ -64,7 +67,9 @@ export default class extends Controller {
                 },
                 body: JSON.stringify({
                     UploadedIds: uploadedIds,
-                    MaxFiles: this.maxFilesValue
+                    MaxFiles: this.maxFilesValue,
+                    CurrentNumberOfFiles: this.currentNumberOfFiles,
+                    HideUploaderIfMaxHit: this.hideUploaderIfMaxHit
                 })
             })
                 .then(response => response.text())

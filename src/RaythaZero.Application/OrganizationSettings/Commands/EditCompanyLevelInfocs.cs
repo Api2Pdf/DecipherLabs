@@ -21,7 +21,8 @@ public class EditCompanylevelInfo
         public string WageRateSheetMediaId { get; init; }
         public string PreviousCostVolumeExcelMediaId { get; init; }
         public string PreviousCostVolumeWordMediaId { get; init; }
-        public IEnumerable<string> FinancialStatements { get; init; } =  new List<string>();
+        public string BalanceSheetMediaId { get; init; }
+        public string ProfitAndLossMediaId { get; init; }
     }
 
     public class Validator : AbstractValidator<Command>
@@ -32,14 +33,6 @@ public class EditCompanylevelInfo
             RuleFor(x => x.Url).NotEmpty();
             RuleFor(x => x.CityHq).NotEmpty();
             RuleFor(x => x.StateHq).NotEmpty();
-            RuleFor(x => x.WageRateSheetMediaId).Custom((request, context) =>
-            {
-                if (request == ShortGuid.Empty)
-                {
-                    context.AddFailure(Constants.VALIDATION_SUMMARY, "'Wage Rate Sheet' cannot be empty.");
-                    return;
-                }
-            });
         }
     }
 
@@ -64,7 +57,8 @@ public class EditCompanylevelInfo
                 WageRateSheetMediaId = request.WageRateSheetMediaId,
                 PreviousCostVolumeExcelMediaId = request.PreviousCostVolumeExcelMediaId,
                 PreviousCostVolumeWordMediaId = request.PreviousCostVolumeWordMediaId,
-                FinancialStatements = request.FinancialStatements
+                BalanceSheetMediaId = request.BalanceSheetMediaId,
+                ProfitAndLossMediaId = request.ProfitAndLossMediaId
             };
             entity.CompanySetupData = companyInfo;
             await _db.SaveChangesAsync(cancellationToken);

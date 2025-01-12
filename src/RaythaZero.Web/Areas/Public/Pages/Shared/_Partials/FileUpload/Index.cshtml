@@ -7,6 +7,9 @@
      data-controller="file-upload" 
      data-file-upload-success-endpoint-value="@Model.SuccessEndpoint"
      data-file-upload-max-files-value="@Model.MaxFiles"
-     data-file-upload-csrf-token-value="@token">
+     data-file-upload-csrf-token-value="@token"
+     data-file-upload-current-number-of-files-value="@Model.CurrentNumberOfFiles"
+     data-file-upload-hide-uploader-if-max-hit-value="@Model.HideUploaderIfMaxHit"
+     data-file-upload-allowed-file-types-value="@Model.AllowedFileTypesAsJson">
     <div data-file-upload-target="uploadContainer"></div>
 </div>
