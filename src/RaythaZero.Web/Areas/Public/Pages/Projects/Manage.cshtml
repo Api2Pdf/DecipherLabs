@@ -11,176 +11,185 @@
   <div class="row justify-content-center">
     <div class="col-lg-11 col-xl-10">
       <div class="page-header">
-        <h1>Project name</h1>
+        <h1>@Model.ProjectName</h1>
       </div>
       <ul class="nav nav-tabs nav-fill" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#docs" role="tab" aria-controls="docs"
-             aria-selected="true">Documents</a>
+          <a class="nav-link active" data-toggle="tab" href="#resumes" role="tab" aria-controls="resumes"
+             aria-selected="true">Resumes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#company" role="tab" aria-controls="company"
-             aria-selected="false">Company Info</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#travel" role="tab" aria-controls="travel" aria-selected="false">Travel</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#subcontractors" role="tab" aria-controls="subcontractors"
-             aria-selected="false">Subcontractors</a>
-        </li>
+        @if (Model.OtherDirectCostSelections.Contains("Travel"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#travel" role="tab" aria-controls="travel"
+               aria-selected="false">Travel</a>
+          </li>
+        }
+        @if (Model.OtherDirectCostSelections.Contains("Subcontractors"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#subcontractors" role="tab" aria-controls="subcontractors"
+               aria-selected="false">Subcontractors</a>
+          </li>
+        }
+        @if (Model.OtherDirectCostSelections.Contains("Materials"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#materials" role="tab" aria-controls="materials"
+               aria-selected="false">Materials</a>
+          </li>
+        }
+        @if (Model.OtherDirectCostSelections.Contains("Equipment"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#equipment" role="tab" aria-controls="equipment"
+               aria-selected="false">Equipment</a>
+          </li>
+        }
+        @if (Model.OtherDirectCostSelections.Contains("Supplies"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#supplies" role="tab" aria-controls="supplies"
+               aria-selected="false">Supplies</a>
+          </li>
+        }
+        @if (Model.OtherDirectCostSelections.Contains("Consultants"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#consultants" role="tab" aria-controls="consultants"
+               aria-selected="false">Consultants</a>
+          </li>
+        }
+        @if (Model.OtherDirectCostSelections.Contains("Other Direct Costs"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#otherdirectcosts" role="tab" aria-controls="otherdirectcosts"
+               aria-selected="false">Other Direct Costs</a>
+          </li>
+        }
       </ul>
-      <div class="tab-content">
-        <div class="tab-pane fade show active" id="docs" role="tabpanel" data-filter-list="card-list-body">
-          <!--end of content list head-->
-          <div class="content-list-body">
-            <div class="card-list">
-              <div class="card-list-head">
-                <h6>Resumes</h6>
-              </div>
-              <div class="card-list-body">
-                @Html.Partial("_Partials/FileUpload", new IndexViewModel
-                {
-                  MaxFiles = 20,
-                })
-                @Html.Partial("_Partials/Resumes", Model)
+      <form method="post" asp-page="/Projects/Manage" asp-route-id="@Model.Form.Id" novalidate>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="resumes" role="tabpanel">
+            <div class="content-list-body">
+              <div class="col-lg-12" id="previous_cost_volume_upload_container">
+                <div class="mb-3">
+                  <label class="form-label">Resumes</label>
+                  <div class="card-list">
+                    <p>Test</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <!--end of content list body-->
-            <div class="card-list">
-              <div class="card-list-head">
-                <h6>Top Level DoD BAA</h6>
-              </div>
-              <div class="card-list-body">
-                @Html.Partial("_Partials/FileUpload", new IndexViewModel
-                {
-                  MaxFiles = 20,
-                })
-                <turbo-frame id="docs_toplevel_frame">
-                  <div class="card card-task">
-                    <div class="card-body">
-                      <div class="card-title">
-                        <h6 data-filter-by="text">Doc name here</h6>
-                      </div>
-                      <div class="card-meta">
-                        <div class="dropdown card-options">
-                          <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown"
-                                  aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                          </div>
-                        </div>
-                      </div>
+          </div>
+          <!--end of tab-->
+          <div class="tab-pane fade" id="travel" role="tabpanel">
+            <div class="content-list">
+              <div class="content-list-body">
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Travel</label>
+                    <div class="card-list">
+                      <p>Test</p>
                     </div>
                   </div>
-                </turbo-frame>
+                </div>
               </div>
             </div>
-
-
-            <div class="card-list">
-              <div class="card-list-head">
-                <h6>Service Specific DoD BAA</h6>
-              </div>
-              <div class="card-list-body">
-                @Html.Partial("_Partials/FileUpload", new IndexViewModel
-                {
-                  MaxFiles = 20,
-                })
-                <turbo-frame id="docs_service_frame">
-                  <div class="card card-task">
-                    <div class="card-body">
-                      <div class="card-title">
-                        <h6 data-filter-by="text">Doc name here</h6>
-                      </div>
-                      <div class="card-meta">
-                        <div class="dropdown card-options">
-                          <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown"
-                                  aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                          </div>
-                        </div>
-                      </div>
+            <!--end of content list-->
+          </div>
+          <div class="tab-pane fade" id="subcontractors" role="tabpanel">
+            <div class="content-list">
+              <!--end of content list head-->
+              <div class="content-list-body">
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Subcontractors</label>
+                    <div class="card-list">
+                      <p>Test</p>
                     </div>
                   </div>
-                </turbo-frame>
+                </div>
               </div>
             </div>
-
-
-            <div class="card-list">
-              <div class="card-list-head">
-                <h6>Specific Topic BAA</h6>
-              </div>
-              <div class="card-list-body">
-                @Html.Partial("_Partials/FileUpload", new IndexViewModel
-                {
-                  MaxFiles = 20,
-                })
-                <turbo-frame id="docs_topic_frame">
-                  <div class="card card-task">
-                    <div class="card-body">
-                      <div class="card-title">
-                        <h6 data-filter-by="text">Doc name here</h6>
-                      </div>
-                      <div class="card-meta">
-                        <div class="dropdown card-options">
-                          <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown"
-                                  aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                          </div>
-                        </div>
-                      </div>
+          </div>
+          <div class="tab-pane fade" id="materials" role="tabpanel">
+            <div class="content-list">
+              <!--end of content list head-->
+              <div class="content-list-body">
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Materials</label>
+                    <div class="card-list">
+                      <p>Test</p>
                     </div>
                   </div>
-                </turbo-frame>
+                </div>
               </div>
             </div>
-
           </div>
-          <!--end of content list-->
-        </div>
-        <!--end of tab-->
-        <div class="tab-pane fade" id="company" role="tabpanel" data-filter-list="dropzone-previews">
-          <div class="content-list">
-            <div class="content-list-body">
-              <turbo-frame id="company_frame">
-                <p>Company info goes here</p>
-              </turbo-frame>
+          <div class="tab-pane fade" id="equipment" role="tabpanel">
+            <div class="content-list">
+              <!--end of content list head-->
+              <div class="content-list-body">
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Equipment</label>
+                    <div class="card-list">
+                      <p>Test</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <!--end of content list-->
-        </div>
-        <div class="tab-pane fade" id="travel" role="tabpanel" data-filter-list="list-group-activity">
-          <div class="content-list">
-            <!--end of content list head-->
-            <div class="content-list-body">
-              <turbo-frame id="travel_frame">
-                <p>Travel info goes here</p>
-              </turbo-frame>
+          <div class="tab-pane fade" id="supplies" role="tabpanel">
+            <div class="content-list">
+              <!--end of content list head-->
+              <div class="content-list-body">
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Supplies</label>
+                    <div class="card-list">
+                      <p>Test</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="consultants" role="tabpanel">
+            <div class="content-list">
+              <!--end of content list head-->
+              <div class="content-list-body">
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Consultants</label>
+                    <div class="card-list">
+                      <p>Test</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="otherdirectcosts" role="tabpanel">
+            <div class="content-list">
+              <!--end of content list head-->
+              <div class="content-list-body">
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label">Other Direct Costs</label>
+                    <div class="card-list">
+                      <p>Test</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="tab-pane fade" id="subcontractors" role="tabpanel" data-filter-list="list-group-activity">
-          <div class="content-list">
-            <!--end of content list head-->
-            <div class="content-list-body">
-              <turbo-frame id="subcontractors_frame">
-                <p>Subcontractors info goes here</p>
-              </turbo-frame>
-            </div>
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

@@ -9,6 +9,7 @@ public class Edit : BasePublicPageModel
 {
     [BindProperty]
     public FormModel Form { get; set; }
+    
     public async Task<IActionResult> OnGet(string id)
     {
         var response = await Mediator.Send(new GetProjectById.Query { Id = id });
@@ -30,6 +31,8 @@ public class Edit : BasePublicPageModel
             ServiceSpecificMediaId = response.Result.ProjectData.ServiceSpecificMediaId,
             OtherDirectCostSelections = otherDirectCostSelections
         };
+        ProjectId = id;
+        ProjectName = response.Result.Label;
         return Page();
     }
 
@@ -50,11 +53,13 @@ public class Edit : BasePublicPageModel
         if (response.Success)
         {
             SetSuccessMessage("Project edited successfully.");
-            return RedirectToPage("/Projects/Edit", new { id = response.Result });
+            return RedirectToPage("/Projects/Manage", new { id = response.Result });
         }
         else
         {
             SetErrorMessage(response.GetErrors());
+            ProjectId = id;
+            ProjectName = Form.Label;
             return Page();
         } 
     }

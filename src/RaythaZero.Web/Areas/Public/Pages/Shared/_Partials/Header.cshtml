@@ -18,7 +18,9 @@
                 <i class="material-icons">settings</i>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" asp-page="/Projects/Edit" asp-route-id="@Model.ProjectId">Edit Project</a>
+                <a class="dropdown-item" asp-page="/Projects/Edit" asp-route-id="@Model.ProjectId">Setup</a>
+                <a class="dropdown-item" asp-page="/Projects/Manage" asp-route-id="@Model.ProjectId">Modify</a>
+                <a class="dropdown-item text-success" asp-page="/Projects/GeneratePackage" asp-route-id="@Model.ProjectId">Generate package</a>
                 <div class="dropdown-divider"></div>
                 <form method="post" asp-page="/Projects/Archive" asp-route-id="@Model.ProjectId" onsubmit="return confirmArchive();">
                     <button href="#" class="dropdown-item btn btn-link text-danger">

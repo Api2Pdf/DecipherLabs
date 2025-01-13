@@ -8,96 +8,97 @@
     ViewData["ActiveMenu"] = "Projects";
 }
 <div class="container">
-    <div class="row mb-4">
-        <div class="col-xxl-7 col-xl-8 col-lg-9 col-md-12">
-            @Html.Partial("_Partials/PageHeading", ViewData["Title"])
-            <div class="card border-0 shadow mb-4">
-                <div class="card-body">
-                    @(await Html.PartialAsync("_Partials/BackToList", "/Projects/Index"))
-                    <form asp-page="/Projects/Edit" asp-route-id="@Model.Form.Id" method="post" class="py-4" novalidate>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label raytha-required" asp-for="Form.Label"></label>
-                                    <input type="text" class="form-control @Model.HasError("Label")" asp-for="Form.Label" required>
-                                    <div class="invalid-feedback">@Model.ErrorMessageFor("Label")</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label raytha-required" asp-for="Form.DsipProposalNumber"></label>
-                                    <input type="text" class="form-control @Model.HasError("DsipProposalNumber")" asp-for="Form.DsipProposalNumber" required>
-                                    <div class="invalid-feedback">@Model.ErrorMessageFor("DsipProposalNumber")</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label raytha-required">Type of Proposal</label>
-                                    <div>
-                                        <div class="form-check">
-                                            <input class="form-check-input @Model.HasError("TypeOfProposal")" type="radio" asp-for="Form.TypeOfProposal" value="Phase I" required>
-                                            <label class="form-check-label">Phase I</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input @Model.HasError("TypeOfProposal")" type="radio" asp-for="Form.TypeOfProposal" value="Phase II" required>
-                                            <label class="form-check-label">Phase II</label>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">@Model.ErrorMessageFor("TypeOfProposal")</div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Other Direct Cost Selections</label>
-                                    <div>
-                                        @for (var i = 0; i < Model.Form.OtherDirectCostSelections.Count; i++)
-                                        {
-                                            <div class="form-check">
-                                                <input class="form-check-input @Model.HasError("OtherDirectCostSelections")"
-                                                       type="checkbox"
-                                                       asp-for="Form.OtherDirectCostSelections[i].Selected"/>
-                                                <label class="form-check-label">@Model.Form.OtherDirectCostSelections[i].Text</label>
-                                                <input type="hidden" asp-for="Form.OtherDirectCostSelections[i].Value" value="@Model.Form.OtherDirectCostSelections[i].Value" />
-                                                <input type="hidden" asp-for="Form.OtherDirectCostSelections[i].Text" value="@Model.Form.OtherDirectCostSelections[i].Text" />
-                                            </div>
-                                        }
-                                    </div>
-                                    <div class="invalid-feedback">@Model.ErrorMessageFor("OtherDirectCostSelections")</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" id="top_level_upload_container">
-                                <div class="mb-3">
-                                    <label class="form-label" asp-for="Form.TopLevelMediaId"></label>
-                                    <div class="card-list">
-                                        @Html.Partial("_Partials/TopLevelUpload")
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" id="service_specific_upload_container">
-                                <div class="mb-3">
-                                    <label class="form-label" asp-for="Form.ServiceSpecificMediaId"></label>
-                                    <div class="card-list">
-                                        @Html.Partial("_Partials/ServiceSpecificUpload")
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" id="topic_upload_container">
-                                <div class="mb-3">
-                                    <label class="form-label" asp-for="Form.TopicMediaId"></label>
-                                    <div class="card-list">
-                                        @Html.Partial("_Partials/TopicUpload")
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" asp-for="Form.Id" />
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-success mt-4">Save changes</button>
+    
+<div class="row mb-4">
+    <div class="col-xxl-7 col-xl-8 col-lg-9 col-md-12">
+        @Html.Partial("_Partials/PageHeading", ViewData["Title"])
+        <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+                @(await Html.PartialAsync("_Partials/BackToList", "/Projects/Index"))
+                <form asp-page="/Projects/Edit" asp-route-id="@Model.Form.Id" method="post" class="py-4" novalidate>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label raytha-required" asp-for="Form.Label"></label>
+                                <input type="text" class="form-control @Model.HasError("Label")" asp-for="Form.Label" required>
+                                <div class="invalid-feedback">@Model.ErrorMessageFor("Label")</div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label raytha-required" asp-for="Form.DsipProposalNumber"></label>
+                                <input type="text" class="form-control @Model.HasError("DsipProposalNumber")" asp-for="Form.DsipProposalNumber" required>
+                                <div class="invalid-feedback">@Model.ErrorMessageFor("DsipProposalNumber")</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label raytha-required">Type of Proposal</label>
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input @Model.HasError("TypeOfProposal")" type="radio" asp-for="Form.TypeOfProposal" value="Phase I" required>
+                                        <label class="form-check-label">Phase I</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input @Model.HasError("TypeOfProposal")" type="radio" asp-for="Form.TypeOfProposal" value="Phase II" required>
+                                        <label class="form-check-label">Phase II</label>
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback">@Model.ErrorMessageFor("TypeOfProposal")</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Other Direct Cost Selections</label>
+                                <div>
+                                    @for (var i = 0; i < Model.Form.OtherDirectCostSelections.Count; i++)
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input @Model.HasError("OtherDirectCostSelections")"
+                                                   type="checkbox"
+                                                   asp-for="Form.OtherDirectCostSelections[i].Selected"/>
+                                            <label class="form-check-label">@Model.Form.OtherDirectCostSelections[i].Text</label>
+                                            <input type="hidden" asp-for="Form.OtherDirectCostSelections[i].Value" value="@Model.Form.OtherDirectCostSelections[i].Value" />
+                                            <input type="hidden" asp-for="Form.OtherDirectCostSelections[i].Text" value="@Model.Form.OtherDirectCostSelections[i].Text" />
+                                        </div>
+                                    }
+                                </div>
+                                <div class="invalid-feedback">@Model.ErrorMessageFor("OtherDirectCostSelections")</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12" id="top_level_upload_container">
+                            <div class="mb-3">
+                                <label class="form-label" asp-for="Form.TopLevelMediaId"></label>
+                                <div class="card-list">
+                                    @Html.Partial("_Partials/TopLevelUpload")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12" id="service_specific_upload_container">
+                            <div class="mb-3">
+                                <label class="form-label" asp-for="Form.ServiceSpecificMediaId"></label>
+                                <div class="card-list">
+                                    @Html.Partial("_Partials/ServiceSpecificUpload")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12" id="topic_upload_container">
+                            <div class="mb-3">
+                                <label class="form-label" asp-for="Form.TopicMediaId"></label>
+                                <div class="card-list">
+                                    @Html.Partial("_Partials/TopicUpload")
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" asp-for="Form.Id" />
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-success mt-4">Save changes</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>

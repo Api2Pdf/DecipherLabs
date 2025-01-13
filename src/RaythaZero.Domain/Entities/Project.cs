@@ -39,28 +39,24 @@ public record ProjectLevelInfo
     public string ServiceSpecificMediaId { get; set; }
     public string TopicMediaId { get; set; }
     public IEnumerable<string> OtherDirectCostSelections { get; set; } = new List<string>();
-    public IEnumerable<Resume> Resumes { get; set; } = new List<Resume>();
-    public TravelDto Travel { get; set; } = new TravelDto();
-    public MaterialsDto Materials { get; set; } = new MaterialsDto();
-    public SuppliesDto Supplies { get; set; } = new SuppliesDto();
-    public EquipmentDto Equipment { get; set; } = new EquipmentDto();
+    public IEnumerable<string> Resumes { get; set; } = new List<string>();
+    public Travel Travel { get; set; } = new Travel();
+    public Materials Materials { get; set; } = new Materials();
+    public Supplies Supplies { get; set; } = new Supplies();
+    public Equipment Equipment { get; set; } = new Equipment();
     public OtherDirectCosts OtherDirectCosts { get; set; } = new OtherDirectCosts();
-    public ConsultantDto Consultant { get; set; } = new ConsultantDto();
+    public Consultant Consultant { get; set; } = new Consultant();
+    public Subcontractor Subcontractor { get; set; } = new Subcontractor();
 }
 
-public record Resume
-{
-    public string FileName { get; set; } = string.Empty;
-    public string ResumeMediaId { get; set; } = string.Empty;
-}
 
-public abstract record Subtier
+public abstract record AbstractSubtier
 {
     public string Description { get; set; } = string.Empty;
-    public string DescriptionMediaId { get; set; }
+    public string DescriptionMediaId { get; set; } = string.Empty;
 }
 
-public record TravelDto : Subtier
+public record Travel : AbstractSubtier
 {
     public int NumberOfTrips { get; set; } = 0;
     public int NumberOfTravelers { get; set; } = 0;
@@ -70,28 +66,28 @@ public record TravelDto : Subtier
     public bool UseRentalCar { get; set; } = false;
 }
 
-public record SubcontractorDto : Subtier
+public record Subcontractor : AbstractSubtier
 {
     public string Url { get; set; } = string.Empty;
 }
 
-public record ConsultantDto : Subtier
+public record Consultant : AbstractSubtier
 {
     public string Url { get; set; } = string.Empty;
 }
 
-public record SuppliesDto : Subtier
+public record Supplies : AbstractSubtier
 {
 }
 
-public record EquipmentDto : Subtier
+public record Equipment : AbstractSubtier
 {
 }
 
-public record OtherDirectCosts : Subtier
+public record OtherDirectCosts : AbstractSubtier
 {
 }
 
-public record MaterialsDto : Subtier
+public record Materials : AbstractSubtier
 {
 }

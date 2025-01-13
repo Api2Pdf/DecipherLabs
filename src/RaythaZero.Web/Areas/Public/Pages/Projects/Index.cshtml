@@ -21,7 +21,10 @@
                     <div class="card card-project">
                       <div class="card-body">
                         <div class="card-title">
-                          <a asp-page="/Projects/Edit" asp-route-id="@item.Id"><h5 data-filter-by="text">@item.Label</h5></a>
+                          <h5>@item.Label</h5>
+                          <a asp-page="/Projects/Edit" asp-route-id="@item.Id" class="btn btn-primary">Setup</a>
+                          <a asp-page="/Projects/Manage" asp-route-id="@item.Id" class="btn btn-secondary">Modify</a>
+                          <a asp-page="/Projects/GeneratePackage" asp-route-id="@item.Id" class="btn btn-success">Generate package</a>
                         </div>
                       </div>
                     </div>
