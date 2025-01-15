@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using RaythaZero.Application.Projects.Commands;
 using RaythaZero.Application.Projects.Queries;
 using RaythaZero.Web.Areas.Public.Pages.Projects._Partials;
 
@@ -11,6 +12,10 @@ public class Manage : BasePublicPageModel
     public string DsipProposalNumber { get; set; } = string.Empty;
     public string TypeOfProposal { get; set; } = string.Empty;
     public IEnumerable<string> OtherDirectCostSelections { get; set; } = new List<string>();
+
+    public int CurrentNumberOfFiles { get; set; } = 0;
+
+    public List<string> UploadedIds { get; set; } = new List<string>();
     public async Task<IActionResult> OnGet(string id)
     {
         var response = await Mediator.Send(new GetProjectById.Query { Id = id });
@@ -21,7 +26,7 @@ public class Manage : BasePublicPageModel
         Form = new FormModel
         {
             Id = response.Result.Id,
-            Resumes = response.Result.ProjectData.Resumes,
+            Resumes = response.Result.ProjectData.Resumes.ToList(),
             Travel = new TravelViewModel
             {
                 NumberOfTrips = response.Result.ProjectData.Travel.NumberOfTrips,
@@ -70,12 +75,64 @@ public class Manage : BasePublicPageModel
         ProjectName = response.Result.Label;
         return Page();
     }
+
+    public async Task<IActionResult> OnPost(string id)
+    {
+        var response = await Mediator.Send(new ManageProject.Command
+        {
+            Id = id,
+            Resumes = Form.Resumes,
+            TravelDescription = Form.Travel.Description,
+            TravelDescriptionMediaId = Form.Travel.DescriptionMediaId,
+            NumberOfTravelers = Form.Travel.NumberOfTravelers,
+            NumberOfTrips = Form.Travel.NumberOfTrips,
+            UseRideshare = Form.Travel.UseRideshare,
+            UseRentalCar = Form.Travel.UseRentalCar,
+            LocationOfSubcontractor = Form.Travel.LocationOfSubcontractor,
+            LocationOfGovEndUser = Form.Travel.LocationOfGovEndUser,
+            SuppliesDescription = Form.Supplies.Description,
+            SuppliesDescriptionMediaId = Form.Supplies.DescriptionMediaId,
+            MaterialsDescription = Form.Materials.Description,
+            MaterialsDescriptionMediaId = Form.Materials.DescriptionMediaId,
+            EquipmentDescription = Form.Equipment.Description,
+            EquipmentDescriptionMediaId = Form.Equipment.DescriptionMediaId,
+            OtherDirectCostsDescription = Form.OtherDirectCosts.Description,
+            OtherDirectCostsDescriptionMediaId = Form.OtherDirectCosts.DescriptionMediaId,
+            SubcontractorsUrl = Form.Subcontractor.Url,
+            SubcontractorsDescription = Form.Subcontractor.Description,
+            SubcontractorsDescriptionMediaId = Form.Subcontractor.DescriptionMediaId,
+            ConsultantsUrl = Form.Consultant.Url,
+            ConsultantsDescription = Form.Consultant.Description,
+            ConsultantsDescriptionMediaId = Form.Consultant.DescriptionMediaId
+        });
+
+        if (response.Success)
+        {
+            SetSuccessMessage("Changes saved successfully.");
+            return RedirectToPage("/Projects/Manage", new { id = id });
+        }
+        else
+        {
+            var result = await Mediator.Send(new GetProjectById.Query { Id = id });
+            DsipProposalNumber = result.Result.ProjectData.DsipProposalNumber;
+            TypeOfProposal = result.Result.ProjectData.TypeOfProposal;
+            OtherDirectCostSelections = result.Result.ProjectData.OtherDirectCostSelections;
+            SetErrorMessage(response.GetErrors());
+            return Page();
+        }
+    }
     
+    public async Task<IActionResult> OnPostProcessResumesUpload(string id, [FromBody] UploadRequest uploads)
+    {
+        CurrentNumberOfFiles = uploads.CurrentNumberOfFiles;
+        UploadedIds = uploads.UploadedIds.ToList();
+        return new PartialViewResult { ViewName = "_Partials/ProcessResumesUpload", ViewData=ViewData };
+    }
 
     public record FormModel
     {
         public string Id { get; set; }
-        public IEnumerable<string> Resumes { get; set; } = new List<string>();
+        public List<string> Resumes { get; set; } = new List<string>();
         public TravelViewModel Travel { get; set; } = new TravelViewModel();
         public MaterialsViewModel Materials { get; set; } = new MaterialsViewModel();
         public SuppliesViewModel Supplies { get; set; } = new SuppliesViewModel();
@@ -129,5 +186,6 @@ public class Manage : BasePublicPageModel
     public record UploadRequest 
     {
         public IEnumerable<string> UploadedIds { get; set; } = new List<string>();
+        public int CurrentNumberOfFiles { get; set; } = 0;
     }
 }

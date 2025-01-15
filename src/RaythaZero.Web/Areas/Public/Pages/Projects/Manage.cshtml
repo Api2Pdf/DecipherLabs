@@ -10,8 +10,9 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-11 col-xl-10">
+      <form method="post" asp-page="/Projects/Manage" asp-route-id="@Model.Form.Id" novalidate>
       <div class="page-header">
-        <h1>@Model.ProjectName</h1>
+        <h1>@Model.ProjectName <button type="submit" class="btn btn-success">Save changes</button></h1>
       </div>
       <ul class="nav nav-tabs nav-fill" role="tablist">
         <li class="nav-item">
@@ -68,15 +69,21 @@
           </li>
         }
       </ul>
-      <form method="post" asp-page="/Projects/Manage" asp-route-id="@Model.Form.Id" novalidate>
         <div class="tab-content">
           <div class="tab-pane fade show active" id="resumes" role="tabpanel">
-            <div class="content-list-body">
-              <div class="col-lg-12" id="previous_cost_volume_upload_container">
-                <div class="mb-3">
-                  <label class="form-label">Resumes</label>
-                  <div class="card-list">
-                    <p>Test</p>
+            <div class="card mt-2">
+              <div class="card-body">
+                <div class="content-list-body">
+                  <div class="col-lg-12" id="previous_cost_volume_upload_container">
+                    <div class="mb-3">
+                      <label asp-for="Form.Resumes"></label>
+                      <p class="lead">Upload all resumes that should be parsed below.</p>
+                      <div class="card-list">
+                        <div class="card-list-body">
+                          @Html.Partial("_Partials/ResumesUpload")
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -193,3 +200,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  function removeFile(button) {
+    button.closest(".file-container").remove();
+  }
+</script>

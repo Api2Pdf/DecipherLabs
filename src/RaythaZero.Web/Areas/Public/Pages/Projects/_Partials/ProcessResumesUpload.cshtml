@@ -1,0 +1,25 @@
+@model RaythaZero.Web.Areas.Public.Pages.Projects.Manage
+
+<turbo-stream action="append" target="resumes_file_frame">
+    <template>
+        @foreach (var resume in Model.UploadedIds)
+        {
+            <turbo-frame id="resume_frame_@resume">
+                <div class="card card-task">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h6><a target="_blank" asp-controller="MediaItems" asp-action="RedirectToFileUrlById" asp-route-id="@resume">@resume</a></h6>
+                        </div>
+                        <div class="card-meta">
+                            <button class="btn btn-danger" onclick="removeFile(this)">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="Form.Resumes[]" value="@resume"/>
+                </div>
+                <br/>
+            </turbo-frame>
+        }
+    </template>
+</turbo-stream>

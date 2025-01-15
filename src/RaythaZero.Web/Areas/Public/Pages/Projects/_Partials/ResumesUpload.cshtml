@@ -1,0 +1,31 @@
+@using RaythaZero.Web.Areas.Public.Pages.Shared._Partials
+@model RaythaZero.Web.Areas.Public.Pages.Projects.Manage
+<turbo-frame id="resumes_file_frame">
+    @Html.Partial("Shared/_Partials/FileUpload/Index", new IndexViewModel
+    {
+        MaxFiles = 20,
+        SuccessEndpoint = Url.Page("/Projects/Manage", "ProcessResumesUpload", new { id = Model.Form.Id }),
+        CurrentNumberOfFiles = Model.Form.Resumes.Count()
+    })
+    <br/>
+    @if (Model.Form.Resumes.Any())
+    {
+        for (int i = 0; i < Model.Form.Resumes.Count(); i++)
+        {
+            <div class="card card-task file-container">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h6><a target="_blank" asp-controller="MediaItems" asp-action="RedirectToFileUrlById" asp-route-id="@Model.Form.Resumes[i]">@Model.Form.Resumes[i]</a></h6>
+                    </div>
+                    <div class="card-meta">
+                        <button class="btn btn-danger" onclick="removeFile(this)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" name="Form.Resumes[]" value="@Model.Form.Resumes[i]" />
+            </div>
+            <br/>
+        }
+    }
+</turbo-frame>
