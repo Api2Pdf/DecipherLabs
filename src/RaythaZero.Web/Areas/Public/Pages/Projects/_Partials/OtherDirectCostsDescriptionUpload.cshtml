@@ -1,0 +1,30 @@
+@using RaythaZero.Web.Areas.Public.Pages.Shared._Partials
+@model RaythaZero.Web.Areas.Public.Pages.Projects.Manage
+<turbo-frame id="otherdirectcosts_description_file_frame">
+    <div class="card-list-body">
+        @if (string.IsNullOrEmpty(Model.Form.OtherDirectCosts.DescriptionMediaId))
+        {
+            @Html.Partial("Shared/_Partials/FileUpload/Index", new IndexViewModel
+            {
+                MaxFiles = 1,
+                SuccessEndpoint = Url.Page("/Projects/Manage", "ProcessOtherDirectCostsDescriptionUpload", new { id = Model.ProjectId })
+            })
+        }
+        @if (!string.IsNullOrEmpty(Model.Form.OtherDirectCosts.DescriptionMediaId))
+        {
+            <div class="card card-task">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h6><a target="_blank" asp-controller="MediaItems" asp-action="RedirectToFileUrlById" asp-route-id="@Model.Form.OtherDirectCosts.DescriptionMediaId">@Model.Form.OtherDirectCosts.DescriptionMediaId</a></h6>
+                    </div>
+                    <div class="card-meta">
+                        <a class="nav-link d-inline-flex align-items-center justify-content-center text-danger" asp-page="/Projects/Manage" asp-route-id="@Model.ProjectId" asp-page-handler="DeleteOtherDirectCostsDescriptionUpload">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="Form.OtherDirectCosts.DescriptionMediaId" />
+            </div>
+        }
+    </div>
+</turbo-frame>

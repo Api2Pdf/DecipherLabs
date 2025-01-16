@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using RaythaZero.Application.Projects.Commands;
@@ -128,7 +129,101 @@ public class Manage : BasePublicPageModel
         UploadedIds = uploads.UploadedIds.ToList();
         return new PartialViewResult { ViewName = "_Partials/ProcessResumesUpload", ViewData=ViewData };
     }
+    
+    public async Task<IActionResult> OnPostProcessTravelDescriptionUpload(string id, [FromBody] UploadRequest uploads)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        Form.Travel.DescriptionMediaId = uploads.UploadedIds.FirstOrDefault();
+        return new PartialViewResult { ViewName = "_Partials/ProcessTravelDescriptionUpload", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnGetDeleteTravelDescriptionUpload(string id)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/TravelDescriptionUpload", ViewData=ViewData };
+    }
+    
+    public async Task<IActionResult> OnPostProcessSuppliesDescriptionUpload(string id, [FromBody] UploadRequest uploads)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        Form.Supplies.DescriptionMediaId = uploads.UploadedIds.FirstOrDefault();
+        return new PartialViewResult { ViewName = "_Partials/ProcessSuppliesDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnGetDeleteSuppliesDescriptionUpload(string id)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/SuppliesDescriptionUpload", ViewData=ViewData };
+    }
 
+    public async Task<IActionResult> OnPostProcessSubcontractorsDescriptionUpload(string id, [FromBody] UploadRequest uploads)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        Form.Subcontractor.DescriptionMediaId = uploads.UploadedIds.FirstOrDefault();
+        return new PartialViewResult { ViewName = "_Partials/ProcessSubcontractorsDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnGetDeleteSubcontractorsDescriptionUpload(string id)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/SubcontractorsDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnPostProcessConsultantsDescriptionUpload(string id, [FromBody] UploadRequest uploads)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        Form.Consultant.DescriptionMediaId = uploads.UploadedIds.FirstOrDefault();
+        return new PartialViewResult { ViewName = "_Partials/ProcessConsultantsDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnGetDeleteConsultantsDescriptionUpload(string id)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/ConsultantsDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnPostProcessMaterialsDescriptionUpload(string id, [FromBody] UploadRequest uploads)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        Form.Materials.DescriptionMediaId = uploads.UploadedIds.FirstOrDefault();
+        return new PartialViewResult { ViewName = "_Partials/ProcessMaterialsDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnGetDeleteMaterialsDescriptionUpload(string id)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/MaterialsDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnPostProcessEquipmentDescriptionUpload(string id, [FromBody] UploadRequest uploads)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        Form.Equipment.DescriptionMediaId = uploads.UploadedIds.FirstOrDefault();
+        return new PartialViewResult { ViewName = "_Partials/ProcessEquipmentDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnGetDeleteEquipmentDescriptionUpload(string id)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/EquipmentDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnPostProcessOtherDirectCostsDescriptionUpload(string id, [FromBody] UploadRequest uploads)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        Form.OtherDirectCosts.DescriptionMediaId = uploads.UploadedIds.FirstOrDefault();
+        return new PartialViewResult { ViewName = "_Partials/ProcessOtherDirectCostsDescriptionUpload", ViewData=ViewData };
+    }
+    public async Task<IActionResult> OnGetDeleteOtherDirectCostsDescriptionUpload(string id)
+    {
+        ProjectId = id;
+        Form = new FormModel();
+        return new PartialViewResult { ViewName = "_Partials/OtherDirectCostsDescriptionUpload", ViewData=ViewData };
+    }
     public record FormModel
     {
         public string Id { get; set; }
@@ -149,11 +244,17 @@ public class Manage : BasePublicPageModel
 
     public record TravelViewModel : AbstractSubtierViewModel
     {
+        [Display(Name = "Number of trips")]
         public int NumberOfTrips { get; set; } = 0;
+        [Display(Name = "Number of travelers")]
         public int NumberOfTravelers { get; set; } = 0;
+        [Display(Name = "Location of gov end user")]
         public string LocationOfGovEndUser { get; set; } = string.Empty;
+        [Display(Name = "Location of subcontractor")]
         public string LocationOfSubcontractor { get; set; } = string.Empty;
+        [Display(Name = "Use rideshare")]
         public bool UseRideshare { get; set; } = false;
+        [Display(Name = "Use rental car")]
         public bool UseRentalCar { get; set; } = false;
     }
 

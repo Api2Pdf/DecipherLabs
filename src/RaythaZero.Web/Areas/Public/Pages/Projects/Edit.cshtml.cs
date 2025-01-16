@@ -123,7 +123,7 @@ public class Edit : BasePublicPageModel
     {
         get
         {
-            return new[] { "Materials", "Supplies", "Equipment", "Consultants", "Travel", "Other Direct Costs" };
+            return new[] { "Materials", "Supplies", "Equipment", "Consultants", "Travel", "Subcontractors", "Other Direct Costs" };
         }
     }
     

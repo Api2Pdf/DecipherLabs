@@ -77,7 +77,7 @@
                   <div class="col-lg-12" id="previous_cost_volume_upload_container">
                     <div class="mb-3">
                       <label asp-for="Form.Resumes"></label>
-                      <p class="lead">Upload all resumes that should be parsed below.</p>
+                      <p class="lead">Make sure to upload resumes for everyone who will be involved in the project.</p>
                       <div class="card-list">
                         <div class="card-list-body">
                           @Html.Partial("_Partials/ResumesUpload")
@@ -91,106 +91,156 @@
           </div>
           <!--end of tab-->
           <div class="tab-pane fade" id="travel" role="tabpanel">
-            <div class="content-list">
-              <div class="content-list-body">
+            <div class="card mt-2">
+              <div class="card-body">
                 <div class="col-lg-12">
                   <div class="mb-3">
-                    <label class="form-label">Travel</label>
-                    <div class="card-list">
-                      <p>Test</p>
-                    </div>
+                    <label class="form-label" asp-for="Form.Travel.NumberOfTravelers"></label>
+                    <input type="number" class="form-control" asp-for="Form.Travel.NumberOfTravelers"></input>
                   </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="Form.Travel.NumberOfTrips"></label>
+                    <input type="number" class="form-control" asp-for="Form.Travel.NumberOfTrips"></input>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="Form.Travel.LocationOfSubcontractor"></label>
+                    <input type="text" class="form-control" asp-for="Form.Travel.LocationOfSubcontractor"></input>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="Form.Travel.LocationOfGovEndUser"></label>
+                    <input type="text" class="form-control" asp-for="Form.Travel.LocationOfGovEndUser"></input>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="Form.Travel.UseRideshare">
+                    <label class="form-check-label" asp-for="Form.Travel.UseRideshare"></label>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="Form.Travel.UseRentalCar">
+                    <label class="form-check-label" asp-for="Form.Travel.UseRentalCar"></label>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="Form.Travel.Description"></label>
+                    <textarea class="form-control" asp-for="Form.Travel.Description"></textarea>
+                  </div>
+                </div>
+                <div class="card-list">
+                  @Html.Partial("_Partials/TravelDescriptionUpload")
                 </div>
               </div>
             </div>
             <!--end of content list-->
           </div>
           <div class="tab-pane fade" id="subcontractors" role="tabpanel">
-            <div class="content-list">
-              <!--end of content list head-->
-              <div class="content-list-body">
+            <div class="card mt-2">
+              <div class="card-body">
                 <div class="col-lg-12">
                   <div class="mb-3">
-                    <label class="form-label">Subcontractors</label>
-                    <div class="card-list">
-                      <p>Test</p>
-                    </div>
+                    <label class="form-label" asp-for="Form.Subcontractor.Url"></label>
+                    <input type="text" class="form-control @Model.HasError("SubcontractorsUrl")" asp-for="Form.Subcontractor.Url">
                   </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="Form.Subcontractor.Description"></label>
+                    <textarea class="form-control" asp-for="Form.Subcontractor.Description"></textarea>
+                  </div>
+                </div>
+                <div class="card-list">
+                  @Html.Partial("_Partials/SubcontractorsDescriptionUpload")
                 </div>
               </div>
             </div>
           </div>
           <div class="tab-pane fade" id="materials" role="tabpanel">
-            <div class="content-list">
-              <!--end of content list head-->
-              <div class="content-list-body">
+            <div class="card mt-2">
+              <div class="card-body">
                 <div class="col-lg-12">
                   <div class="mb-3">
-                    <label class="form-label">Materials</label>
-                    <div class="card-list">
-                      <p>Test</p>
-                    </div>
+                    <label class="form-label" asp-for="Form.Materials.Description"></label>
+                    <textarea class="form-control" asp-for="Form.Materials.Description"></textarea>
                   </div>
+                </div>
+                <div class="card-list">
+                  @Html.Partial("_Partials/MaterialsDescriptionUpload")
                 </div>
               </div>
             </div>
           </div>
           <div class="tab-pane fade" id="equipment" role="tabpanel">
-            <div class="content-list">
-              <!--end of content list head-->
-              <div class="content-list-body">
+            <div class="card mt-2">
+              <div class="card-body">
                 <div class="col-lg-12">
                   <div class="mb-3">
-                    <label class="form-label">Equipment</label>
-                    <div class="card-list">
-                      <p>Test</p>
-                    </div>
+                    <label class="form-label" asp-for="Form.Equipment.Description"></label>
+                    <textarea class="form-control" asp-for="Form.Equipment.Description"></textarea>
                   </div>
+                </div>
+                <div class="card-list">
+                  @Html.Partial("_Partials/EquipmentDescriptionUpload")
                 </div>
               </div>
             </div>
           </div>
           <div class="tab-pane fade" id="supplies" role="tabpanel">
-            <div class="content-list">
-              <!--end of content list head-->
-              <div class="content-list-body">
+            <div class="card mt-2">
+              <div class="card-body">
                 <div class="col-lg-12">
                   <div class="mb-3">
-                    <label class="form-label">Supplies</label>
-                    <div class="card-list">
-                      <p>Test</p>
-                    </div>
+                    <label class="form-label" asp-for="Form.Supplies.Description"></label>
+                    <textarea class="form-control" asp-for="Form.Supplies.Description"></textarea>
                   </div>
+                </div>
+                <div class="card-list">
+                  @Html.Partial("_Partials/SuppliesDescriptionUpload")
                 </div>
               </div>
             </div>
           </div>
           <div class="tab-pane fade" id="consultants" role="tabpanel">
-            <div class="content-list">
-              <!--end of content list head-->
-              <div class="content-list-body">
+            <div class="card mt-2">
+              <div class="card-body">
                 <div class="col-lg-12">
                   <div class="mb-3">
-                    <label class="form-label">Consultants</label>
-                    <div class="card-list">
-                      <p>Test</p>
-                    </div>
+                    <label class="form-label" asp-for="Form.Consultant.Url"></label>
+                    <input type="text" class="form-control @Model.HasError("ConsultantsUrl")" asp-for="Form.Consultant.Url">
+                    <div class="invalid-feedback">@Model.ErrorMessageFor("ConsultantsUrl")</div>
                   </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="Form.Consultant.Description"></label>
+                    <textarea class="form-control" asp-for="Form.Consultant.Description"></textarea>
+                  </div>
+                </div>
+                <div class="card-list">
+                  @Html.Partial("_Partials/ConsultantsDescriptionUpload")
                 </div>
               </div>
             </div>
           </div>
           <div class="tab-pane fade" id="otherdirectcosts" role="tabpanel">
-            <div class="content-list">
-              <!--end of content list head-->
-              <div class="content-list-body">
+            <div class="card mt-2">
+              <div class="card-body">
                 <div class="col-lg-12">
                   <div class="mb-3">
-                    <label class="form-label">Other Direct Costs</label>
-                    <div class="card-list">
-                      <p>Test</p>
-                    </div>
+                    <label class="form-label" asp-for="Form.OtherDirectCosts.Description"></label>
+                    <textarea class="form-control" asp-for="Form.OtherDirectCosts.Description"></textarea>
                   </div>
+                </div>
+                <div class="card-list">
+                  @Html.Partial("_Partials/OtherDirectCostsDescriptionUpload")
                 </div>
               </div>
             </div>
