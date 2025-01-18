@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using RaythaZero.Application.Common.Behaviors;
 using System.Reflection;
+using RaythaZero.Application.Projects.Commands;
 
 namespace RaythaZero.Application;
 
@@ -18,7 +19,8 @@ public static class ConfigureServices
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuditBehavior<,>));
         });
-        
+
+        services.AddScoped<BeginToGeneratePackage.BackgroundTask>();
         return services;
     }
 }

@@ -1,0 +1,16 @@
+@model RaythaZero.Web.Areas.Public.Pages.Projects.GeneratePackage
+
+<turbo-frame id="package-frame">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: @Model.PercentComplete%" aria-valuenow="@Model.PercentComplete" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div>
+        @Html.Raw(Model.StatusInfo)
+    </div>
+    @if (Model.PercentComplete == 100)
+    {
+        <br/>
+        <span>Done! See result...</span>
+    }
+</turbo-frame>
+

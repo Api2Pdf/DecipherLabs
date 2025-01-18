@@ -1,0 +1,35 @@
+@page "/projects/generate-package/{id}"
+@model RaythaZero.Web.Areas.Public.Pages.Projects.GeneratePackage
+
+@{
+    var pageTitle = $"Generate package for {Model.ProjectName}";
+    Layout = "SidebarLayout";
+    ViewData["Title"] = pageTitle;
+    ViewData["ActiveMenu"] = "Projects";
+}
+
+<div class="container">
+    <a asp-page="/Projects/Manage" asp-route-id="@Model.ProjectId">< Back to project</a>
+    @Html.Partial("_Partials/PageHeading", ViewData["Title"])
+    @if (string.IsNullOrEmpty(Model.BackgroundTaskId))
+    {
+        <form method="post">
+            <button type="submit" class="btn btn-success">Begin package generation now</button>
+        </form>
+    }
+    else
+    {
+        @Html.Partial("_Partials/GeneratePackageProgress")
+        <script>
+            setInterval(function() {
+                var turboFrame = document.getElementById('package-frame');
+                var currentUrl = "/projects/generate-package/@Model.ProjectId?handler=Progress&backgroundTaskId=@Model.BackgroundTaskId";
+                currentUrl = currentUrl + "&time=" + Date.now();
+                turboFrame.src = currentUrl;          // Update the Turbo Frame's source
+                turboFrame.reload();                             // Reload the Turbo Frame content
+            }, 1000); // Refresh every 1 second
+        </script>
+    }
+        
+</div>
+
