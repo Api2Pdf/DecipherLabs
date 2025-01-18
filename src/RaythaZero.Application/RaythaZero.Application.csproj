@@ -23,4 +23,9 @@
         <PackageReference Include="TimeZoneConverter" Version="6.1.0" />
         <PackageReference Include="TimeZoneNames" Version="6.0.0" />
     </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Projects\StaticFiles\topics.json" />
+      <EmbeddedResource Include="Projects\Utils\topics.json" />
+    </ItemGroup>
 </Project>

@@ -14,9 +14,7 @@ public class EditProject
         public string Label { get; init; } = null!;
         public string DsipProposalNumber { get; init; } = string.Empty;
         public string TypeOfProposal { get; init; } = string.Empty;
-        public string TopLevelMediaId { get; init; } = string.Empty;
-        public string ServiceSpecificMediaId { get; init; } = string.Empty;
-        public string TopicMediaId { get; init; } = string.Empty;
+        public string TopicNumber { get; init; } = string.Empty;
         public IEnumerable<string> OtherDirectCostSelections { get; init; } = new List<string>();
     }
 
@@ -27,6 +25,7 @@ public class EditProject
             RuleFor(x => x.Label).NotEmpty();
             RuleFor(x => x.TypeOfProposal).NotEmpty();
             RuleFor(x => x.DsipProposalNumber).NotEmpty();
+            RuleFor(x => x.TopicNumber).NotEmpty();
         }
     }
 
@@ -49,9 +48,7 @@ public class EditProject
             var projectData = entity.ProjectData;
             projectData.TypeOfProposal = request.TypeOfProposal;
             projectData.DsipProposalNumber = request.DsipProposalNumber;
-            projectData.TopLevelMediaId = request.TopLevelMediaId;
-            projectData.ServiceSpecificMediaId = request.ServiceSpecificMediaId;
-            projectData.TopicMediaId = request.TopicMediaId;
+            projectData.TopicNumber = request.TopicNumber;
             projectData.OtherDirectCostSelections = request.OtherDirectCostSelections;
             entity.ProjectData = projectData;
             

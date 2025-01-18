@@ -47,7 +47,19 @@
                                 <div class="invalid-feedback">@Model.ErrorMessageFor("TypeOfProposal")</div>
                             </div>
                         </div>
-
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label raytha-required" asp-for="Form.TopicNumber"></label>
+                                <select class="form-control @Model.HasError("TopicNumber")" asp-for="Form.TopicNumber" required>
+                                    <option value="">-- SELECT --</option>
+                                    @foreach (var topic in Model.Topics)
+                                    {
+                                        <option value="@topic">@topic</option>
+                                    }
+                                </select>
+                                <div class="invalid-feedback">@Model.ErrorMessageFor("TopicNumber")</div>
+                            </div>
+                        </div> 
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label class="form-label">Other Direct Cost Selections</label>
@@ -65,30 +77,6 @@
                                     }
                                 </div>
                                 <div class="invalid-feedback">@Model.ErrorMessageFor("OtherDirectCostSelections")</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12" id="top_level_upload_container">
-                            <div class="mb-3">
-                                <label class="form-label" asp-for="Form.TopLevelMediaId"></label>
-                                <div class="card-list">
-                                    @Html.Partial("_Partials/TopLevelUpload")
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12" id="service_specific_upload_container">
-                            <div class="mb-3">
-                                <label class="form-label" asp-for="Form.ServiceSpecificMediaId"></label>
-                                <div class="card-list">
-                                    @Html.Partial("_Partials/ServiceSpecificUpload")
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12" id="topic_upload_container">
-                            <div class="mb-3">
-                                <label class="form-label" asp-for="Form.TopicMediaId"></label>
-                                <div class="card-list">
-                                    @Html.Partial("_Partials/TopicUpload")
-                                </div>
                             </div>
                         </div>
                         <input type="hidden" asp-for="Form.Id" />

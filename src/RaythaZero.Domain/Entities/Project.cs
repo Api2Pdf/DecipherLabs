@@ -35,9 +35,7 @@ public record ProjectLevelInfo
 {
     public string DsipProposalNumber { get; set; } = string.Empty;
     public string TypeOfProposal { get; set; } = string.Empty;
-    public string TopLevelMediaId { get; set; }
-    public string ServiceSpecificMediaId { get; set; }
-    public string TopicMediaId { get; set; }
+    public string TopicNumber { get; set; } = string.Empty;
     public IEnumerable<string> OtherDirectCostSelections { get; set; } = new List<string>();
     public IEnumerable<string> Resumes { get; set; } = new List<string>();
     public Travel Travel { get; set; } = new Travel();
@@ -90,4 +88,9 @@ public record OtherDirectCosts : AbstractSubtier
 
 public record Materials : AbstractSubtier
 {
+}
+
+public record Topic
+{
+    public string topic_number { get; set; } = string.Empty;
 }

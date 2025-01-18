@@ -2,13 +2,14 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RaythaZero.Application.Projects.Queries;
+using RaythaZero.Domain.Entities;
 
 namespace RaythaZero.Web.Areas.Public.Pages.Projects;
 
 public class Edit : BasePublicPageModel
 {
-    [BindProperty]
-    public FormModel Form { get; set; }
+    [BindProperty] public FormModel Form { get; set; }
+
     
     public async Task<IActionResult> OnGet(string id)
     {
@@ -20,16 +21,17 @@ public class Edit : BasePublicPageModel
             otherDirectCostSelections.Add(new SelectListItem { Text = option, Value = option, Selected = isSelected });
         }
         
+        var topics = Application.Projects.Utils.ProjectUtils.GetTopics();
+        
+        
         Form = new FormModel
         {
             Id = response.Result.Id,
             Label = response.Result.Label,
             DsipProposalNumber = response.Result.ProjectData.DsipProposalNumber,
             TypeOfProposal = response.Result.ProjectData.TypeOfProposal,
-            TopicMediaId = response.Result.ProjectData.TopicMediaId,
-            TopLevelMediaId = response.Result.ProjectData.TopLevelMediaId,
-            ServiceSpecificMediaId = response.Result.ProjectData.ServiceSpecificMediaId,
-            OtherDirectCostSelections = otherDirectCostSelections
+            OtherDirectCostSelections = otherDirectCostSelections,
+            TopicNumber = response.Result.ProjectData.TopicNumber
         };
         ProjectId = id;
         ProjectName = response.Result.Label;
@@ -44,9 +46,7 @@ public class Edit : BasePublicPageModel
             Label = Form.Label,
             DsipProposalNumber = Form.DsipProposalNumber,
             TypeOfProposal = Form.TypeOfProposal,
-            TopicMediaId = Form.TopicMediaId,
-            ServiceSpecificMediaId = Form.ServiceSpecificMediaId,
-            TopLevelMediaId = Form.TopLevelMediaId,
+            TopicNumber = Form.TopicNumber,
             OtherDirectCostSelections = Form.OtherDirectCostSelections.Where(p => p.Selected).Select(x => x.Value)
         });
 
@@ -64,61 +64,14 @@ public class Edit : BasePublicPageModel
         } 
     }
     
-    public async Task<IActionResult> OnPostProcessTopLevelUpload(string id, [FromBody] UploadRequest uploads)
+    public IEnumerable<string> Topics 
     {
-        Form = new FormModel
+        get
         {
-            Id = id,
-            TopLevelMediaId = uploads.UploadedIds.First()
-        };
-        return new PartialViewResult { ViewName = "_Partials/ProcessTopLevelUpload", ViewData=ViewData };
+            return Application.Projects.Utils.ProjectUtils.GetTopics().Select(p => p.topic_number);
+        }
     }
     
-    public async Task<IActionResult> OnGetDeleteTopLevelUpload(string id)
-    {
-        Form = new FormModel
-        {
-            Id = id,
-        };
-        return new PartialViewResult { ViewName = "_Partials/TopLevelUpload", ViewData=ViewData };
-    }
-    
-    public async Task<IActionResult> OnPostProcessServiceSpecificUpload(string id, [FromBody] UploadRequest uploads)
-    {
-        Form = new FormModel
-        {
-            Id = id,
-            ServiceSpecificMediaId = uploads.UploadedIds.First()
-        };
-        return new PartialViewResult { ViewName = "_Partials/ProcessServiceSpecificUpload", ViewData=ViewData };
-    }
-    
-    public async Task<IActionResult> OnGetDeleteServiceSpecificUpload(string id)
-    {
-        Form = new FormModel
-        {
-            Id = id,
-        };
-        return new PartialViewResult { ViewName = "_Partials/ServiceSpecificUpload", ViewData=ViewData };
-    }
-    public async Task<IActionResult> OnPostProcessTopicUpload(string id, [FromBody] UploadRequest uploads)
-    {
-        Form = new FormModel
-        {
-            Id = id,
-            TopicMediaId = uploads.UploadedIds.First()
-        };
-        return new PartialViewResult { ViewName = "_Partials/ProcessTopicUpload", ViewData=ViewData };
-    }
-    
-    public async Task<IActionResult> OnGetDeleteTopicUpload(string id)
-    {
-        Form = new FormModel
-        {
-            Id = id,
-        };
-        return new PartialViewResult { ViewName = "_Partials/TopicUpload", ViewData=ViewData };
-    }
     public IEnumerable<string> DirectCostOptions
     {
         get
@@ -132,23 +85,16 @@ public class Edit : BasePublicPageModel
         public string Id { get; set; }
         public string Label { get; set; }
         [Display(Name = "DSIP Proposal number")]
-        public string DsipProposalNumber { get; init; } = string.Empty;
+        public string DsipProposalNumber { get; set; } = string.Empty;
         
         [Display(Name = "Type of proposal")]
-        public string TypeOfProposal { get; init; } = string.Empty;
-        
-        [Display(Name = "Top level DoD BAA")]
-        public string TopLevelMediaId { get; init; }
-        
-        [Display(Name = "Service specific solicitation")]
-        public string ServiceSpecificMediaId { get; init; }
-        
-        [Display(Name = "Specific topic solicitation")]
-        public string TopicMediaId { get; init; }
+        public string TypeOfProposal { get; set; } = string.Empty;
         
         [Display(Name = "Other direct costs")]
-        public List<SelectListItem> OtherDirectCostSelections { get; init; } = new List<SelectListItem>();
-
+        public List<SelectListItem> OtherDirectCostSelections { get; set; } = new List<SelectListItem>();
+        
+        [Display(Name = "Topic solicitation")]
+        public string TopicNumber { get; set; } = string.Empty;
     }
     
     public record UploadRequest 

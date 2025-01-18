@@ -1,5 +1,6 @@
 ﻿using RaythaZero.Domain.ValueObjects;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using CSharpVitamins;
@@ -192,5 +193,21 @@ public static class StringExtensions
             return string.Empty;
         return guid.ToString();
     }
-    
+    public static string ReadJsonFile(string assemblyPath)
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+
+        using (Stream stream = assembly.GetManifestResourceStream(assemblyPath))
+        {
+            if (stream == null)
+            {
+                throw new FileNotFoundException();
+            }
+
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
+        }
+    } 
 }
