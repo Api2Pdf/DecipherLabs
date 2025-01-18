@@ -20,6 +20,7 @@ public interface IRaythaDbContext
     public DbSet<ApiKey> ApiKeys { get; }
     public DbSet<BackgroundTask> BackgroundTasks { get; }
     public DbSet<Project> Projects { get; }
+    public DbSet<Prompt> Prompts { get; }
     public DbContext DbContext { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);

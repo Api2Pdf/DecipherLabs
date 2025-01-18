@@ -1,0 +1,46 @@
+@page "/admin/prompts/edit/{id}"
+@model RaythaZero.Web.Areas.Admin.Pages.Prompts.Edit
+
+@{
+    var pageTitle = "Edit prompt";
+    Layout = "SubActionLayout";
+    ViewData["Title"] = pageTitle;
+    ViewData["ActiveMenu"] = "Prompts";
+}
+
+@(await Html.PartialAsync("_Partials/BackToList", "/Prompts/Index"))
+<form asp-page="/Projects/Edit" method="post" class="py-4" asp-route-id="@Model.Form.Id" novalidate>
+    <div class="col-lg-12">
+        <div class="mb-3">
+            <label class="form-label raytha-required" asp-for="Form.Label"></label>
+            <input type="text" class="form-control @Model.HasError("Label")" asp-for="Form.Label" required>
+            <div class="invalid-feedback">@Model.ErrorMessageFor("Label")</div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="mb-3">
+            <label class="form-label" asp-for="Form.DeveloperName"></label>
+            <input type="text" class="form-control" asp-for="Form.DeveloperName" readonly>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="mb-3">
+            <label class="form-label" asp-for="Form.PromptText"></label><br/>
+            <textarea asp-for="Form.PromptText" rows="20" class="form-control @Model.HasError("PromptText")"></textarea>
+            <div class="invalid-feedback">@Model.ErrorMessageFor("PromptText")</div>
+        </div>
+    </div>
+    <div class="col-lg-12 my-4">
+        <div class="form-check">
+            <input class="form-check-input @Model.HasError("ResultType")" type="radio" asp-for="Form.ResultType" value="JsonValue">
+            <label class="form-check-label" asp-for="Form.ResultType">JSON result</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input @Model.HasError("ResultType")" type="radio" asp-for="Form.ResultType" value="SingleValue">
+            <label class="form-check-label" asp-for="Form.ResultType">Single value text result</label>
+        </div>
+        <div class="invalid-feedback">@Model.ErrorMessageFor("ResultType")</div>
+    </div>
+    <input type="hidden" asp-for="Form.Id">
+    <button type="submit" class="btn btn-success mt-4">Save changes</button>
+</form>

@@ -18,9 +18,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Interfaces/IRaythaDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Interfaces/IRaythaDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Migrations/RaythaDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Migrations/RaythaDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Persistence/RaythaDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/Persistence/RaythaDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Admin/Pages/Shared/SidebarLayout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Admin/Pages/Shared/SidebarLayout.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +299,9 @@
       <workItem from="1735237816395" duration="9060000" />
       <workItem from="1735757397081" duration="11325000" />
       <workItem from="1736462949481" duration="55170000" />
-      <workItem from="1736897964288" duration="11943000" />
+      <workItem from="1736897964288" duration="12467000" />
+      <workItem from="1737155858743" duration="2606000" />
+      <workItem from="1737158491875" duration="4700000" />
     </task>
     <servers />
   </component>
