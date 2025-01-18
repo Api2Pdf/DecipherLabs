@@ -3,7 +3,6 @@ using System.Text.Json;
 using CSharpVitamins;
 using Fluid;
 using MediatR;
-using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.SemanticKernel.ChatCompletion;
 using RaythaZero.Application.Common.Interfaces;
 using RaythaZero.Application.Common.Models;
@@ -298,10 +297,21 @@ public class BeginToGeneratePackage
             if (string.IsNullOrEmpty(fileExtension))
                 return MediaTypeNames.Application.Octet;
 
-            var provider = new FileExtensionContentTypeProvider();
-            return provider.TryGetContentType(fileExtension, out var mimeType)
-                ? mimeType
-                : MediaTypeNames.Application.Octet;
+            switch (fileExtension)
+            {
+                case ".pdf":
+                    return MediaTypeNames.Application.Pdf;
+                case ".docx":
+                    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                case ".xlsx":
+                    return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                case ".txt":
+                    return "text/plain";
+                case ".html":
+                    return "text/html";
+                default:
+                    return MediaTypeNames.Application.Octet;
+            }
         }
         private string ParsePrompt(string source, FinalPackage model)
         {
