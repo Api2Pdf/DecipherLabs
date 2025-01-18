@@ -18,18 +18,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/StringExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Utils/StringExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/EditProject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/EditProject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/ConfigureServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/ConfigureServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Utils/ProjectUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Utils/ProjectUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/RaythaZero.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/RaythaZero.Application.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/Project.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/Project.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/ProcessServiceSpecificUpload.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/ProcessTopLevelUpload.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/ProcessTopicUpload.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/ServiceSpecificUpload.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/TopLevelUpload.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/TopicUpload.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/ConfigureServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/ConfigureServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/RaythaZero.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/RaythaZero.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/RaythaZero.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/RaythaZero.Web.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,6 +337,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs</url>
+          <line>107</line>
+          <properties documentPath="C:\Users\Zack Schwartz\source\repos\DecipherLabs\src\RaythaZero.Application\Projects\Commands\BeginToGeneratePackage.cs" containingFunctionPresentation="Method 'Execute'">
+            <startOffsets>
+              <option value="4539" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4604" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

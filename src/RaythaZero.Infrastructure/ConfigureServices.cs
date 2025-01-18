@@ -11,6 +11,7 @@ using RaythaZero.Infrastructure.BackgroundTasks;
 using Microsoft.Extensions.Hosting;
 using RaythaZero.Infrastructure.Configurations;
 using Npgsql;
+using RaythaZero.Infrastructure.GenerativeAi;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -34,11 +35,14 @@ public static class ConfigureServices
 
         services.AddSingleton<ICurrentOrganizationConfiguration, CurrentOrganizationConfiguration>();
         services.AddScoped<IEmailerConfiguration, EmailerConfiguration>();
-
         services.AddScoped<IEmailer, Emailer>();
         services.AddTransient<IBackgroundTaskDb, BackgroundTaskDb>();
         services.AddTransient<IRaythaRawDbInfo, RaythaRawDbInfo>();
 
+        //generative ai
+        services.Configure<OpenAiSettings>(configuration);
+        services.AddScoped<IGenerativeAiService, OpenAiService>();
+        
         //file storage provider
         var fileStorageProvider = configuration[FileStorageUtility.CONFIG_NAME].IfNullOrEmpty(FileStorageUtility.LOCAL).ToLower();
         if (fileStorageProvider == FileStorageUtility.LOCAL)

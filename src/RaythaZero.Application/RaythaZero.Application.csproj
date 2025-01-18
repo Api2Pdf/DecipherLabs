@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+    <PropertyGroup>
+        <NoWarn>SKEXP0001</NoWarn>
+    </PropertyGroup>
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -12,20 +14,32 @@
 
     <ItemGroup>
         <PackageReference Include="CsvExport" Version="2.0.1" />
+        <PackageReference Include="DocumentFormat.OpenXml" Version="3.2.0" />
+        <PackageReference Include="Fluid.Core" Version="2.11.1" />
         <PackageReference Include="LumenWorksCsvReader2" Version="4.4.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.1" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.0" />
         <PackageReference Include="System.Linq.Async" Version="6.0.1" />
         <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.5" />
         <PackageReference Include="System.Security.Cryptography.Xml" Version="8.0.1" />
         <PackageReference Include="TimeZoneConverter" Version="6.1.0" />
         <PackageReference Include="TimeZoneNames" Version="6.0.0" />
+        <PackageReference Include="Microsoft.SemanticKernel" Version="1.33.0" />
+        <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.33.0" />
+        <PackageReference Include="UglyToad.PdfPig" Version="1.7.0-custom-5" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Projects\StaticFiles\topics.json" />
       <EmbeddedResource Include="Projects\Utils\topics.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.StaticFiles">
+        <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.6\Microsoft.AspNetCore.StaticFiles.dll</HintPath>
+      </Reference>
     </ItemGroup>
 </Project>

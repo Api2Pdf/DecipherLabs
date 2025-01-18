@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
-using CSharpVitamins;
 
 namespace RaythaZero.Domain.Entities;
 
@@ -93,4 +92,96 @@ public record Materials : AbstractSubtier
 public record Topic
 {
     public string topic_number { get; set; } = string.Empty;
+}
+
+public record FinalPackage
+{
+    public string company_name { get; set; } = string.Empty;
+    public string company_url { get; set; } = string.Empty;
+    public string company_city_hq { get; set; } = string.Empty;
+    public string company_state_hq { get; set; } = string.Empty;
+    public bool offers_benefits { get; set; } = false;
+    public string offers_benefits_description { get; set; } = string.Empty;
+
+    public string wage_rate_sheet_file_text { get; set; } = string.Empty;
+    public string previous_cost_volumes_word_file_text { get; set; } = string.Empty;
+    public string previous_cost_volumes_excel_file_text { get; set; } = string.Empty;
+    public string balance_sheet_file_text { get; set; } = string.Empty;
+    public string profit_and_loss_file_text { get; set; } = string.Empty; 
+    
+    public decimal fringe_rate { get; set; } = 0;
+    public decimal fully_loaded_labor_amount { get; set; } = 0;
+    
+    public string topic_number { get; set; } = string.Empty;
+    public string dsip_proposal_number { get; set; } = string.Empty;
+    public string type_of_proposal { get; set; } = string.Empty;
+    
+    public IEnumerable<string> other_direct_cost_selections { get; set; } = new List<string>();
+    public List<IndividualPersonFinalPackage> individuals { get; set; } = new List<IndividualPersonFinalPackage>();
+    
+    public Travel travel { get; set; } = new Travel();
+    public Materials materials { get; set; } = new Materials();
+    public Supplies supplies { get; set; } = new Supplies();
+    public Equipment equipment { get; set; } = new Equipment();
+    public OtherDirectCosts other_direct_costs { get; set; } = new OtherDirectCosts();
+    public Consultant consultant { get; set; } = new Consultant();
+    public Subcontractor subcontractor { get; set; } = new Subcontractor();
+    
+    public record IndividualPersonFinalPackage
+    {
+        public string name { get; set; } = string.Empty;
+        public string job_title { get; set; } = string.Empty;
+        public string job_description { get; set; } = string.Empty;
+        public string file_text { get; set; } = string.Empty;
+    }
+
+    public record Travel
+    {
+        public string description { get; set; } = string.Empty;
+        public string file_text { get; set; } = string.Empty;
+        public int number_of_trips { get; set; } = 0;
+        public int number_of_travelers { get; set; } = 0;
+        public string location_of_gov_end_user { get; set; } = string.Empty;
+        public string location_of_subcontractor { get; set; } = string.Empty;
+        public bool use_rideshare { get; set; } = false;
+        public bool use_rental { get; set; } = false; 
+    }
+
+    public record Materials
+    {
+        public string description { get; set; } = string.Empty;
+        public string file_text { get; set; } = string.Empty;
+    }
+
+    public record Subcontractor
+    {
+        public string description { get; set; } = string.Empty;
+        public string file_text { get; set; } = string.Empty;
+        public string url { get; set; } = string.Empty;
+    }
+
+    public record Consultant
+    {
+        public string description { get; set; } = string.Empty;
+        public string file_text { get; set; } = string.Empty;
+        public string url { get; set; } = string.Empty;
+    }
+
+    public record Equipment
+    {
+        public string description { get; set; } = string.Empty;
+        public string file_text { get; set; } = string.Empty;
+    }
+
+    public record OtherDirectCosts
+    {
+        public string description { get; set; } = string.Empty;
+        public string file_text { get; set; } = string.Empty;
+    }
+
+    public record Supplies
+    {
+        public string description { get; set; } = string.Empty;
+        public string file_text { get; set; } = string.Empty;
+    }
 }

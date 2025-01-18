@@ -20,6 +20,7 @@ public static class ConfigureServices
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuditBehavior<,>));
         });
 
+        services.AddHttpClient<BeginToGeneratePackage.BackgroundTask>();
         services.AddScoped<BeginToGeneratePackage.BackgroundTask>();
         return services;
     }
