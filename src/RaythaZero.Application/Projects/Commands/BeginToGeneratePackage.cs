@@ -84,12 +84,12 @@ public class BeginToGeneratePackage
                 .FirstOrDefault(p => p.topic_number == project.ProjectData.TopicNumber);
             
             if (topic == null)
-                throw new Exception($"Project {project.ProjectData.TopicNumber} does not exist");
+                throw new Exception($"Topic {project.ProjectData.TopicNumber} does not exist");
             
             await UpdateStatus(job, JsonSerializer.Serialize(topic), 5, cancellationToken);
             
             await UpdateStatus(job, "Pulling project data...", 5, cancellationToken);
-            var finalPackage = await InitializeFinalPackage(company.CompanySetupData, project.ProjectData);
+            var finalPackage = await InitializeFinalPackage(company.CompanySetupData, project.ProjectData, topic);
             await UpdateStatus(job, JsonSerializer.Serialize(finalPackage), 5, cancellationToken);
             
             //Resumes
@@ -122,9 +122,8 @@ public class BeginToGeneratePackage
             await _db.SaveChangesAsync(cancellationToken);
         }
 
-        private async Task<FinalPackage> InitializeFinalPackage(CompanyLevelInfo company, ProjectLevelInfo project)
+        private async Task<FinalPackage> InitializeFinalPackage(CompanyLevelInfo company, ProjectLevelInfo project, Topic topic)
         {
-            
             FinalPackage finalPackage = new FinalPackage
             {
                 company_name = company.LegalName,
@@ -135,6 +134,7 @@ public class BeginToGeneratePackage
                 offers_benefits_description = company.OffersBenefitsDescription,
                 dsip_proposal_number = project.DsipProposalNumber,
                 topic_number = project.TopicNumber,
+                topic = topic,
                 type_of_proposal = project.TypeOfProposal,
                 other_direct_cost_selections = project.OtherDirectCostSelections,
                 travel = new()

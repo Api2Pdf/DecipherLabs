@@ -1,4 +1,5 @@
 @page "/projects/generate-package/{id}"
+@using RaythaZero.Domain.Entities
 @model RaythaZero.Web.Areas.Public.Pages.Projects.GeneratePackage
 
 @{
@@ -11,25 +12,52 @@
 <div class="container">
     <a asp-page="/Projects/Manage" asp-route-id="@Model.ProjectId">< Back to project</a>
     @Html.Partial("_Partials/PageHeading", ViewData["Title"])
-    @if (string.IsNullOrEmpty(Model.BackgroundTaskId))
-    {
-        <form method="post">
-            <button type="submit" class="btn btn-success">Begin package generation now</button>
-        </form>
-    }
-    else
-    {
-        @Html.Partial("_Partials/GeneratePackageProgress")
-        <script>
-            setInterval(function() {
-                var turboFrame = document.getElementById('package-frame');
-                var currentUrl = "/projects/generate-package/@Model.ProjectId?handler=Progress&backgroundTaskId=@Model.BackgroundTaskId";
-                currentUrl = currentUrl + "&time=" + Date.now();
-                turboFrame.src = currentUrl;          // Update the Turbo Frame's source
-                turboFrame.reload();                             // Reload the Turbo Frame content
-            }, 1000); // Refresh every 1 second
-        </script>
-    }
-        
+    <turbo-frame id="package-frame">
+        @if (string.IsNullOrEmpty(Model.BackgroundTaskId))
+        {
+            <form method="post">
+                <button type="submit" class="btn btn-success">Begin package generation now</button>
+            </form>
+        }
+        else
+        {
+            if (Model.BackgroundTaskStatus == BackgroundTaskStatus.Error.DeveloperName)
+            {
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="@Model.PercentComplete" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br/>
+                <span>@Model.BackgroundTaskStatus.Label</span><br/>
+                <span>@Model.BackgroundTaskError</span>
+            }
+            else if (Model.BackgroundTaskStatus == BackgroundTaskStatus.Complete.DeveloperName)
+            {
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="@Model.PercentComplete" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br/>
+                <span>@Model.BackgroundTaskStatus.Label</span><br/>
+                <button class="btn btn-primary">Download result</button>
+            }
+            else
+            {
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: @Model.PercentComplete%" aria-valuenow="@Model.PercentComplete" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br/>
+                <span>@Model.BackgroundTaskStatus.Label</span><br/>
+                <script>
+                    setTimeout(() => {
+                        const turboFrame = document.getElementById('package-frame');
+                        if (turboFrame) {
+                            Turbo.visit(window.location.href + "?backgroundTaskId=@Model.BackgroundTaskId", { frame: turboFrame.id });
+                        }
+                    }, 1000); // 1 second
+                </script>
+            }
+            <div>
+                @Html.Raw(Model.StatusInfo)
+            </div>
+        }
+    </turbo-frame>
 </div>
-

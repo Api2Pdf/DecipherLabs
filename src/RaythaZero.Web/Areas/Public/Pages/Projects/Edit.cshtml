@@ -54,7 +54,7 @@
                                     <option value="">-- SELECT --</option>
                                     @foreach (var topic in Model.Topics)
                                     {
-                                        <option value="@topic">@topic</option>
+                                        <option value="@topic.topic_number">@topic.topic_title</option>
                                     }
                                 </select>
                                 <div class="invalid-feedback">@Model.ErrorMessageFor("TopicNumber")</div>

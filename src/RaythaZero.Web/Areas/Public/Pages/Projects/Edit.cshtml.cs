@@ -21,9 +21,6 @@ public class Edit : BasePublicPageModel
             otherDirectCostSelections.Add(new SelectListItem { Text = option, Value = option, Selected = isSelected });
         }
         
-        var topics = Application.Projects.Utils.ProjectUtils.GetTopics();
-        
-        
         Form = new FormModel
         {
             Id = response.Result.Id,
@@ -35,6 +32,7 @@ public class Edit : BasePublicPageModel
         };
         ProjectId = id;
         ProjectName = response.Result.Label;
+        ProjectIsArchived = response.Result.IsArchived.Value;
         return Page();
     }
 
@@ -64,11 +62,11 @@ public class Edit : BasePublicPageModel
         } 
     }
     
-    public IEnumerable<string> Topics 
+    public IEnumerable<Topic> Topics 
     {
         get
         {
-            return Application.Projects.Utils.ProjectUtils.GetTopics().Select(p => p.topic_number);
+            return Application.Projects.Utils.ProjectUtils.GetTopics();
         }
     }
     

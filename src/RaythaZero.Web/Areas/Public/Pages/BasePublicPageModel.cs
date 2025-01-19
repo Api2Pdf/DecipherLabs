@@ -10,4 +10,6 @@ public class BasePublicPageModel : BasePageModel
 {
     public string ProjectId { get; set; }
     public string ProjectName { get; set; }
+    
+    public bool ProjectIsArchived { get; set; }
 }

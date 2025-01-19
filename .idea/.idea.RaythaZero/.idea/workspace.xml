@@ -19,7 +19,18 @@
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/RaythaZero.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/RaythaZero.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Utils/topics.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Utils/topics.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/Project.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/Project.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/BasePublicPageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/BasePublicPageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Archive.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Archive.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Edit.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/GeneratePackage.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/GeneratePackage.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/GeneratePackage.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/GeneratePackage.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/GeneratePackageProgress.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/_Partials/GeneratePackageProgress.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/Header.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Shared/_Partials/Header.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +93,6 @@
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.4992224&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -301,6 +311,7 @@
       <workItem from="1736897964288" duration="12467000" />
       <workItem from="1737155858743" duration="2606000" />
       <workItem from="1737158491875" duration="9390000" />
+      <workItem from="1737308528786" duration="3196000" />
     </task>
     <servers />
   </component>

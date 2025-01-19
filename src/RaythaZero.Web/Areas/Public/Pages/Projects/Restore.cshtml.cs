@@ -3,14 +3,14 @@ using RaythaZero.Application.Projects.Commands;
 
 namespace RaythaZero.Web.Areas.Public.Pages.Projects;
 
-public class Archive : BasePublicPageModel
+public class Restore : BasePublicPageModel
 {
     public async Task<IActionResult> OnPost(string id)
     {
-        var response = await Mediator.Send(new ArchiveProject.Command { Id = id });
+        var response = await Mediator.Send(new ArchiveProject.Command { Id = id, IsArchived = false});
         if (response.Success)
         {
-            SetSuccessMessage("Project successfully archived");
+            SetSuccessMessage("Project successfully restored");
         }
         else
         {

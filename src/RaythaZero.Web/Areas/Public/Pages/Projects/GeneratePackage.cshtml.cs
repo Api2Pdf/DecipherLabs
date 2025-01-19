@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RaythaZero.Application.BackgroundTasks.Queries;
 using RaythaZero.Application.Projects.Commands;
 using RaythaZero.Application.Projects.Queries;
+using RaythaZero.Domain.Entities;
 
 namespace RaythaZero.Web.Areas.Public.Pages.Projects;
 
@@ -11,11 +12,14 @@ public class GeneratePackage : BasePublicPageModel
     public string BackgroundTaskId { get; set; } = string.Empty;
     public int PercentComplete { get; set; } = 0;
     public string StatusInfo { get; set; } = string.Empty; 
+    public BackgroundTaskStatus BackgroundTaskStatus { get; set; } = null;
+    public string BackgroundTaskError { get; set; } = string.Empty;
     public async Task<IActionResult> OnGet(string id, string backgroundTaskId = "")
     {
         var response = await Mediator.Send(new GetProjectById.Query { Id = id });
         ProjectName = response.Result.Label;
         ProjectId = id;
+        ProjectIsArchived = response.Result.IsArchived.Value;
 
         if (!string.IsNullOrEmpty(backgroundTaskId))
         {
@@ -23,6 +27,8 @@ public class GeneratePackage : BasePublicPageModel
             PercentComplete = backgroundTask.Result.PercentComplete;
             StatusInfo = backgroundTask.Result.StatusInfo;
             BackgroundTaskId = backgroundTaskId;
+            BackgroundTaskStatus = backgroundTask.Result.Status;
+            BackgroundTaskError = backgroundTask.Result.ErrorMessage;
         }
 
         return Page();

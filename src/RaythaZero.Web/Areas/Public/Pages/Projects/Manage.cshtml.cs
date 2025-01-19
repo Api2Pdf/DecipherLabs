@@ -74,6 +74,7 @@ public class Manage : BasePublicPageModel
         };
         ProjectId = id;
         ProjectName = response.Result.Label;
+        ProjectIsArchived = response.Result.IsArchived.Value;
         return Page();
     }
 

@@ -22,11 +22,22 @@
                 <a class="dropdown-item" asp-page="/Projects/Manage" asp-route-id="@Model.ProjectId">Modify</a>
                 <a class="dropdown-item text-success" asp-page="/Projects/GeneratePackage" asp-route-id="@Model.ProjectId">Generate package</a>
                 <div class="dropdown-divider"></div>
-                <form method="post" asp-page="/Projects/Archive" asp-route-id="@Model.ProjectId" onsubmit="return confirmArchive();">
-                    <button href="#" class="dropdown-item btn btn-link text-danger">
-                        Archive 
-                    </button>
-                </form>
+                @if (Model.ProjectIsArchived)
+                {
+                    <form method="post" asp-page="/Projects/Restore" asp-route-id="@Model.ProjectId">
+                        <button href="#" class="dropdown-item btn btn-link text-success">
+                           Restore 
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post" asp-page="/Projects/Archive" asp-route-id="@Model.ProjectId" onsubmit="return confirmArchive();">
+                        <button href="#" class="dropdown-item btn btn-link text-danger">
+                            Archive
+                        </button>
+                    </form>
+                }
             </div>
         </div>
     }

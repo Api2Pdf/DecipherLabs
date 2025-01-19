@@ -89,11 +89,30 @@ public record Materials : AbstractSubtier
 {
 }
 
-public record Topic
-{
-    public string topic_number { get; set; } = string.Empty;
-}
 
+public class Topic
+{
+    public int item_number { get; set; }
+    public string topic_number { get; set; }
+    public string topic_title { get; set; }
+    public string open_date { get; set; }
+    public string close_date { get; set; }
+    public bool phase_1_available { get; set; }
+    public string phase_1_period_of_performance { get; set; }
+    public bool phase_2_available { get; set; }
+    public string phase_2_period_of_performance { get; set; }
+    public decimal award_amount { get; set; }
+    public bool itar { get; set; }
+    public string tpoc_name { get; set; }
+    public string tpoc_number { get; set; }
+    public string tpoc_email { get; set; }
+    public string tpoc2_name { get; set; }
+    public string tpoc2_number { get; set; }
+    public string tpoc2_email { get; set; }
+    public string tpoc3_name { get; set; }
+    public string tpoc3_number { get; set; }
+    public string tpoc3_email { get; set; }
+}
 public record FinalPackage
 {
     public string company_name { get; set; } = string.Empty;
@@ -113,6 +132,7 @@ public record FinalPackage
     public decimal fully_loaded_labor_amount { get; set; } = 0;
     
     public string topic_number { get; set; } = string.Empty;
+    public Topic topic { get; set; } = new Topic();
     public string dsip_proposal_number { get; set; } = string.Empty;
     public string type_of_proposal { get; set; } = string.Empty;
     
