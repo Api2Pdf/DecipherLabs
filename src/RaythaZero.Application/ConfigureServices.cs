@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RaythaZero.Application.Common.Behaviors;
 using System.Reflection;
 using RaythaZero.Application.Projects.Commands;
+using RaythaZero.Application.Projects.Extractors;
 
 namespace RaythaZero.Application;
 
@@ -22,6 +23,8 @@ public static class ConfigureServices
 
         services.AddHttpClient<BeginToGeneratePackage.BackgroundTask>();
         services.AddScoped<BeginToGeneratePackage.BackgroundTask>();
+        services.AddScoped<ResumeExtractor>();
+        services.AddScoped<PersonGenerator>();
         return services;
     }
 }

@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.SemanticKernel.ChatCompletion;
 using RaythaZero.Application.Common.Interfaces;
 using RaythaZero.Application.Common.Models;
+using RaythaZero.Application.Projects.Extractors;
 using RaythaZero.Application.Projects.Utils;
 using RaythaZero.Domain.Entities;
 
@@ -45,8 +46,8 @@ public class BeginToGeneratePackage
         private readonly IFileStorageProvider _fileStorageProvider;
         private readonly IGenerativeAiService _aiService;
         private readonly HttpClient _httpClient;
-        private readonly IRelativeUrlBuilder _relativeUrlBuilder;
-        private readonly ICurrentOrganization _currentOrganization;
+        private readonly ResumeExtractor _resumeExtractor;
+        private readonly PersonGenerator _personGenerator;
         
         public BackgroundTask(
             IRaythaDbContext db,
@@ -54,7 +55,8 @@ public class BeginToGeneratePackage
             IFileStorageProviderSettings fileStorageProviderSettings,
             IGenerativeAiService aiService,
             HttpClient httpClient,
-            ICurrentOrganization currentOrganization
+            ResumeExtractor resumeExtractor,
+            PersonGenerator personGenerator
         )
         {
             _db = db;
@@ -62,7 +64,8 @@ public class BeginToGeneratePackage
             _fileStorageProvider = fileStorageProvider;
             _aiService = aiService;
             _httpClient = httpClient;
-            _currentOrganization = currentOrganization;
+            _resumeExtractor = resumeExtractor;
+            _personGenerator = personGenerator;
         }
 
         public async Task Execute(Guid jobId, JsonElement args, CancellationToken cancellationToken)
@@ -92,31 +95,14 @@ public class BeginToGeneratePackage
             var finalPackage = await InitializeFinalPackage(company.CompanySetupData, project.ProjectData, topic);
             await UpdateStatus(job, JsonSerializer.Serialize(finalPackage), 5, cancellationToken);
             
-            ChatHistory chatHistory = [];
-            
             //Extract Resumes Data
             await UpdateStatus(job, "Processing resumes...", 10, cancellationToken);
-
-            var resumeExtractionPrompts = _db.Prompts.First(p => p.DeveloperName == "bls_code");
-            var renderedResumeExtractionPrompt = ParsePrompt(resumeExtractionPrompts.PromptText, finalPackage);
-            
-            chatHistory.AddUserMessage(renderedResumeExtractionPrompt);
-            var resumePromptResponse = await _aiService.GetResponse(chatHistory);
-            var individualsAsJson = resumePromptResponse.First().Content;
-            var individuals =
-                JsonSerializer.Deserialize<List<FinalPackage.IndividualPersonFinalPackage>>(individualsAsJson);
-            finalPackage.individuals = individuals;
-            await UpdateStatus(job, individualsAsJson, 50, cancellationToken);
+            finalPackage.individuals = await _resumeExtractor.Extract<List<FinalPackage.IndividualPersonFinalPackage>>(finalPackage);
+            await UpdateStatus(job, JsonSerializer.Serialize(JsonSerializer.Serialize(finalPackage.individuals)), 50, cancellationToken);
             
             //Generate content from resumes
-            var resumeGenerationPrompts = _db.Prompts.First(p => p.DeveloperName == "person_generation");
-            var renderedResumeGenerationPrompt = ParsePrompt(resumeGenerationPrompts.PromptText, finalPackage);
-
-            chatHistory = [];
-            chatHistory.AddUserMessage(renderedResumeGenerationPrompt);
-            var resumeGenerationResponse = await _aiService.GetResponse(chatHistory);
-            var resumeGenerationText = resumeGenerationResponse.First().Content;
-            await UpdateStatus(job, resumeGenerationText, 100, cancellationToken);
+            var personGenerationContent = await _personGenerator.Generate(finalPackage);
+            await UpdateStatus(job, personGenerationContent, 100, cancellationToken);
             
             await _db.SaveChangesAsync(cancellationToken);
         }
@@ -320,21 +306,6 @@ public class BeginToGeneratePackage
                     return MediaTypeNames.Application.Octet;
             }
         }
-        private string ParsePrompt(string source, FinalPackage model)
-        {
-            var parser = new FluidParser();
 
-            if (parser.TryParse(source, out var template, out var error))
-            {
-                var options = new TemplateOptions();
-                options.MemberAccessStrategy = new UnsafeMemberAccessStrategy();
-                var context = new TemplateContext(model, options);
-                return template.Render(context);
-            }
-            else
-            {
-                throw new Exception($"Failed to parse template: {error}");
-            }
-        }
     }
 }

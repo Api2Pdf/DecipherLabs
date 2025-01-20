@@ -18,8 +18,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Interfaces/IGenerativeAiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Common/Interfaces/IGenerativeAiService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/ConfigureServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/ConfigureServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/Project.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/Project.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/GenerativeAi/OpenAiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/GenerativeAi/OpenAiService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/RaythaZero.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Infrastructure/RaythaZero.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,7 +305,7 @@
       <workItem from="1736897964288" duration="12467000" />
       <workItem from="1737155858743" duration="2606000" />
       <workItem from="1737158491875" duration="9390000" />
-      <workItem from="1737308528786" duration="14040000" />
+      <workItem from="1737308528786" duration="19123000" />
     </task>
     <servers />
   </component>

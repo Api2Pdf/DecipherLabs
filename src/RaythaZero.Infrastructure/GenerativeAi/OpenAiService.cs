@@ -1,3 +1,5 @@
+using System.Text.Json;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
@@ -29,5 +31,38 @@ public class OpenAiService : IGenerativeAiService
         );
         var response = await chatCompletionService.GetChatMessageContentsAsync(history);
         return response;
+    }
+    
+    public async Task<T> GetStructuredResponse<T>(ChatHistory history)
+    {
+        OpenAIChatCompletionService chatCompletionService = new (
+            modelId: _settings.OPENAI_MODEL_ID,
+            apiKey: _settings.OPENAI_API_KEY
+        );
+
+        var executionSettings = new OpenAIPromptExecutionSettings()
+        {
+            ResponseFormat = typeof(T),
+            
+        };
+        var response = await chatCompletionService.GetChatMessageContentsAsync(history, executionSettings);
+        var result = JsonSerializer.Deserialize<T>(response.First()?.Content ?? string.Empty);
+        return result;
+    }
+    
+    public async Task<T> GetStructuredResponse<T>(ChatHistory history, string jsonSchema)
+    {
+        OpenAIChatCompletionService chatCompletionService = new (
+            modelId: _settings.OPENAI_MODEL_ID,
+            apiKey: _settings.OPENAI_API_KEY
+        );
+        ChatResponseFormat chatResponseFormat = ChatResponseFormat.ForJsonSchema(jsonSchema);
+        var executionSettings = new OpenAIPromptExecutionSettings()
+        {
+            ResponseFormat = chatResponseFormat
+        };
+        var response = await chatCompletionService.GetChatMessageContentsAsync(history, executionSettings);
+        var result = JsonSerializer.Deserialize<T>(response.First()?.Content ?? string.Empty);
+        return result;
     }
 }
