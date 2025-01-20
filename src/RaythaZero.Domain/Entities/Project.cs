@@ -113,6 +113,7 @@ public class Topic
     public string tpoc3_number { get; set; }
     public string tpoc3_email { get; set; }
 }
+
 public record FinalPackage
 {
     public string company_name { get; set; } = string.Empty;
@@ -151,7 +152,8 @@ public record FinalPackage
     {
         public string name { get; set; } = string.Empty;
         public string job_title { get; set; } = string.Empty;
-        public string job_description { get; set; } = string.Empty;
+        public string bls_code { get; set; } = string.Empty;
+        public string grad_year { get; set; } = string.Empty;
         public string file_text { get; set; } = string.Empty;
     }
 

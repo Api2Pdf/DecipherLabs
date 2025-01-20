@@ -92,25 +92,32 @@ public class BeginToGeneratePackage
             var finalPackage = await InitializeFinalPackage(company.CompanySetupData, project.ProjectData, topic);
             await UpdateStatus(job, JsonSerializer.Serialize(finalPackage), 5, cancellationToken);
             
-            //Resumes
-            await UpdateStatus(job, "Processing resumes...", 10, cancellationToken);
-            foreach (var individual in finalPackage.individuals)
-            {
-                ChatHistory chatHistory = [];
-                
-                //Get job title of the person 
-                var jobTitlePrompt = _db.Prompts.First(p => p.DeveloperName == "job_title");
-
-                chatHistory.AddUserMessage(individual.file_text);
-                chatHistory.AddUserMessage(ParsePrompt(jobTitlePrompt.PromptText, finalPackage));
-
-                var jobTitleResponse = await _aiService.GetResponse(chatHistory);
-                individual.job_title = jobTitleResponse.First().Content;
-                
-                await UpdateStatus(job, jobTitleResponse.First().Content, 50, cancellationToken);
-            }
+            ChatHistory chatHistory = [];
             
-            await UpdateStatus(job, "Done", 100, cancellationToken);
+            //Extract Resumes Data
+            await UpdateStatus(job, "Processing resumes...", 10, cancellationToken);
+
+            var resumeExtractionPrompts = _db.Prompts.First(p => p.DeveloperName == "bls_code");
+            var renderedResumeExtractionPrompt = ParsePrompt(resumeExtractionPrompts.PromptText, finalPackage);
+            
+            chatHistory.AddUserMessage(renderedResumeExtractionPrompt);
+            var resumePromptResponse = await _aiService.GetResponse(chatHistory);
+            var individualsAsJson = resumePromptResponse.First().Content;
+            var individuals =
+                JsonSerializer.Deserialize<List<FinalPackage.IndividualPersonFinalPackage>>(individualsAsJson);
+            finalPackage.individuals = individuals;
+            await UpdateStatus(job, individualsAsJson, 50, cancellationToken);
+            
+            //Generate content from resumes
+            var resumeGenerationPrompts = _db.Prompts.First(p => p.DeveloperName == "person_generation");
+            var renderedResumeGenerationPrompt = ParsePrompt(resumeGenerationPrompts.PromptText, finalPackage);
+
+            chatHistory = [];
+            chatHistory.AddUserMessage(renderedResumeGenerationPrompt);
+            var resumeGenerationResponse = await _aiService.GetResponse(chatHistory);
+            var resumeGenerationText = resumeGenerationResponse.First().Content;
+            await UpdateStatus(job, resumeGenerationText, 100, cancellationToken);
+            
             await _db.SaveChangesAsync(cancellationToken);
         }
 
@@ -212,7 +219,7 @@ public class BeginToGeneratePackage
                 
                 finalPackage.individuals.Add(new FinalPackage.IndividualPersonFinalPackage()
                 {
-                    file_text = resumeText,
+                    file_text = resumeText
                 });
             }
 
@@ -318,25 +325,10 @@ public class BeginToGeneratePackage
             var parser = new FluidParser();
 
             if (parser.TryParse(source, out var template, out var error))
-            {   
-                var context = new TemplateContext(model);
-
-                return template.Render(context);
-            }
-            else
             {
-                throw new Exception($"Failed to parse template: {error}");
-            }
-        }
-        
-        private string ParseIndividualPrompt(string source, FinalPackage.IndividualPersonFinalPackage model)
-        {
-            var parser = new FluidParser();
-
-            if (parser.TryParse(source, out var template, out var error))
-            {   
-                var context = new TemplateContext(model);
-
+                var options = new TemplateOptions();
+                options.MemberAccessStrategy = new UnsafeMemberAccessStrategy();
+                var context = new TemplateContext(model, options);
                 return template.Render(context);
             }
             else
@@ -345,5 +337,4 @@ public class BeginToGeneratePackage
             }
         }
     }
-
 }
