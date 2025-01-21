@@ -25,6 +25,7 @@ public static class ConfigureServices
         services.AddScoped<BeginToGeneratePackage.BackgroundTask>();
         services.AddScoped<ResumeExtractor>();
         services.AddScoped<PersonGenerator>();
+        services.AddScoped<BenefitsExtractor>();
         return services;
     }
 }

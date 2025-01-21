@@ -56,7 +56,8 @@ public class BeginToGeneratePackage
             IGenerativeAiService aiService,
             HttpClient httpClient,
             ResumeExtractor resumeExtractor,
-            PersonGenerator personGenerator
+            PersonGenerator personGenerator,
+            BenefitsExtractor benefitsExtractor
         )
         {
             _db = db;
@@ -66,6 +67,7 @@ public class BeginToGeneratePackage
             _httpClient = httpClient;
             _resumeExtractor = resumeExtractor;
             _personGenerator = personGenerator;
+            _benefitsExtractor = benefitsExtractor;
         }
 
         public async Task Execute(Guid jobId, JsonElement args, CancellationToken cancellationToken)
@@ -95,6 +97,17 @@ public class BeginToGeneratePackage
             var finalPackage = await InitializeFinalPackage(company.CompanySetupData, project.ProjectData, topic);
             // await UpdateStatus(job, JsonSerializer.Serialize(finalPackage), 5, cancellationToken);
             
+            finalPackage.benefits_offered = await _benefitsExtractor.ExtractBenefitsList(finalPackage);
+            finalPackage.fringe_rate = "15%";  // Replace with actual calculation
+            finalPackage.fully_loaded_labor_amount = "920,064.17";  // Replace with actual calculation
+            
+            // Generate fringe benefits writeup
+            ChatHistory fringeChatHistory = [];
+            var fringePrompt = _db.Prompts.First(p => p.DeveloperName == "fringe_rate");
+            fringeChatHistory.AddUserMessage(ParsePrompt(fringePrompt.PromptText, finalPackage));
+            var fringeResponse = await _aiService.GetResponse(fringeChatHistory);
+            finalPackage.fringe_benefits_writeup = fringeResponse.First().Content;
+            
             //Extract Resumes Data
             // await UpdateStatus(job, "Processing resumes...", 10, cancellationToken);
             finalPackage.individuals = await _resumeExtractor.Extract<List<FinalPackage.IndividualPersonFinalPackage>>(finalPackage);
@@ -105,7 +118,7 @@ public class BeginToGeneratePackage
             // await UpdateStatus(job, personGenerationContent, 100, cancellationToken);
             
             await _db.SaveChangesAsync(cancellationToken);
-        } 
+        }
 
         private async Task UpdateStatus(Domain.Entities.BackgroundTask job, string status, int percentComplete, CancellationToken cancellationToken, bool appendStatus = true)
         {
