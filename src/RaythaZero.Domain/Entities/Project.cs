@@ -123,6 +123,7 @@ public record FinalPackage
     public bool offers_benefits { get; set; } = false;
     public string offers_benefits_description { get; set; } = string.Empty;
 
+    public string offers_benefits_extracted { get; set; } = string.Empty;
     public string wage_rate_sheet_file_text { get; set; } = string.Empty;
     public string previous_cost_volumes_word_file_text { get; set; } = string.Empty;
     public string previous_cost_volumes_excel_file_text { get; set; } = string.Empty;
@@ -131,6 +132,8 @@ public record FinalPackage
     
     public decimal fringe_rate { get; set; } = 0;
     public decimal fully_loaded_labor_amount { get; set; } = 0;
+
+    public string fringe_rate_generated { get; set; } = string.Empty;
     
     public string topic_number { get; set; } = string.Empty;
     public Topic topic { get; set; } = new Topic();

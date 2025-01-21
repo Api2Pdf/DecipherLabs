@@ -26,6 +26,7 @@ public static class ConfigureServices
         services.AddScoped<ResumeExtractor>();
         services.AddScoped<PersonGenerator>();
         services.AddScoped<BenefitsExtractor>();
+        services.AddScoped<FringeGenerator>();
         return services;
     }
 }

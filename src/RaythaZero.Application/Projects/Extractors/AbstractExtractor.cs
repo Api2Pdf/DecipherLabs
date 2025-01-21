@@ -6,6 +6,7 @@ namespace RaythaZero.Application.Projects.Extractors;
 public abstract class AbstractExtractor
 {
     public abstract Task<T> Extract<T>(FinalPackage package);
+    public abstract Task<string> Extract(FinalPackage package);
     
     protected string ParsePrompt(string source, FinalPackage model)
     {

@@ -27,6 +27,12 @@ public class ResumeExtractor : AbstractExtractor
         var resumePromptResponse = await _aiService.GetStructuredResponse<T>(chatHistory, GetResumeJsonSchema());
         return resumePromptResponse;
     }
+
+    public override async Task<string> Extract(FinalPackage finalPackage)
+    {
+        throw new NotImplementedException();
+    }
+    
     private string GetResumeJsonSchema()
     {
         return """

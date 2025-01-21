@@ -19,26 +19,17 @@ public class BenefitsExtractor : AbstractExtractor
     
     public override async Task<T> Extract<T>(FinalPackage finalPackage)
     {
+        throw new NotImplementedException();
+    }
+
+    public override async Task<string> Extract(FinalPackage finalPackage)
+    {
         var benefitsExtractionPrompt = _db.Prompts.First(p => p.DeveloperName == "parse_benefits");
         var renderedBenefitsPrompt = ParsePrompt(benefitsExtractionPrompt.PromptText, finalPackage);
 
         ChatHistory chatHistory = [];
         chatHistory.AddUserMessage(renderedBenefitsPrompt);
-        var benefitsPromptResponse = await _aiService.GetStructuredResponse<T>(chatHistory, GetBenefitsJsonSchema());
-        return benefitsPromptResponse;
-    }
-
-    private string GetBenefitsJsonSchema()
-    {
-        return """
-               {
-                   "type": "object",
-                   "properties": {
-                       "benefits_list": { "type": "string" }
-                   },
-                   "required": ["benefits_list"],
-                   "additionalProperties": false
-               }
-               """;
+        var benefitsPromptResponse = await _aiService.GetResponse(chatHistory);
+        return benefitsPromptResponse.First().Content;
     }
 }

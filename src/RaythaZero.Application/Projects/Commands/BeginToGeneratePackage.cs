@@ -48,6 +48,8 @@ public class BeginToGeneratePackage
         private readonly HttpClient _httpClient;
         private readonly ResumeExtractor _resumeExtractor;
         private readonly PersonGenerator _personGenerator;
+        private readonly BenefitsExtractor _benefitsExtractor;
+        private readonly FringeGenerator _fringeGenerator;
         
         public BackgroundTask(
             IRaythaDbContext db,
@@ -57,7 +59,8 @@ public class BeginToGeneratePackage
             HttpClient httpClient,
             ResumeExtractor resumeExtractor,
             PersonGenerator personGenerator,
-            BenefitsExtractor benefitsExtractor
+            BenefitsExtractor benefitsExtractor,
+            FringeGenerator fringeGenerator
         )
         {
             _db = db;
@@ -68,6 +71,7 @@ public class BeginToGeneratePackage
             _resumeExtractor = resumeExtractor;
             _personGenerator = personGenerator;
             _benefitsExtractor = benefitsExtractor;
+            _fringeGenerator = fringeGenerator;
         }
 
         public async Task Execute(Guid jobId, JsonElement args, CancellationToken cancellationToken)
@@ -97,24 +101,22 @@ public class BeginToGeneratePackage
             var finalPackage = await InitializeFinalPackage(company.CompanySetupData, project.ProjectData, topic);
             // await UpdateStatus(job, JsonSerializer.Serialize(finalPackage), 5, cancellationToken);
             
-            finalPackage.benefits_offered = await _benefitsExtractor.ExtractBenefitsList(finalPackage);
-            finalPackage.fringe_rate = "15%";  // Replace with actual calculation
-            finalPackage.fully_loaded_labor_amount = "920,064.17";  // Replace with actual calculation
+            finalPackage.offers_benefits_extracted = await _benefitsExtractor.Extract(finalPackage);
+            finalPackage.fringe_rate = 0.15M;  // Replace with actual calculation
+            finalPackage.fully_loaded_labor_amount = 100M;
+            
             
             // Generate fringe benefits writeup
-            ChatHistory fringeChatHistory = [];
-            var fringePrompt = _db.Prompts.First(p => p.DeveloperName == "fringe_rate");
-            fringeChatHistory.AddUserMessage(ParsePrompt(fringePrompt.PromptText, finalPackage));
-            var fringeResponse = await _aiService.GetResponse(fringeChatHistory);
-            finalPackage.fringe_benefits_writeup = fringeResponse.First().Content;
-            
+            finalPackage.fringe_rate_generated = await _fringeGenerator.Generate(finalPackage);
+
+            await UpdateStatus(job, finalPackage.fringe_rate_generated, 100, cancellationToken);
             //Extract Resumes Data
             // await UpdateStatus(job, "Processing resumes...", 10, cancellationToken);
-            finalPackage.individuals = await _resumeExtractor.Extract<List<FinalPackage.IndividualPersonFinalPackage>>(finalPackage);
+            //finalPackage.individuals = await _resumeExtractor.Extract<List<FinalPackage.IndividualPersonFinalPackage>>(finalPackage);
             // await UpdateStatus(job, JsonSerializer.Serialize(JsonSerializer.Serialize(finalPackage.individuals)), 50, cancellationToken);
             
             //Generate content from resumes
-            var personGenerationContent = await _personGenerator.Generate(finalPackage);
+            //var personGenerationContent = await _personGenerator.Generate(finalPackage);
             // await UpdateStatus(job, personGenerationContent, 100, cancellationToken);
             
             await _db.SaveChangesAsync(cancellationToken);
