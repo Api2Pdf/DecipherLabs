@@ -105,7 +105,7 @@ public class BeginToGeneratePackage
             await UpdateStatus(job, personGenerationContent, 100, cancellationToken);
             
             await _db.SaveChangesAsync(cancellationToken);
-        }
+        } 
 
         private async Task UpdateStatus(Domain.Entities.BackgroundTask job, string status, int percentComplete, CancellationToken cancellationToken, bool appendStatus = true)
         {

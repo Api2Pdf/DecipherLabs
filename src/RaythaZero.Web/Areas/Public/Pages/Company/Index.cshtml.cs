@@ -134,27 +134,27 @@ public class Index : BasePublicPageModel
     }
     public record FormModel 
     {
-        [Display(Name = "Legal name")]
+        [Display(Name = "Company Legal Name")]
         public string LegalName { get; set; } = string.Empty;
         [Display(Name = "Company URL")]
         public string Url { get; set; } = string.Empty;
-        [Display(Name = "City HQ")]
+        [Display(Name = "Company Headquarters Location - City")]
         public string CityHq { get; set; } = string.Empty;
-        [Display(Name = "State HQ")]
+        [Display(Name = "Company Headquarters Location - State")]
         public string StateHq { get; set; } = string.Empty;
-        [Display(Name = "Offers benefits")] 
+        [Display(Name = "Company Offers Benefits to Employees")] 
         public bool OffersBenefits { get; set; } = false;
-        [Display(Name = "Description of benefits")]
+        [Display(Name = "Description of Company Benefits")]
         public string OffersBenefitsDescription { get; set; } = string.Empty;
-        [Display(Name = "Wage rate sheet")]
+        [Display(Name = "Company Wage Rate Sheet and Description")]
         public string WageRateSheetMediaId { get; set; } = string.Empty;
-        [Display(Name = "Previous cost volume excel file")]
+        [Display(Name = "Previous SBIR Cost Volume and Supplement - Excel Sheet")]
         public string PreviousCostVolumeExcelMediaId { get; set; } = string.Empty;
-        [Display(Name = "Previous cost volume word file")]
+        [Display(Name = "Previous SBIR Cost Volume and Supplement - Word File")]
         public string PreviousCostVolumeWordMediaId { get; set; } = string.Empty;
-        [Display(Name = "Balance sheet")]
+        [Display(Name = "Latest Year End or Quarter End Company Balance Sheet")]
         public string BalanceSheetMediaId { get; set; } = string.Empty;
-        [Display(Name = "Profit and loss")]
+        [Display(Name = "Latest Year End or Quarter End Company Profit and Loss Statement")]
         public string ProfitAndLossMediaId { get; set; } = string.Empty;
     }
 
