@@ -71,16 +71,16 @@ public class BeginToGeneratePackage
         public async Task Execute(Guid jobId, JsonElement args, CancellationToken cancellationToken)
         {
             var job = _db.BackgroundTasks.First(p => p.Id == jobId);
-            await UpdateStatus(job, "Getting started...", 5, cancellationToken);
+            // await UpdateStatus(job, "Getting started...", 5, cancellationToken);
             
             //Get company level data
             var company = _db.OrganizationSettings.First();
-            await UpdateStatus(job, company._CompanySetupData ?? string.Empty, 5, cancellationToken);
+            // await UpdateStatus(job, company._CompanySetupData ?? string.Empty, 5, cancellationToken);
             
             //Get current project and its associated data
             var projectId = new ShortGuid(args.GetProperty("Id").GetString());
             var project = _db.Projects.First(p => p.Id == projectId.Guid);
-            await UpdateStatus(job, project._ProjectData ?? string.Empty, 5, cancellationToken);
+            // await UpdateStatus(job, project._ProjectData ?? string.Empty, 5, cancellationToken);
             
             //Get Topic Information from JSON file
             var topic = ProjectUtils.GetTopics()
@@ -89,20 +89,20 @@ public class BeginToGeneratePackage
             if (topic == null)
                 throw new Exception($"Topic {project.ProjectData.TopicNumber} does not exist");
             
-            await UpdateStatus(job, JsonSerializer.Serialize(topic), 5, cancellationToken);
+            // await UpdateStatus(job, JsonSerializer.Serialize(topic), 5, cancellationToken);
             
-            await UpdateStatus(job, "Pulling project data...", 5, cancellationToken);
+            // await UpdateStatus(job, "Pulling project data...", 5, cancellationToken);
             var finalPackage = await InitializeFinalPackage(company.CompanySetupData, project.ProjectData, topic);
-            await UpdateStatus(job, JsonSerializer.Serialize(finalPackage), 5, cancellationToken);
+            // await UpdateStatus(job, JsonSerializer.Serialize(finalPackage), 5, cancellationToken);
             
             //Extract Resumes Data
-            await UpdateStatus(job, "Processing resumes...", 10, cancellationToken);
+            // await UpdateStatus(job, "Processing resumes...", 10, cancellationToken);
             finalPackage.individuals = await _resumeExtractor.Extract<List<FinalPackage.IndividualPersonFinalPackage>>(finalPackage);
-            await UpdateStatus(job, JsonSerializer.Serialize(JsonSerializer.Serialize(finalPackage.individuals)), 50, cancellationToken);
+            // await UpdateStatus(job, JsonSerializer.Serialize(JsonSerializer.Serialize(finalPackage.individuals)), 50, cancellationToken);
             
             //Generate content from resumes
             var personGenerationContent = await _personGenerator.Generate(finalPackage);
-            await UpdateStatus(job, personGenerationContent, 100, cancellationToken);
+            // await UpdateStatus(job, personGenerationContent, 100, cancellationToken);
             
             await _db.SaveChangesAsync(cancellationToken);
         } 

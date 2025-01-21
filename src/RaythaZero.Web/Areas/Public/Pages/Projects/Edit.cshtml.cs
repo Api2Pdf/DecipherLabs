@@ -82,16 +82,16 @@ public class Edit : BasePublicPageModel
     {
         public string Id { get; set; }
         public string Label { get; set; }
-        [Display(Name = "DSIP Proposal number")]
+        [Display(Name = "DSIP Proposal Number")]
         public string DsipProposalNumber { get; set; } = string.Empty;
         
-        [Display(Name = "Type of proposal")]
+        [Display(Name = "Type of Proposal")]
         public string TypeOfProposal { get; set; } = string.Empty;
         
-        [Display(Name = "Other direct costs")]
+        [Display(Name = "Other Direct Costs")]
         public List<SelectListItem> OtherDirectCostSelections { get; set; } = new List<SelectListItem>();
         
-        [Display(Name = "Topic solicitation")]
+        [Display(Name = "SBIR/STTR Topic to Which You Are Proposing")]
         public string TopicNumber { get; set; } = string.Empty;
     }
     
