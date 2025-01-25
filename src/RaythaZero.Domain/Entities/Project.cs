@@ -150,6 +150,9 @@ public record FinalPackage
     public OtherDirectCosts other_direct_costs { get; set; } = new OtherDirectCosts();
     public Consultant consultant { get; set; } = new Consultant();
     public Subcontractor subcontractor { get; set; } = new Subcontractor();
+
+    public TravelCostInfo travel_cost { get; set; } = new TravelCostInfo();
+    public string travel_cost_writeup { get; set; } = string.Empty;
     
     public record IndividualPersonFinalPackage
     {
@@ -170,6 +173,21 @@ public record FinalPackage
         public string location_of_subcontractor { get; set; } = string.Empty;
         public bool use_rideshare { get; set; } = false;
         public bool use_rental { get; set; } = false; 
+    }
+
+        public record TravelCostInfo
+    {
+        public decimal LodgingRate { get; set; }
+        public decimal MealRate { get; set; }
+        public decimal FlightCost { get; set; }
+        public decimal? RentalCarCost { get; set; }
+        public decimal? RideshareEstimate { get; set; }
+        public decimal? SubcontractorFlightCost { get; set; }
+        public decimal? SubcontractorLodgingRate { get; set; }
+        public decimal? SubcontractorMealRate { get; set; }
+        public int NumberOfDays { get; set; }
+        public int NumberOfNights { get; set; }
+        public string TimePeriod { get; set; } = string.Empty;
     }
 
     public record Materials
