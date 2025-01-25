@@ -105,7 +105,8 @@ public class BeginToGeneratePackage
           finalPackage.fringe_rate_generated = await _fringeGenerator.Generate(finalPackage);
 
           // Travel Cost Processing
-          finalPackage.travel_cost = await _travelCostExtractor.Extract<FinalPackage.TravelCostInfo>(finalPackage);
+          var travelCostJson = await _travelCostExtractor.Extract(finalPackage);
+          finalPackage.travel_cost = JsonSerializer.Deserialize<FinalPackage.TravelCostInfo>(travelCostJson);
           finalPackage.travel_cost_writeup = await _travelGenerator.Generate(finalPackage);
           
           await UpdateStatus(job, finalPackage.fringe_rate_generated, 100, cancellationToken);
