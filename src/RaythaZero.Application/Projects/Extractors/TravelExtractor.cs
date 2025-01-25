@@ -29,6 +29,11 @@ public class TravelCostExtractor : AbstractExtractor
 
         return travelCostResponse;
     }
+    
+    public override async Task<string> Extract(FinalPackage finalPackage)
+    {
+        throw new NotImplementedException();
+    }
 
     private string GetTravelCostJsonSchema()
     {
