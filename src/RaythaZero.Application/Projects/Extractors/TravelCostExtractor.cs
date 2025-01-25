@@ -32,7 +32,14 @@ public class TravelCostExtractor : AbstractExtractor
     
     public override async Task<string> Extract(FinalPackage finalPackage)
     {
-        throw new NotImplementedException();
+        var travelCostPrompt = _db.Prompts.First(p => p.DeveloperName == "calculate_travel_costs");
+        var renderedTravelCostPrompt = ParsePrompt(travelCostPrompt.PromptText, finalPackage);
+
+        ChatHistory chatHistory = [];
+        chatHistory.AddUserMessage(renderedTravelCostPrompt);
+        var travelCostResponse = await _aiService.GetResponse(chatHistory);
+
+        return travelCostResponse;
     }
 
     private string GetTravelCostJsonSchema()
