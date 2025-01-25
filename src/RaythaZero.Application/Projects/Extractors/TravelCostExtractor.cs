@@ -39,7 +39,8 @@ public class TravelCostExtractor : AbstractExtractor
         chatHistory.AddUserMessage(renderedTravelCostPrompt);
         var travelCostResponse = await _aiService.GetResponse(chatHistory);
 
-        return travelCostResponse;
+        var responseText = travelCostResponse.First().Content;
+        return responseText;
     }
 
     private string GetTravelCostJsonSchema()
