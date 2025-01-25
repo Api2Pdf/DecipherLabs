@@ -1,6 +1,7 @@
 using Microsoft.SemanticKernel.ChatCompletion;
 using RaythaZero.Application.Common.Interfaces;
 using RaythaZero.Domain.Entities;
+using System.Text.Json;
 
 namespace RaythaZero.Application.Projects.Extractors;
 
