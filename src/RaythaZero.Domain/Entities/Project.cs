@@ -171,8 +171,8 @@ public record FinalPackage
         public int number_of_travelers { get; set; } = 0;
         public string location_of_gov_end_user { get; set; } = string.Empty;
         public string location_of_subcontractor { get; set; } = string.Empty;
-        public bool UseRideshare { get; set; } = false;
-        public bool UseRentalCar { get; set; } = false; 
+        public bool use_rideshare { get; set; } = false;
+        public bool use_rental { get; set; } = false; 
     }
 
         public record TravelCostInfo

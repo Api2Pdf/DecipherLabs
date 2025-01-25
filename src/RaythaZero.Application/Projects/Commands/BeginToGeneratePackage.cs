@@ -103,14 +103,16 @@ public class BeginToGeneratePackage
           finalPackage.fringe_rate = 0.15M;  
           finalPackage.fully_loaded_labor_amount = 100M;
           finalPackage.fringe_rate_generated = await _fringeGenerator.Generate(finalPackage);
+          await UpdateStatus(job, finalPackage.fringe_rate_generated, 10, cancellationToken);
 
           // Travel Cost Processing
           var travelCostJson = await _travelCostExtractor.Extract(finalPackage);
+          await UpdateStatus(job, travelCostJson, 20, cancellationToken);
           finalPackage.travel_cost = JsonSerializer.Deserialize<FinalPackage.TravelCostInfo>(travelCostJson);
           finalPackage.travel_cost_writeup = await _travelGenerator.Generate(finalPackage);
+          await UpdateStatus(job, finalPackage.travel_cost_writeup, 30, cancellationToken);
           
-          await UpdateStatus(job, finalPackage.fringe_rate_generated, 100, cancellationToken);
-          
+          await UpdateStatus(job, "Done", 100, cancellationToken);
           await _db.SaveChangesAsync(cancellationToken);
       }
 
