@@ -19,8 +19,11 @@ public class ManageProject
         public string TravelDescriptionMediaId { get; set; } = string.Empty;
         public int NumberOfTrips { get; set; } = 0;
         public int NumberOfTravelers { get; set; } = 0;
-        public string LocationOfGovEndUser { get; set; } = string.Empty;
-        public string LocationOfSubcontractor { get; set; } = string.Empty;
+        public string EndUserLocationCity { get; set; } = string.Empty;
+        public string EndUserLocationState { get; set; } = string.Empty;
+        public bool HasSubcontractorLocation { get; set; } = false;
+        public string SubcontractorLocationCity { get; set; } = string.Empty;
+        public string SubcontractorLocationState { get; set; } = string.Empty;
         public bool UseRideshare { get; set; } = false;
         public bool UseRentalCar { get; set; } = false;
         
@@ -73,8 +76,11 @@ public class ManageProject
             projectData.Travel.DescriptionMediaId = request.TravelDescriptionMediaId;
             projectData.Travel.NumberOfTravelers = request.NumberOfTravelers;
             projectData.Travel.NumberOfTrips = request.NumberOfTrips;
-            projectData.Travel.LocationOfGovEndUser = request.LocationOfGovEndUser;
-            projectData.Travel.LocationOfSubcontractor = request.LocationOfSubcontractor;
+            projectData.Travel.EndUserLocationCity = request.EndUserLocationCity;
+            projectData.Travel.EndUserLocationState = request.EndUserLocationState;
+            projectData.Travel.SubcontractorLocationCity = request.SubcontractorLocationCity;
+            projectData.Travel.SubcontractorLocationState = request.SubcontractorLocationState;
+            projectData.Travel.HasSubcontractorLocation = request.HasSubcontractorLocation;
             projectData.Travel.UseRideshare = request.UseRideshare;
             projectData.Travel.UseRentalCar = request.UseRentalCar;
             

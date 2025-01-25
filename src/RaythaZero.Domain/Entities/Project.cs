@@ -57,8 +57,11 @@ public record Travel : AbstractSubtier
 {
     public int NumberOfTrips { get; set; } = 0;
     public int NumberOfTravelers { get; set; } = 0;
-    public string LocationOfGovEndUser { get; set; } = string.Empty;
-    public string LocationOfSubcontractor { get; set; } = string.Empty;
+    public string EndUserLocationState { get; set; } = string.Empty;
+    public string EndUserLocationCity { get; set; } = string.Empty;
+    public bool HasSubcontractorLocation { get; set; } = false;
+    public string SubcontractorLocationState { get; set; } = string.Empty;
+    public string SubcontractorLocationCity { get; set; } = string.Empty;
     public bool UseRideshare { get; set; } = false;
     public bool UseRentalCar { get; set; } = false;
 }
@@ -169,8 +172,12 @@ public record FinalPackage
         public string file_text { get; set; } = string.Empty;
         public int number_of_trips { get; set; } = 0;
         public int number_of_travelers { get; set; } = 0;
-        public string location_of_gov_end_user { get; set; } = string.Empty;
-        public string location_of_subcontractor { get; set; } = string.Empty;
+        public string end_user_location_state { get; set; } = string.Empty;
+        public string end_user_location_city { get; set; } = string.Empty;
+        
+        public bool has_subcontractor_location { get; set; } = false;
+        public string subcontractor_location_state { get; set; } = string.Empty;
+        public string subcontrator_location_city { get; set; } = string.Empty;
         public bool use_rideshare { get; set; } = false;
         public bool use_rental { get; set; } = false; 
     }

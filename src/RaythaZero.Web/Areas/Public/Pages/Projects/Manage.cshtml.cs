@@ -34,8 +34,11 @@ public class Manage : BasePublicPageModel
                 NumberOfTravelers = response.Result.ProjectData.Travel.NumberOfTravelers,
                 UseRideshare = response.Result.ProjectData.Travel.UseRideshare,
                 UseRentalCar = response.Result.ProjectData.Travel.UseRentalCar,
-                LocationOfSubcontractor = response.Result.ProjectData.Travel.LocationOfSubcontractor,
-                LocationOfGovEndUser = response.Result.ProjectData.Travel.LocationOfGovEndUser,
+                EndUserLocationCity= response.Result.ProjectData.Travel.EndUserLocationCity,
+                EndUserLocationState= response.Result.ProjectData.Travel.SubcontractorLocationState,
+                HasSubcontractorLocation = response.Result.ProjectData.Travel.HasSubcontractorLocation,
+                SubcontractorLocationCity = response.Result.ProjectData.Travel.SubcontractorLocationCity,
+                SubcontractorLocationState = response.Result.ProjectData.Travel.SubcontractorLocationState,
                 Description = response.Result.ProjectData.Travel.Description,
                 DescriptionMediaId = response.Result.ProjectData.Travel.DescriptionMediaId
             },
@@ -90,8 +93,11 @@ public class Manage : BasePublicPageModel
             NumberOfTrips = Form.Travel.NumberOfTrips,
             UseRideshare = Form.Travel.UseRideshare,
             UseRentalCar = Form.Travel.UseRentalCar,
-            LocationOfSubcontractor = Form.Travel.LocationOfSubcontractor,
-            LocationOfGovEndUser = Form.Travel.LocationOfGovEndUser,
+            EndUserLocationCity= Form.Travel.EndUserLocationCity,
+            EndUserLocationState= Form.Travel.EndUserLocationState,
+            SubcontractorLocationState = Form.Travel.SubcontractorLocationState,
+            SubcontractorLocationCity = Form.Travel.SubcontractorLocationCity,
+            HasSubcontractorLocation = Form.Travel.HasSubcontractorLocation,
             SuppliesDescription = Form.Supplies.Description,
             SuppliesDescriptionMediaId = Form.Supplies.DescriptionMediaId,
             MaterialsDescription = Form.Materials.Description,
@@ -249,10 +255,17 @@ public class Manage : BasePublicPageModel
         public int NumberOfTrips { get; set; } = 0;
         [Display(Name = "Number of travelers")]
         public int NumberOfTravelers { get; set; } = 0;
-        [Display(Name = "Location of gov end user")]
-        public string LocationOfGovEndUser { get; set; } = string.Empty;
-        [Display(Name = "Location of subcontractor")]
-        public string LocationOfSubcontractor { get; set; } = string.Empty;
+        [Display(Name = "Gov end user state")]
+        public string EndUserLocationState { get; set; } = string.Empty;
+        [Display(Name = "Gov end user city")]
+        public string EndUserLocationCity { get; set; } = string.Empty;
+
+        [Display(Name = "Has subcontractor location")]
+        public bool HasSubcontractorLocation { get; set; } = false;
+        [Display(Name = "Subcontractor state")]
+        public string SubcontractorLocationState { get; set; } = string.Empty;
+        [Display(Name = "Subcontractor city")]
+        public string SubcontractorLocationCity { get; set; } = string.Empty;
         [Display(Name = "Use rideshare")]
         public bool UseRideshare { get; set; } = false;
         [Display(Name = "Use rental car")]

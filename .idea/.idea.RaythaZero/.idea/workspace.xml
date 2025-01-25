@@ -19,7 +19,10 @@
     <list default="true" id="2e2757c6-71fa-485a-a3ef-c78694e604f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RaythaZero/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/BeginToGeneratePackage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/ManageProject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Application/Projects/Commands/ManageProject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/Project.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Domain/Entities/Project.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/RaythaZero.Web/Areas/Public/Pages/Projects/Manage.cshtml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -106,15 +106,35 @@
                   </div>
                 </div>
                 <div class="col-lg-12">
-                  <div class="mb-3">
-                    <label class="form-label" asp-for="Form.Travel.LocationOfSubcontractor"></label>
-                    <input type="text" class="form-control" asp-for="Form.Travel.LocationOfSubcontractor"></input>
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="Form.Travel.HasSubcontractorLocation" id="hasSubcontractorCheckbox" onclick="toggleHasSubcontractorLocation()">
+                    <label class="form-check-label" asp-for="Form.Travel.HasSubcontractorLocation"></label>
+                  </div>
+                </div>
+                <div id="subcontractorFields">
+                  <div class="col-lg-12">
+                    <div class="mb-3">
+                      <label class="form-label" asp-for="Form.Travel.SubcontractorLocationCity"></label>
+                      <input type="text" class="form-control" asp-for="Form.Travel.SubcontractorLocationCity"></input>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="mb-3">
+                      <label class="form-label" asp-for="Form.Travel.SubcontractorLocationState"></label>
+                      <input type="text" class="form-control" asp-for="Form.Travel.SubcontractorLocationState"></input>
+                    </div>
                   </div>
                 </div>
                 <div class="col-lg-12">
                   <div class="mb-3">
-                    <label class="form-label" asp-for="Form.Travel.LocationOfGovEndUser"></label>
-                    <input type="text" class="form-control" asp-for="Form.Travel.LocationOfGovEndUser"></input>
+                    <label class="form-label" asp-for="Form.Travel.EndUserLocationCity"></label>
+                    <input type="text" class="form-control" asp-for="Form.Travel.EndUserLocationCity"></input>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="Form.Travel.EndUserLocationState"></label>
+                    <input type="text" class="form-control" asp-for="Form.Travel.EndUserLocationState"></input>
                   </div>
                 </div>
                 <div class="col-lg-12">
@@ -255,4 +275,14 @@
   function removeFile(button) {
     button.closest(".file-container").remove();
   }
+  
+  function toggleHasSubcontractorLocation() {
+    var checkbox = document.getElementById("hasSubcontractorCheckbox");
+    var subcontractorFieldsElement = document.getElementById("subcontractorFields");
+    subcontractorFieldsElement.style.display = checkbox.checked ? "block" : "none";
+  }
+
+  // Initialize visibility on page load
+  toggleHasSubcontractorLocation();
+  
 </script>

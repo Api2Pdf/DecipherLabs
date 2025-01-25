@@ -145,8 +145,11 @@ public class BeginToGeneratePackage
                   use_rideshare = project.Travel.UseRideshare,
                   number_of_travelers = project.Travel.NumberOfTravelers,
                   number_of_trips = project.Travel.NumberOfTrips,
-                  location_of_gov_end_user = project.Travel.LocationOfGovEndUser,
-                  location_of_subcontractor = project.Travel.LocationOfSubcontractor
+                  end_user_location_city = project.Travel.EndUserLocationCity,
+                  end_user_location_state = project.Travel.EndUserLocationState,
+                  has_subcontractor_location = project.Travel.HasSubcontractorLocation,
+                  subcontrator_location_city = project.Travel.SubcontractorLocationCity,
+                  subcontractor_location_state = project.Travel.SubcontractorLocationState
               },
               materials = new()
               {
