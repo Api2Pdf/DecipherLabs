@@ -19,17 +19,9 @@ public class TravelCostExtractor : AbstractExtractor
     
     public override async Task<T> Extract<T>(FinalPackage finalPackage)
     {
-        // Get travel costs calculations from prompt
-        var travelCostPrompt = _db.Prompts.First(p => p.DeveloperName == "calculate_travel_costs");
-        var renderedTravelCostPrompt = ParsePrompt(travelCostPrompt.PromptText, finalPackage);
-
-        ChatHistory chatHistory = [];
-        chatHistory.AddUserMessage(renderedTravelCostPrompt);
-        var travelCostResponse = await _aiService.GetStructuredResponse<T>(chatHistory, GetTravelCostJsonSchema());
-
-        return travelCostResponse;
+        throw new NotImplementedException();
     }
-    
+
     public override async Task<string> Extract(FinalPackage finalPackage)
     {
         var travelCostPrompt = _db.Prompts.First(p => p.DeveloperName == "calculate_travel_costs");
@@ -37,10 +29,18 @@ public class TravelCostExtractor : AbstractExtractor
 
         ChatHistory chatHistory = [];
         chatHistory.AddUserMessage(renderedTravelCostPrompt);
-        var travelCostResponse = await _aiService.GetResponse(chatHistory);
-
-        var responseText = travelCostResponse.First().Content;
-        return responseText;
+        var travelCostResponse = await _aiService.GetStructuredResponse<FinalPackage.TravelCostInfo>(chatHistory, GetTravelCostJsonSchema());
+        
+        try
+        {
+            var json = JsonSerializer.Serialize(travelCostResponse);
+            JsonDocument.Parse(json);
+            return json;
+        }
+        catch (JsonException)
+        {
+            throw new Exception("Invalid JSON returned from travel cost calculation");
+        }
     }
 
     private string GetTravelCostJsonSchema()
