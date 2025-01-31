@@ -19,14 +19,25 @@ public class TravelGenerator : AbstractGenerator
     
     public override async Task<string> Generate(FinalPackage package)
     {
-        var prompt = _db.Prompts.First(p => p.DeveloperName == "travel_cost");
-        var renderedPrompt = ParsePrompt(prompt.PromptText, package);
+        // Get and process travel_cost prompt
+        var travelCostPrompt = _db.Prompts.First(p => p.DeveloperName == "travel_cost");
+        var renderedTravelPrompt = ParsePrompt(travelCostPrompt.PromptText, package);
 
-        ChatHistory chatHistory = [];
-        chatHistory.AddUserMessage(renderedPrompt);
-        
-        var response = await _aiService.GetResponse(chatHistory);
-        var responseText = response.First().Content;
-        return responseText;
+        ChatHistory travelChatHistory = [];
+        travelChatHistory.AddUserMessage(renderedTravelPrompt);
+        var travelResponse = await _aiService.GetResponse(travelChatHistory);
+        var travelText = travelResponse.First().Content;
+
+        // Get and process flight_cost_generator prompt
+        var flightCostPrompt = _db.Prompts.First(p => p.DeveloperName == "flight_cost_generator");
+        var renderedFlightPrompt = ParsePrompt(flightCostPrompt.PromptText, package);
+
+        ChatHistory flightChatHistory = [];
+        flightChatHistory.AddUserMessage(renderedFlightPrompt);
+        var flightResponse = await _aiService.GetResponse(flightChatHistory);
+        var flightText = flightResponse.First().Content;
+
+        // Combine both responses
+        return $"{travelText}\n\n{flightText}";
     }
 }

@@ -1,0 +1,319 @@
+[2025-01-30 01:13:28.714] Starting extraction, waiting 2 seconds before first API call...
+[2025-01-30 01:13:30.715] Starting GetAccessToken method
+[2025-01-30 01:13:30.716] Amadeus API Key exists: True
+[2025-01-30 01:13:30.716] Amadeus API Secret exists: True
+[2025-01-30 01:13:30.716] Sending token request to Amadeus
+[2025-01-30 01:13:31.326] Amadeus response status: OK
+[2025-01-30 01:13:31.327] Amadeus response content: 
+
+        {
+            "type": "amadeusOAuth2Token",
+            "username": "gil@decipherlabs.xyz",
+            "application_name": "Travel Cost Estimator",
+            "client_id": "fPGNrlv6BACmAOzhNwxzaVSjwEpQSMiE",
+            "token_type": "Bearer",
+            "access_token": "xYJgSPiSqgVpAfzX4e7hwRlIws2C",
+            "expires_in": 1799,
+            "state": "approved",
+            "scope": ""
+        }
+        
+
+[2025-01-30 01:13:31.327] Successfully retrieved access token
+[2025-01-30 01:13:31.327] Getting coordinates for New York, New York
+[2025-01-30 01:13:31.327] Google Maps API Key value: AIzaS...
+[2025-01-30 01:13:31.328] Google Maps API Key exists: True
+[2025-01-30 01:13:31.534] Google Maps response status: OK
+[2025-01-30 01:13:31.534] Google Maps response content: {
+   "results" : 
+   [
+      {
+         "address_components" : 
+         [
+            {
+               "long_name" : "New York",
+               "short_name" : "New York",
+               "types" : 
+               [
+                  "locality",
+                  "political"
+               ]
+            },
+            {
+               "long_name" : "New York",
+               "short_name" : "NY",
+               "types" : 
+               [
+                  "administrative_area_level_1",
+                  "political"
+               ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : 
+               [
+                  "country",
+                  "political"
+               ]
+            }
+         ],
+         "formatted_address" : "New York, NY, USA",
+         "geometry" : 
+         {
+            "bounds" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 40.917705,
+                  "lng" : -73.700169
+               },
+               "southwest" : 
+               {
+                  "lat" : 40.476578,
+                  "lng" : -74.258843
+               }
+            },
+            "location" : 
+            {
+               "lat" : 40.7127753,
+               "lng" : -74.0059728
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 40.917705,
+                  "lng" : -73.700169
+               },
+               "southwest" : 
+               {
+                  "lat" : 40.476578,
+                  "lng" : -74.258843
+               }
+            }
+         },
+         "place_id" : "ChIJOwg_06VPwokRYv534QaPC8g",
+         "types" : 
+         [
+            "locality",
+            "political"
+         ]
+      }
+   ],
+   "status" : "OK"
+}
+[2025-01-30 01:13:31.535] Found coordinates for New York, New York: 40.7127753, -74.0059728
+[2025-01-30 01:13:31.535] 
+Searching for nearest airport to coordinates: 40.71, -74.01
+[2025-01-30 01:13:31.535] Making Amadeus API call to: https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=40.71&longitude=-74.01&radius=100&page[limit]=1
+[2025-01-30 01:13:31.535] With Authorization Bearer token: xYJgSPiSqg... (truncated)
+[2025-01-30 01:13:31.990] Amadeus Airport Search Response: {
+    "meta": {
+        "count": 9,
+        "links": {
+            "self": "https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=40.71&longitude=-74.01&radius=100&page%5Blimit%5D=1",
+            "next": "https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=40.71&longitude=-74.01&radius=100&page%5Boffset%5D=1&page%5Blimit%5D=1",
+            "last": "https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=40.71&longitude=-74.01&radius=100&page%5Boffset%5D=8&page%5Blimit%5D=1"
+        }
+    },
+    "data": [
+        {
+            "type": "location",
+            "subType": "AIRPORT",
+            "name": "NEWARK LIBERTY INTL",
+            "detailedName": "NEW YORK/NJ/US:NEWARK LIBERTY",
+            "timeZoneOffset": "-05:00",
+            "iataCode": "EWR",
+            "geoCode": {
+                "latitude": 40.69112,
+                "longitude": -74.17888
+            },
+            "address": {
+                "cityName": "NEW YORK",
+                "cityCode": "NYC",
+                "countryName": "UNITED STATES OF AMERICA",
+                "countryCode": "US",
+                "stateCode": "NJ",
+                "regionCode": "NAMER"
+            },
+            "distance": {
+                "value": 14,
+                "unit": "KM"
+            },
+            "analytics": {
+                "flights": {
+                    "score": 30
+                },
+                "travelers": {
+                    "score": 24
+                }
+            },
+            "relevance": 207.56282
+        }
+    ]
+}
+[2025-01-30 01:13:31.990] Found airport code EWR for New York, New York
+[2025-01-30 01:13:31.990] Getting coordinates for Wright Patterson AFB, Ohio
+[2025-01-30 01:13:31.990] Google Maps API Key value: AIzaS...
+[2025-01-30 01:13:31.991] Google Maps API Key exists: True
+[2025-01-30 01:13:32.049] Google Maps response status: OK
+[2025-01-30 01:13:32.049] Google Maps response content: {
+   "results" : 
+   [
+      {
+         "address_components" : 
+         [
+            {
+               "long_name" : "Wright-Patterson Air Force Base",
+               "short_name" : "Wright-Patterson AFB",
+               "types" : 
+               [
+                  "locality",
+                  "political"
+               ]
+            },
+            {
+               "long_name" : "Bath Township",
+               "short_name" : "Bath Township",
+               "types" : 
+               [
+                  "administrative_area_level_3",
+                  "political"
+               ]
+            },
+            {
+               "long_name" : "Greene County",
+               "short_name" : "Greene County",
+               "types" : 
+               [
+                  "administrative_area_level_2",
+                  "political"
+               ]
+            },
+            {
+               "long_name" : "Ohio",
+               "short_name" : "OH",
+               "types" : 
+               [
+                  "administrative_area_level_1",
+                  "political"
+               ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : 
+               [
+                  "country",
+                  "political"
+               ]
+            }
+         ],
+         "formatted_address" : "Wright-Patterson AFB, OH, USA",
+         "geometry" : 
+         {
+            "bounds" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 39.8486621,
+                  "lng" : -84.013733
+               },
+               "southwest" : 
+               {
+                  "lat" : 39.769606,
+                  "lng" : -84.0989361
+               }
+            },
+            "location" : 
+            {
+               "lat" : 39.8137298,
+               "lng" : -84.05374479999999
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 39.8486621,
+                  "lng" : -84.013733
+               },
+               "southwest" : 
+               {
+                  "lat" : 39.769606,
+                  "lng" : -84.0989361
+               }
+            }
+         },
+         "place_id" : "ChIJG8UAN9mCQIgRfm8e0q-Q430",
+         "types" : 
+         [
+            "locality",
+            "political"
+         ]
+      }
+   ],
+   "status" : "OK"
+}
+[2025-01-30 01:13:32.050] Found coordinates for Wright Patterson AFB, Ohio: 39.8137298, -84.05374479999999
+[2025-01-30 01:13:32.050] 
+Searching for nearest airport to coordinates: 39.81, -84.05
+[2025-01-30 01:13:32.050] Making Amadeus API call to: https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=39.81&longitude=-84.05&radius=100&page[limit]=1
+[2025-01-30 01:13:32.050] With Authorization Bearer token: xYJgSPiSqg... (truncated)
+[2025-01-30 01:13:32.411] Amadeus Airport Search Response: {
+    "meta": {
+        "count": 3,
+        "links": {
+            "self": "https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=39.81&longitude=-84.05&radius=100&page%5Blimit%5D=1",
+            "next": "https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=39.81&longitude=-84.05&radius=100&page%5Boffset%5D=1&page%5Blimit%5D=1",
+            "last": "https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=39.81&longitude=-84.05&radius=100&page%5Boffset%5D=2&page%5Blimit%5D=1"
+        }
+    },
+    "data": [
+        {
+            "type": "location",
+            "subType": "AIRPORT",
+            "name": "JAMES M COX INTL",
+            "detailedName": "DAYTON/OH/US:JAMES M COX INTL",
+            "timeZoneOffset": "-05:00",
+            "iataCode": "DAY",
+            "geoCode": {
+                "latitude": 39.90250,
+                "longitude": -84.21944
+            },
+            "address": {
+                "cityName": "DAYTON",
+                "cityCode": "DAY",
+                "countryName": "UNITED STATES OF AMERICA",
+                "countryCode": "US",
+                "stateCode": "OH",
+                "regionCode": "NAMER"
+            },
+            "distance": {
+                "value": 17,
+                "unit": "KM"
+            },
+            "analytics": {
+                "flights": {
+                    "score": 3
+                },
+                "travelers": {
+                    "score": 2
+                }
+            },
+            "relevance": 15.91383
+        }
+    ]
+}
+[2025-01-30 01:13:32.411] Found airport code DAY for Wright Patterson AFB, Ohio
+[2025-01-30 01:13:32.412] 
+Searching for round trip flights:
+[2025-01-30 01:13:32.412] From: EWR to DAY
+[2025-01-30 01:13:32.412] Outbound: 2025-07-30
+[2025-01-30 01:13:32.413] Return: 2025-08-03
+[2025-01-30 01:13:32.413] Request Body: {"currencyCode":"USD","originDestinations":[{"id":"1","originLocationCode":"EWR","destinationLocationCode":"DAY","departureDateTimeRange":{"date":"2025-07-30"}},{"id":"2","originLocationCode":"DAY","destinationLocationCode":"EWR","departureDateTimeRange":{"date":"2025-08-03"}}],"travelers":[{"id":"1","travelerType":"ADULT"}],"sources":["GDS"],"searchCriteria":{"maxFlightOffers":1,"flightFilters":{"cabinRestrictions":[{"cabin":"ECONOMY","coverage":"MOST_SEGMENTS","originDestinationIds":["1","2"]}]}}}
+[2025-01-30 01:13:56.727] Flight Search Response Status: OK
+[2025-01-30 01:13:56.729] Flight Search Response: {"meta":{"count":1},"data":[{"type":"flight-offer","id":"1","source":"GDS","instantTicketingRequired":false,"nonHomogeneous":false,"oneWay":false,"isUpsellOffer":false,"lastTicketingDate":"2025-01-31","lastTicketingDateTime":"2025-01-31","numberOfBookableSeats":6,"itineraries":[{"duration":"PT3H50M","segments":[{"departure":{"iataCode":"EWR","terminal":"C","at":"2025-07-30T06:00:00"},"arrival":{"iataCode":"IAD","at":"2025-07-30T07:19:00"},"carrierCode":"UA","number":"1366","aircraft":{"code":"7M8"},"operating":{"carrierCode":"UA"},"duration":"PT1H19M","id":"1","numberOfStops":0,"blacklistedInEU":false},{"departure":{"iataCode":"IAD","at":"2025-07-30T08:15:00"},"arrival":{"iataCode":"DAY","at":"2025-07-30T09:50:00"},"carrierCode":"UA","number":"4327","aircraft":{"code":"ERJ"},"duration":"PT1H35M","id":"2","numberOfStops":0,"blacklistedInEU":false}]},{"duration":"PT4H59M","segments":[{"departure":{"iataCode":"DAY","at":"2025-08-03T09:10:00"},"arrival":{"iataCode":"ORD","terminal":"2","at":"2025-08-03T09:37:00"},"carrierCode":"UA","number":"5414","aircraft":{"code":"E7W"},"duration":"PT1H27M","id":"3","numberOfStops":0,"blacklistedInEU":false},{"departure":{"iataCode":"ORD","terminal":"1","at":"2025-08-03T10:45:00"},"arrival":{"iataCode":"EWR","terminal":"C","at":"2025-08-03T14:09:00"},"carrierCode":"UA","number":"2668","aircraft":{"code":"7M8"},"operating":{"carrierCode":"UA"},"duration":"PT2H24M","id":"4","numberOfStops":0,"blacklistedInEU":false}]}],"price":{"currency":"USD","total":"423.31","base":"347.31","fees":[{"amount":"0.00","type":"SUPPLIER"},{"amount":"0.00","type":"TICKETING"}],"grandTotal":"423.31"},"pricingOptions":{"fareType":["PUBLISHED"],"includedCheckedBagsOnly":false},"validatingAirlineCodes":["UA"],"travelerPricings":[{"travelerId":"1","fareOption":"STANDARD","travelerType":"ADULT","price":{"currency":"USD","total":"423.31","base":"347.31"},"fareDetailsBySegment":[{"segmentId":"1","cabin":"ECONOMY","fareBasis":"LFA2ADDN","brandedFare":"ECONOMY","brandedFareLabel":"ECONOMY","class":"L","includedCheckedBags":{"quantity":0},"amenities":[{"description":"CHECKED BAG FIRST","isChargeable":true,"amenityType":"BAGGAGE","amenityProvider":{"name":"BrandedFare"}},{"description":"SECOND BAG","isChargeable":true,"amenityType":"BAGGAGE","amenityProvider":{"name":"BrandedFare"}},{"description":"PRE RESERVED SEAT ASSIGNMENT","isChargeable":false,"amenityType":"PRE_RESERVED_SEAT","amenityProvider":{"name":"BrandedFare"}},{"description":"PRIORITY BOARDING","isChargeable":true,"amenityType":"TRAVEL_SERVICES","amenityProvider":{"name":"BrandedFare"}},{"description":"ECONOMY TO ECONOMY PLUS","isChargeable":true,"amenityType":"UPGRADES","amenityProvider":{"name":"BrandedFare"}},{"description":"MILEAGE ACCRUAL","isChargeable":false,"amenityType":"BRANDED_FARES","amenityProvider":{"name":"BrandedFare"}}]},{"segmentId":"2","cabin":"ECONOMY","fareBasis":"LFA2ADDN","brandedFare":"ECONOMY","brandedFareLabel":"ECONOMY","class":"L","includedCheckedBags":{"quantity":0},"amenities":[{"description":"CHECKED BAG FIRST","isChargeable":true,"amenityType":"BAGGAGE","amenityProvider":{"name":"BrandedFare"}},{"description":"SECOND BAG","isChargeable":true,"amenityType":"BAGGAGE","amenityProvider":{"name":"BrandedFare"}},{"description":"PRE RESERVED SEAT ASSIGNMENT","isChargeable":false,"amenityType":"PRE_RESERVED_SEAT","amenityProvider":{"name":"BrandedFare"}},{"description":"PRIORITY BOARDING","isChargeable":true,"amenityType":"TRAVEL_SERVICES","amenityProvider":{"name":"BrandedFare"}},{"description":"ECONOMY TO ECONOMY PLUS","isChargeable":true,"amenityType":"UPGRADES","amenityProvider":{"name":"BrandedFare"}},{"description":"MILEAGE ACCRUAL","isChargeable":false,"amenityType":"BRANDED_FARES","amenityProvider":{"name":"BrandedFare"}}]},{"segmentId":"3","cabin":"ECONOMY","fareBasis":"VFA5AFDN","brandedFare":"ECONOMY","brandedFareLabel":"ECONOMY","class":"V","includedCheckedBags":{"quantity":0},"amenities":[{"description":"CHECKED BAG FIRST","isChargeable":true,"amenityType":"BAGGAGE","amenityProvider":{"name":"BrandedFare"}},{"description":"SECOND BAG","isChargeable":true,"amenityType":"BAGGAGE","amenityProvider":{"name":"BrandedFare"}},{"description":"PRE RESERVED SEAT ASSIGNMENT","isChargeable":false,"amenityType":"PRE_RESERVED_SEAT","amenityProvider":{"name":"BrandedFare"}},{"description":"PRIORITY BOARDING","isChargeable":true,"amenityType":"TRAVEL_SERVICES","amenityProvider":{"name":"BrandedFare"}},{"description":"ECONOMY TO ECONOMY PLUS","isChargeable":true,"amenityType":"UPGRADES","amenityProvider":{"name":"BrandedFare"}},{"description":"MILEAGE ACCRUAL","isChargeable":false,"amenityType":"BRANDED_FARES","amenityProvider":{"name":"BrandedFare"}}]},{"segmentId":"4","cabin":"ECONOMY","fareBasis":"VFA5AFDN","brandedFare":"ECONOMY","brandedFareLabel":"ECONOMY","class":"V","includedCheckedBags":{"quantity":0},"amenities":[{"description":"CHECKED BAG FIRST","isChargeable":true,"amenityType":"BAGGAGE","amenityProvider":{"name":"BrandedFare"}},{"description":"SECOND BAG","isChargeable":true,"amenityType":"BAGGAGE","amenityProvider":{"name":"BrandedFare"}},{"description":"PRE RESERVED SEAT ASSIGNMENT","isChargeable":false,"amenityType":"PRE_RESERVED_SEAT","amenityProvider":{"name":"BrandedFare"}},{"description":"PRIORITY BOARDING","isChargeable":true,"amenityType":"TRAVEL_SERVICES","amenityProvider":{"name":"BrandedFare"}},{"description":"ECONOMY TO ECONOMY PLUS","isChargeable":true,"amenityType":"UPGRADES","amenityProvider":{"name":"BrandedFare"}},{"description":"MILEAGE ACCRUAL","isChargeable":false,"amenityType":"BRANDED_FARES","amenityProvider":{"name":"BrandedFare"}}]}]}]}],"dictionaries":{"locations":{"ORD":{"cityCode":"CHI","countryCode":"US"},"EWR":{"cityCode":"NYC","countryCode":"US"},"IAD":{"cityCode":"WAS","countryCode":"US"},"DAY":{"cityCode":"DAY","countryCode":"US"}},"aircraft":{"7M8":"BOEING 737 MAX 8","E7W":"EMBRAER 175 (ENHANCED WINGLETS)","ERJ":"EMBRAER RJ135/140/145"},"currencies":{"USD":"US DOLLAR"},"carriers":{"UA":"UNITED AIRLINES"}}}
+[2025-01-30 01:13:56.733] Found round trip flight price: 423.31 USD

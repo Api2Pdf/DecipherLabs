@@ -28,6 +28,8 @@ public class Project : BaseAuditableEntity
             _ProjectData = JsonSerializer.Serialize(value);
         }
     } 
+
+    public BlsData Bls { get; set; } = new();
 }
 
 public record ProjectLevelInfo
@@ -44,6 +46,7 @@ public record ProjectLevelInfo
     public OtherDirectCosts OtherDirectCosts { get; set; } = new OtherDirectCosts();
     public Consultant Consultant { get; set; } = new Consultant();
     public Subcontractor Subcontractor { get; set; } = new Subcontractor();
+    public string truncated_project_description { get; set; } = string.Empty;
 }
 
 
@@ -55,6 +58,7 @@ public abstract record AbstractSubtier
 
 public record Travel : AbstractSubtier
 {
+    public string Description { get; set; } = string.Empty;
     public int NumberOfTrips { get; set; } = 0;
     public int NumberOfTravelers { get; set; } = 0;
     public string EndUserLocationState { get; set; } = string.Empty;
@@ -64,6 +68,9 @@ public record Travel : AbstractSubtier
     public string SubcontractorLocationCity { get; set; } = string.Empty;
     public bool UseRideshare { get; set; } = false;
     public bool UseRentalCar { get; set; } = false;
+    public FinalPackage.TravelCostInfo TravelCost { get; set; } = new();
+    public string TravelCostWriteup { get; set; } = string.Empty;
+    public string FlightCostWriteup { get; set; } = string.Empty;
 }
 
 public record Subcontractor : AbstractSubtier
@@ -145,6 +152,7 @@ public record FinalPackage
     
     public IEnumerable<string> other_direct_cost_selections { get; set; } = new List<string>();
     public List<IndividualPersonFinalPackage> individuals { get; set; } = new List<IndividualPersonFinalPackage>();
+    public IndividualPersonFinalPackage current_person { get; set; } = new();
     
     public Travel travel { get; set; } = new Travel();
     public Materials materials { get; set; } = new Materials();
@@ -156,13 +164,22 @@ public record FinalPackage
 
     public TravelCostInfo travel_cost { get; set; } = new TravelCostInfo();
     public string travel_cost_writeup { get; set; } = string.Empty;
+    public string flight_cost_writeup { get; set; } = string.Empty;
     
+    public decimal total_cost { get; set; }
+    public string truncated_project_description { get; set; } = string.Empty;
+    public decimal direct_labor_amount { get; set; }
+
+    [NotMapped]
+    public Dictionary<string, BlsOccupationData> bls_data { get; set; } = new();
+
     public record IndividualPersonFinalPackage
     {
         public string name { get; set; } = string.Empty;
         public string job_title { get; set; } = string.Empty;
         public string bls_code { get; set; } = string.Empty;
         public string grad_year { get; set; } = string.Empty;
+        public string wage_rate { get; set; } = string.Empty;
         public string file_text { get; set; } = string.Empty;
     }
 
@@ -234,4 +251,20 @@ public record FinalPackage
         public string description { get; set; } = string.Empty;
         public string file_text { get; set; } = string.Empty;
     }
+}
+
+[NotMapped]
+public class BlsData
+{
+    public Dictionary<string, BlsOccupationData> OccupationData { get; set; } = new();
+}
+
+public class BlsOccupationData
+{
+    public string state_name { get; set; }
+    public string state_acronym { get; set; }
+    public string occupation_code { get; set; }
+    public string occupation_title { get; set; }
+    public decimal hourly_mean { get; set; }
+    public decimal hourly_90_percentile { get; set; }
 }

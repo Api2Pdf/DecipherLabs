@@ -1,0 +1,42 @@
+2025-01-30 01:13:03.183 Starting resume extraction...
+2025-01-30 01:13:03.183 Processing resume with text length: 9556
+2025-01-30 01:13:03.183 Starting name extraction...
+2025-01-30 01:13:03.219 Got name prompt: Given the resume provided, extract the name of the person.
+  - Return only the person's first and last name.
+  - Do not include any other information.
+2025-01-30 01:13:03.219 Sending to AI...
+2025-01-30 01:13:03.846 Got response: "Francis Bitonti"
+2025-01-30 01:13:04.683 Extracted Job Title: "CEO"
+2025-01-30 01:13:05.017 Extracted Graduation Year: "2005"
+2025-01-30 01:13:05.499 Extracted BLS Code: "11-1011.00 - Chief Executives"
+2025-01-30 01:13:05.500 Processing resume with text length: 2260
+2025-01-30 01:13:05.500 Starting name extraction...
+2025-01-30 01:13:05.535 Got name prompt: Given the resume provided, extract the name of the person.
+  - Return only the person's first and last name.
+  - Do not include any other information.
+2025-01-30 01:13:05.535 Sending to AI...
+2025-01-30 01:13:05.963 Got response: "Christian Gartland"
+2025-01-30 01:13:07.379 Extracted Job Title: "Snr. AI Data Engineer"
+2025-01-30 01:13:08.275 Extracted Graduation Year: "2017"
+2025-01-30 01:13:08.806 Extracted BLS Code: "15-1299.00 - Computer and Information Research Scientists"
+2025-01-30 01:13:08.806 Processing resume with text length: 7803
+2025-01-30 01:13:08.806 Starting name extraction...
+2025-01-30 01:13:08.839 Got name prompt: Given the resume provided, extract the name of the person.
+  - Return only the person's first and last name.
+  - Do not include any other information.
+2025-01-30 01:13:08.839 Sending to AI...
+2025-01-30 01:13:09.163 Got response: "Azam Khan"
+2025-01-30 01:13:09.753 Extracted Job Title: "Chief Operating Officer"
+2025-01-30 01:13:10.713 Extracted Graduation Year: "2003"
+2025-01-30 01:13:11.091 Extracted BLS Code: "11-1021 - Chief Executives"
+2025-01-30 01:13:11.092 Finished processing 3 resumes
+BeginToGeneratePackage: Processed 3 resumes
+BeginToGeneratePackage: Person - Name: "Francis Bitonti", Job: "CEO", BLS: "11-1011.00 - Chief Executives", Grad Year: "2005"
+BeginToGeneratePackage: Person - Name: "Christian Gartland", Job: "Snr. AI Data Engineer", BLS: "15-1299.00 - Computer and Information Research Scientists", Grad Year: "2017"
+BeginToGeneratePackage: Person - Name: "Azam Khan", Job: "Chief Operating Officer", BLS: "11-1021 - Chief Executives", Grad Year: "2003"
+
+BeginToGeneratePackage: Starting Key Personnel Generation...
+
+BeginToGeneratePackage: Starting Travel Cost Processing...
+Configuration has AmadeusSettings:ApiKey: False
+Configuration has AmadeusSettings:ApiSecret: False

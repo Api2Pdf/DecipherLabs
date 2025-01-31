@@ -4,11 +4,27 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using RaythaZero.Application.Common.Utils;
 using UglyToad.PdfPig;
 using Topic = RaythaZero.Domain.Entities.Topic;
+using RaythaZero.Domain.Entities;
 
 namespace RaythaZero.Application.Projects.Utils;
 
 public static class ProjectUtils
 {
+    private static List<Topic> _topics;
+    private static Dictionary<string, BlsOccupationData> _blsData;
+
+    public static Dictionary<string, BlsOccupationData> GetBlsData(string companyState)
+    {
+        if (_blsData == null)
+        {
+            var blsDataAsJson = StringExtensions.ReadJsonFile("RaythaZero.Application.Projects.Utils.bls.json");
+            var blsArray = JsonSerializer.Deserialize<List<BlsOccupationData>>(blsDataAsJson);
+            _blsData = blsArray.Where(x => x.state_name.Equals(companyState, StringComparison.OrdinalIgnoreCase))
+                              .ToDictionary(x => x.occupation_code, x => x);
+        }
+        return _blsData ?? new Dictionary<string, BlsOccupationData>();
+    }
+
     public static IEnumerable<Topic> GetTopics()
     {
         var topicsAsJson = StringExtensions.ReadJsonFile("RaythaZero.Application.Projects.Utils.topics.json");

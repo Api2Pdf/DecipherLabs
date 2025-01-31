@@ -42,7 +42,7 @@ public static class ConfigureServices
         //generative ai
         services.Configure<OpenAiSettings>(configuration);
         services.AddScoped<IGenerativeAiService, OpenAiService>();
-        
+
         //file storage provider
         var fileStorageProvider = configuration[FileStorageUtility.CONFIG_NAME].IfNullOrEmpty(FileStorageUtility.LOCAL).ToLower();
         if (fileStorageProvider == FileStorageUtility.LOCAL)

@@ -7,156 +7,376 @@ using System.Text.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.Globalization;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace RaythaZero.Application.Projects.Extractors;
 
-public class TravelCostExtractor : AbstractExtractor
+public class TravelCostExtractor
 {
-    private readonly IRaythaDbContext _db;
-    private readonly IGenerativeAiService _aiService;
-    private readonly IConfiguration _configuration;
+    private readonly HttpClient _httpClient;
+    private readonly string _amadeusApiKey;
+    private readonly string _amadeusApiSecret;
+    private readonly string _googleMapsApiKey;
+    private readonly string _debugPath = "amadeus_debug.txt";
 
-    private const string TokenUrl = "https://test.api.amadeus.com/v1/security/oauth2/token";
-    private const string LocationsUrl = "https://test.api.amadeus.com/v1/reference-data/locations";
-    private const string FlightUrl = "https://test.api.amadeus.com/v2/shopping/flight-offers";
-
-    public TravelCostExtractor(
-        IRaythaDbContext db,
-        IGenerativeAiService aiService,
-        IConfiguration configuration)
+    public class AmadeusTokenResponse
     {
-        _db = db;
-        _aiService = aiService;
-        _configuration = configuration;
+        [JsonPropertyName("access_token")]
+        public string AccessToken { get; set; }
     }
 
-    public override async Task<T> Extract<T>(FinalPackage finalPackage)
+    public class GoogleGeocodeResponse
+    {
+        [JsonPropertyName("results")]
+        public List<GoogleResult> Results { get; set; }
+        
+        public class GoogleResult
+        {
+            [JsonPropertyName("geometry")]
+            public GoogleGeometry Geometry { get; set; }
+        }
+        
+        public class GoogleGeometry
+        {
+            [JsonPropertyName("location")]
+            public GoogleLocation Location { get; set; }
+        }
+        
+        public class GoogleLocation
+        {
+            [JsonPropertyName("lat")]
+            public double Lat { get; set; }
+            [JsonPropertyName("lng")]
+            public double Lng { get; set; }
+        }
+    }
+
+    public class AmadeusAirportSearchResponse
+    {
+        [JsonPropertyName("data")]
+        public List<AmadeusAirport> Data { get; set; }
+
+        public class AmadeusAirport
+        {
+            [JsonPropertyName("iataCode")]
+            public string IataCode { get; set; }
+        }
+    }
+
+    public class AmadeusFlightSearchResponse
+    {
+        [JsonPropertyName("data")]
+        public List<FlightOffer> Data { get; set; }
+
+        public class FlightOffer
+        {
+            [JsonPropertyName("price")]
+            public Price Price { get; set; }
+        }
+
+        public class Price
+        {
+            [JsonPropertyName("total")]
+            public string Total { get; set; }
+        }
+    }
+
+    public TravelCostExtractor(IConfiguration configuration)
+    {
+        _httpClient = new HttpClient();
+        _amadeusApiKey = configuration["Amadeus:ApiKey"];
+        _amadeusApiSecret = configuration["Amadeus:ApiSecret"];
+        _googleMapsApiKey = configuration["GoogleMaps:ApiKey"] ?? configuration["GoogleMapsApiKey"];
+
+        // Initialize log file
+        File.WriteAllText(_debugPath, ""); 
+
+        // Log initial configuration state
+        LogToFile($"Configuration loaded:");
+        LogToFile($"Amadeus API Key exists: {!string.IsNullOrEmpty(_amadeusApiKey)}");
+        LogToFile($"Amadeus API Secret exists: {!string.IsNullOrEmpty(_amadeusApiSecret)}");
+        LogToFile($"Google Maps API Key exists: {!string.IsNullOrEmpty(_googleMapsApiKey)}");
+    }
+
+    public async Task<T> Extract<T>(FinalPackage finalPackage)
     {
         throw new NotImplementedException();
     }
 
-    public override async Task<string> Extract(FinalPackage finalPackage)
+    public async Task<string> Extract(FinalPackage package)
     {
-        var travelCostPrompt = _db.Prompts.First(p => p.DeveloperName == "calculate_travel_costs");
-        var renderedTravelCostPrompt = ParsePrompt(travelCostPrompt.PromptText, finalPackage);
-
-        ChatHistory chatHistory = [];
-        chatHistory.AddUserMessage(renderedTravelCostPrompt);
+        // Clear the debug file at the start of each extraction
+        File.WriteAllText(_debugPath, "");
+        LogToFile("Starting extraction, waiting 2 seconds before first API call...");
         
-        var targetTravelDate = DateTime.Parse(finalPackage.topic.close_date).AddMonths(4);
-
-        // Fetch Amadeus API token
-        string token = await GetAccessToken();
-
-        // Resolve company HQ location
-        string companyLocation = $"{finalPackage.company_city_hq}, {finalPackage.company_state_hq}";
-        string originCode = await ResolveAirportCode(token, companyLocation);
-
-        // Resolve government end-user location
-        string governmentLocation = "Wright Patterson AFB, OH";
-        string destinationCode = await ResolveAirportCode(token, governmentLocation);
-
-        // Get flight cost
-        decimal flightCost = await GetFlightCost(token, originCode, destinationCode, targetTravelDate);
-        return flightCost.ToString();
-
-        var travelCostResponse = await _aiService.GetStructuredResponse<FinalPackage.TravelCostInfo>(chatHistory, GetTravelCostJsonSchema());
-        /*
-        // Inject flight cost into the AI-generated response
-        travelCostResponse.FlightCost = flightCost;
-
+        await Task.Delay(2000);  // Add 2 second delay before first API call
+        
         try
         {
-            var json = System.Text.Json.JsonSerializer.Serialize(travelCostResponse);
-            JsonDocument.Parse(json); // Validate JSON
-            return json;
+            var token = await GetAccessToken();
+            
+            // Get origin airport code using company location
+            var originLocation = $"{package.company_city_hq}, {package.company_state_hq}";
+            var originAirport = await ResolveAirportCode(token, originLocation);
+
+            // Get destination airport code using travel location
+            var destinationLocation = $"{package.travel.end_user_location_city}, {package.travel.end_user_location_state}";
+            var destinationAirport = await ResolveAirportCode(token, destinationLocation);
+
+            // Search for flights using the airport codes
+            var departureDate = DateTime.Now.AddMonths(6).ToString("yyyy-MM-dd");
+            var returnDate = DateTime.Now.AddMonths(6).AddDays(4).ToString("yyyy-MM-dd");
+            var flightPrice = await GetFlightPrice(token, originAirport, destinationAirport, departureDate, returnDate);
+
+            var travelCostInfo = new FinalPackage.TravelCostInfo
+            {
+                FlightCost = flightPrice,
+                LodgingRate = 0,
+                MealRate = 0,
+                NumberOfDays = 4,
+                NumberOfNights = 3,
+                TimePeriod = "Base Period"
+            };
+
+            return JsonSerializer.Serialize(travelCostInfo);
         }
-        catch (System.Text.Json.JsonException)
+        catch (Exception ex)
         {
-            throw new Exception("Invalid JSON returned from travel cost calculation");
+            File.AppendAllText(_debugPath, $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] Error: {ex.Message}\n");
+            throw;  // Rethrow on any error
         }
-        */
     }
 
     private async Task<string> GetAccessToken()
     {
-        var amadeusApiKey = _configuration["Amadeus:ApiKey"] 
-            ?? throw new InvalidOperationException("Amadeus API key not configured");
-        var amadeusApiSecret = _configuration["Amadeus:ApiSecret"] 
-            ?? throw new InvalidOperationException("Amadeus API secret not configured");
-
-        using HttpClient client = new HttpClient();
-        var formData = new Dictionary<string, string>
+        LogToFile("Starting GetAccessToken method");
+        
+        if (string.IsNullOrEmpty(_amadeusApiKey))
         {
-            { "grant_type", "client_credentials" },
-            { "client_id", amadeusApiKey },
-            { "client_secret", amadeusApiSecret }
+            var error = "Amadeus API key not configured. Please check configuration for Amadeus:ApiKey";
+            LogToFile($"ERROR: {error}");
+            throw new Exception(error);
+        }
+
+        if (string.IsNullOrEmpty(_amadeusApiSecret))
+        {
+            var error = "Amadeus API secret not configured. Please check configuration for Amadeus:ApiSecret";
+            LogToFile($"ERROR: {error}");
+            throw new Exception(error);
+        }
+
+        LogToFile("Amadeus API Key exists: True");
+        LogToFile("Amadeus API Secret exists: True");
+        LogToFile("Sending token request to Amadeus");
+
+        var tokenRequest = new HttpRequestMessage(HttpMethod.Post, "https://test.api.amadeus.com/v1/security/oauth2/token")
+        {
+            Content = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                {"grant_type", "client_credentials"},
+                {"client_id", _amadeusApiKey},
+                {"client_secret", _amadeusApiSecret}
+            })
         };
 
-        var content = new FormUrlEncodedContent(formData);
+        var response = await _httpClient.SendAsync(tokenRequest);
+        var content = await response.Content.ReadAsStringAsync();
+        
+        LogToFile($"Amadeus response status: {response.StatusCode}");
+        LogToFile($"Amadeus response content: \n{content}\n");
 
-        try 
+        if (!response.IsSuccessStatusCode)
         {
-            HttpResponseMessage response = await client.PostAsync(TokenUrl, content);
-            string responseContent = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Failed to get Amadeus access token: {response.StatusCode} - {content}");
+        }
+
+        var tokenResponse = JsonSerializer.Deserialize<AmadeusTokenResponse>(content);
+        LogToFile("Successfully retrieved access token");
+        
+        return tokenResponse.AccessToken;
+    }
+
+    private async Task<(double Lat, double Lng)> GetCoordinates(string cityState)
+    {
+        LogToFile($"Getting coordinates for {cityState}");
+        LogToFile($"Google Maps API Key value: {(_googleMapsApiKey?.Length > 0 ? _googleMapsApiKey[..5] + "..." : "null")}");
+        
+        if (string.IsNullOrEmpty(_googleMapsApiKey))
+        {
+            LogToFile($"ERROR: Google Maps API key not configured. Configuration paths checked:");
+            LogToFile($"- Amadeus:GoogleMapsApiKey");
+            LogToFile($"- GoogleMapsApiKey");
+            throw new Exception("Google Maps API key not configured");
+        }
+
+        LogToFile("Google Maps API Key exists: True");
+
+        var encodedLocation = Uri.EscapeDataString(cityState);
+        var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedLocation}&key={_googleMapsApiKey}";
+        
+        var response = await _httpClient.GetAsync(url);
+        var content = await response.Content.ReadAsStringAsync();
+        
+        LogToFile($"Google Maps response status: {response.StatusCode}");
+        LogToFile($"Google Maps response content: {content}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($"Google Maps API error: {response.StatusCode} - {content}");
+        }
+
+        var geocodeResponse = JsonSerializer.Deserialize<GoogleGeocodeResponse>(content);
+        var location = geocodeResponse?.Results?.FirstOrDefault()?.Geometry?.Location;
+
+        if (location == null)
+        {
+            throw new Exception($"No coordinates found for {cityState}");
+        }
+
+        LogToFile($"Found coordinates for {cityState}: {location.Lat}, {location.Lng}");
+        return (Math.Round(location.Lat, 2), Math.Round(location.Lng, 2));
+    }
+
+    private async Task<string> ResolveAirportCode(string token, string location)
+    {
+        try
+        {
+            var coordinates = await GetCoordinates(location);
+            LogToFile($"\nSearching for nearest airport to coordinates: {coordinates.Lat}, {coordinates.Lng}");
+
+            var url = $"https://test.api.amadeus.com/v1/reference-data/locations/airports" +
+                     $"?latitude={coordinates.Lat:0.00}" +
+                     $"&longitude={coordinates.Lng:0.00}" +
+                     $"&radius=100" +
+                     $"&page[limit]=1";
             
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Add("Authorization", $"Bearer {token}");
+            
+            LogToFile($"Making Amadeus API call to: {url}");
+            LogToFile($"With Authorization Bearer token: {token[..10]}... (truncated)");
+
+            var response = await _httpClient.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
+            LogToFile($"Amadeus Airport Search Response: {content}");
+
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"Amadeus API error: {response.StatusCode} - {responseContent}");
+                throw new Exception($"Amadeus API error: {response.StatusCode} - {content}");
             }
 
-            JObject data = JObject.Parse(responseContent);
-            return data["access_token"]?.ToString() ?? throw new Exception("Failed to retrieve access token.");
+            var searchResult = JsonSerializer.Deserialize<AmadeusAirportSearchResponse>(content);
+            var airportCode = searchResult?.Data?.FirstOrDefault()?.IataCode;
+
+            if (string.IsNullOrEmpty(airportCode))
+            {
+                throw new Exception($"No airport found near {location}");
+            }
+
+            LogToFile($"Found airport code {airportCode} for {location}");
+            return airportCode;
         }
-        catch (HttpRequestException ex)
+        catch (Exception ex)
         {
-            throw new Exception($"Failed to connect to Amadeus API: {ex.Message}");
+            LogToFile($"Error in ResolveAirportCode: {ex.Message}");
+            throw;
         }
     }
 
-    private async Task<string> ResolveAirportCode(string token, string cityOrLocation)
+    private async Task<decimal> GetFlightPrice(string token, string originAirport, string destinationAirport, string departureDate, string returnDate)
     {
-        using HttpClient client = new HttpClient();
-        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+        LogToFile($"\nSearching for round trip flights:");
+        LogToFile($"From: {originAirport} to {destinationAirport}");
+        LogToFile($"Outbound: {departureDate}");
+        LogToFile($"Return: {returnDate}");
 
-        var url = $"{LocationsUrl}?keyword={Uri.EscapeDataString(cityOrLocation)}&subType=AIRPORT&max=1";
-
-        HttpResponseMessage response = await client.GetAsync(url);
-        response.EnsureSuccessStatusCode();
-
-        string json = await response.Content.ReadAsStringAsync();
-        JObject data = JObject.Parse(json);
-
-        var locationData = data["data"]?[0];
-        if (locationData == null)
+        var searchRequest = new
         {
-            throw new Exception($"No airport found for location: {cityOrLocation}");
+            currencyCode = "USD",
+            originDestinations = new[]
+            {
+                new
+                {
+                    id = "1",
+                    originLocationCode = originAirport,
+                    destinationLocationCode = destinationAirport,
+                    departureDateTimeRange = new { date = departureDate }
+                },
+                new
+                {
+                    id = "2",
+                    originLocationCode = destinationAirport,
+                    destinationLocationCode = originAirport,
+                    departureDateTimeRange = new { date = returnDate }
+                }
+            },
+            travelers = new[]
+            {
+                new { id = "1", travelerType = "ADULT" }
+            },
+            sources = new[] { "GDS" },
+            searchCriteria = new
+            {
+                maxFlightOffers = 1,
+                flightFilters = new
+                {
+                    cabinRestrictions = new[]
+                    {
+                        new
+                        {
+                            cabin = "ECONOMY",
+                            coverage = "MOST_SEGMENTS",
+                            originDestinationIds = new[] { "1", "2" }
+                        }
+                    }
+                }
+            }
+        };
+
+        var url = "https://test.api.amadeus.com/v2/shopping/flight-offers";
+        var request = new HttpRequestMessage(HttpMethod.Post, url)
+        {
+            Content = new StringContent(JsonSerializer.Serialize(searchRequest), System.Text.Encoding.UTF8, "application/json")
+        };
+        request.Headers.Add("Authorization", $"Bearer {token}");
+
+        LogToFile($"Request Body: {await request.Content.ReadAsStringAsync()}");
+
+        var response = await _httpClient.SendAsync(request);
+        var content = await response.Content.ReadAsStringAsync();
+
+        LogToFile($"Flight Search Response Status: {response.StatusCode}");
+        LogToFile($"Flight Search Response: {content}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($"Flight search failed: {response.StatusCode} - {content}");
         }
 
-        return locationData["iataCode"]?.ToString() ?? throw new Exception("IATA code not found for the location.");
+        var searchResult = JsonSerializer.Deserialize<AmadeusFlightSearchResponse>(content);
+        var price = searchResult?.Data?.FirstOrDefault()?.Price?.Total;
+
+        if (string.IsNullOrEmpty(price))
+        {
+            throw new Exception("No flight price found");
+        }
+
+        if (!decimal.TryParse(price, out var flightPrice))
+        {
+            throw new Exception($"Invalid flight price format: {price}");
+        }
+
+        LogToFile($"Found round trip flight price: {flightPrice} USD");
+        return flightPrice;
     }
 
-    private async Task<decimal> GetFlightCost(string token, string origin, string destination, DateTime travelDate)
+    private void LogToFile(string message)
     {
-        using HttpClient client = new HttpClient();
-        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-
-        var url = $"{FlightUrl}?originLocationCode={origin}&destinationLocationCode={destination}&departureDate={travelDate:yyyy-MM-dd}&adults=1&travelClass=ECONOMY&nonStop=true&max=1";
-
-        HttpResponseMessage response = await client.GetAsync(url);
-        response.EnsureSuccessStatusCode();
-
-        string json = await response.Content.ReadAsStringAsync();
-        JObject data = JObject.Parse(json);
-
-        var flightData = data["data"]?[0];
-        if (flightData == null)
-        {
-            throw new Exception("No flight data found.");
-        }
-
-        string priceStr = flightData["price"]?["total"]?.ToString();
-        return decimal.Parse(priceStr ?? "0");
+        var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+        var logMessage = $"[{timestamp}] {message}\n";
+        File.AppendAllText(_debugPath, logMessage);
     }
 
     private string GetTravelCostJsonSchema()

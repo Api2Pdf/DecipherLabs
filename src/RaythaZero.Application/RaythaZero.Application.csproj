@@ -36,5 +36,6 @@
     <ItemGroup>
       <None Remove="Projects\StaticFiles\topics.json" />
       <EmbeddedResource Include="Projects\Utils\topics.json" />
+      <EmbeddedResource Include="Projects\Utils\bls.json" />
     </ItemGroup>
 </Project>
